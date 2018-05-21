@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
+import qs from 'querystring'
 import TextField from 'components/TextField'
 import Grid from 'components/Grid'
-import { Button } from 'components/Button'
+import { LinkButton } from 'components/Button'
 
 export default class Guest extends Component {
   state = {
     party: '',
     password: ''
+  }
+
+  get url () {
+    const params = {
+      party: this.state.party,
+      password: this.state.password
+    }
+    return `/guest?${qs.stringify(params)}`
   }
 
   render () {
@@ -26,7 +35,7 @@ export default class Guest extends Component {
           type='password'
         />
         <Grid justify='flex-end'>
-          <Button variant='primary'>Join party</Button>
+          <LinkButton to={this.url} variant='primary'>Join party</LinkButton>
         </Grid>
       </div>
     )

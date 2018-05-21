@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { PlayerProvider } from './PlayerContext'
 import { PlayerStateProvider } from './PlayerStateContext'
 import Player from './Player'
+import Party from './Party'
 
 export default class Host extends Component {
   static propTypes = {
@@ -50,7 +51,7 @@ export default class Host extends Component {
         <PlayerStateProvider player={this.state.player}>
           <Wrapper>
             <Player />
-            <div>Battle queue here</div>
+            <Party />
           </Wrapper>
         </PlayerStateProvider>
       </PlayerProvider>

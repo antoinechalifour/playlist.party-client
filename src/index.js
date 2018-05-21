@@ -2,16 +2,20 @@ import 'reset.css/reset.css'
 import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Socket from 'socket.io-client'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const socket = Socket(process.env.REACT_APP_SIGNALING_URI)
+const props = { socket }
+
+ReactDOM.render(<App {...props} />, document.getElementById('root'))
 registerServiceWorker()
 
 if (module.hot) {
   module.hot.accept('./App', () => {
     const NextApp = require('./App').default
 
-    ReactDOM.render(<NextApp />, document.getElementById('root'))
+    ReactDOM.render(<NextApp {...props} />, document.getElementById('root'))
   })
 }
