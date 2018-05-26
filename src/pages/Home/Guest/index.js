@@ -7,13 +7,13 @@ import { LinkButton } from 'components/Button'
 export default class Guest extends Component {
   state = {
     party: '',
-    password: ''
+    code: ''
   }
 
   get url () {
     const params = {
       party: this.state.party,
-      password: this.state.password
+      code: this.state.code
     }
     return `/guest?${qs.stringify(params)}`
   }
@@ -28,11 +28,11 @@ export default class Guest extends Component {
           onChange={party => this.setState({ party })}
         />
         <TextField
-          label='Password'
-          name='password'
-          value={this.state.password}
-          onChange={password => this.setState({ password })}
-          type='password'
+          label='Pass code'
+          name='code'
+          value={this.state.code}
+          onChange={code => this.setState({ code })}
+          type='text'
         />
         <Grid justify='flex-end'>
           <LinkButton to={this.url} variant='primary'>Join party</LinkButton>

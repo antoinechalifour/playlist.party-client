@@ -4,12 +4,12 @@ import TextField from 'components/TextField'
 import Typography from 'components/Typography'
 import Grid from 'components/Grid'
 import { Button } from 'components/Button'
-import { withHostContext } from 'components/HostContext'
+import { withHost } from 'components/HostContext'
 
 class PartyDetail extends Component {
   state = {
     party: '',
-    password: ''
+    code: ''
   }
 
   constructor (props) {
@@ -25,7 +25,7 @@ class PartyDetail extends Component {
     const params = {
       accessToken: this.accessToken,
       party: this.state.party,
-      password: this.state.password
+      code: this.state.code
     }
 
     const uri = `/host?${qs.stringify(params)}`
@@ -45,10 +45,10 @@ class PartyDetail extends Component {
           onChange={party => this.setState({ party })}
         />
         <TextField
-          label='Password'
-          name='password'
-          value={this.state.password}
-          onChange={password => this.setState({ password })}
+          label='Pass code'
+          name='code'
+          value={this.state.code}
+          onChange={code => this.setState({ code })}
         />
 
         <Grid justify='flex-end'>
@@ -59,4 +59,4 @@ class PartyDetail extends Component {
   }
 }
 
-export default withHostContext(PartyDetail)
+export default withHost(PartyDetail)

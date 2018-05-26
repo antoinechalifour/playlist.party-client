@@ -61,6 +61,8 @@ export default function Player ({ playerState }) {
   }
   const { current_track } = playerState.track_window
 
+  return <div>todo</div>
+
   return (
     <Wrapper align='center' justify='center'>
       <Content>

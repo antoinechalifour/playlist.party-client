@@ -1,44 +1,27 @@
 import React, { createContext, Component } from 'react'
+import PropTypes from 'prop-types'
 
 const context = createContext()
 
-export class HostContextProvider extends Component {
-  constructor (props) {
-    super(props)
-
-    const params = new URLSearchParams(window.location.search.substr(1))
-
-    this.state = {
-      accessToken: params.get('accessToken'),
-      party: params.get('party'),
-      password: params.get('password'),
-      startParty: this._startParty
-    }
-  }
-
-  _startParty = (accessToken, party, password) =>
-    this.setState({
-      accessToken,
-      party,
-      password
-    })
-
-  render () {
-    return (
-      <context.Provider value={this.state}>
-        {this.props.children}
-      </context.Provider>
-    )
-  }
+export function HostProvider ({ party, code, accessToken, children }) {
+  return (
+    <context.Provider value={{ party, code, accessToken }}>
+      {children}
+    </context.Provider>
+  )
 }
 
-export function withHostContext (WrappedComponent) {
-  return function WithHostContext (props) {
+HostProvider.propTypes = {
+  party: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
+  accessToken: PropTypes.string.isRequired
+}
+
+export function withHost (WrappedComponent) {
+  return function WithHost (props) {
     return (
       <context.Consumer>
-        {hostContext => (
-          <WrappedComponent {...props} hostContext={hostContext} />
-        )}
+        {host => <WrappedComponent {...props} host={host} />}
       </context.Consumer>
     )
   }

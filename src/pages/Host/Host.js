@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { PlayerProvider } from './PlayerContext'
-import { PlayerStateProvider } from './PlayerStateContext'
-import Player from './Player'
+import { PlayerProvider } from 'components/PlayerContext'
 import Party from './Party'
 
 export default class Host extends Component {
   static propTypes = {
-    hostContext: PropTypes.shape({
+    host: PropTypes.shape({
       accessToken: PropTypes.string.isRequired,
       party: PropTypes.string.isRequired,
-      password: PropTypes.string.isRequired
+      code: PropTypes.string.isRequired
     }).isRequired
   }
 
@@ -37,7 +35,7 @@ export default class Host extends Component {
   _setup = () => {
     const player = new window.Spotify.Player({
       name: 'PlaylistParty player',
-      getOAuthToken: cb => cb(this.props.hostContext.accessToken)
+      getOAuthToken: cb => cb(this.props.host.accessToken)
     })
 
     player.addListener('ready', () => this.setState({ player }))
@@ -48,12 +46,9 @@ export default class Host extends Component {
   render () {
     return this.state.player
       ? <PlayerProvider player={this.state.player}>
-        <PlayerStateProvider player={this.state.player}>
-          <Wrapper>
-            <Player />
-            <Party />
-          </Wrapper>
-        </PlayerStateProvider>
+        <Wrapper>
+          <Party />
+        </Wrapper>
       </PlayerProvider>
       : <div>Waiting for spotiry player...</div>
   }

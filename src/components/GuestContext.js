@@ -1,27 +1,19 @@
 import React, { Component, createContext } from 'react'
-import qs from 'querystring'
+import PropTypes from 'prop-types'
 
 const context = createContext()
 
-export class GuestProvider extends Component {
-  constructor (props) {
-    super(props)
+export function GuestProvider ({ party, code, children }) {
+  return (
+    <context.Provider value={{ party, code }}>
+      {children}
+    </context.Provider>
+  )
+}
 
-    const params = qs.parse(window.location.search.substr(1))
-
-    this.state = {
-      party: params.party,
-      password: params.password
-    }
-  }
-
-  render () {
-    return (
-      <context.Provider value={this.state}>
-        {this.props.children}
-      </context.Provider>
-    )
-  }
+GuestProvider.propTypes = {
+  party: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired
 }
 
 export function withGuest (WrappedComponent) {
