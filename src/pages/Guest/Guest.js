@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import createSignaling from './signaling'
+import { ChannelProvider } from 'components/ChannelContext'
 import SearchBar from './SearchBar'
 
 export default class Guest extends Component {
@@ -12,10 +13,12 @@ export default class Guest extends Component {
     }).isRequired
   }
 
+  state = { channel: null }
+
   constructor (props) {
     super(props)
 
-    this.signaling = createSignaling(props.socket)
+    this.signaling = createSignaling(props.socket, this._onChannel)
 
     this.signaling.subscribe()
     this.signaling.init(
@@ -33,11 +36,18 @@ export default class Guest extends Component {
     // TODO: Handle normal state
   }
 
+  _onChannel = channel => {
+    this.setState({ channel })
+  }
+
   render () {
+    if (!this.state.channel) {
+      return <div>Connecting to party...</div>
+    }
     return (
-      <div>
+      <ChannelProvider channel={this.state.channel}>
         <SearchBar />
-      </div>
+      </ChannelProvider>
     )
   }
 }

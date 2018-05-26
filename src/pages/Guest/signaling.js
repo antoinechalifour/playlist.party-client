@@ -1,6 +1,7 @@
 import iceServers from 'core/iceServers'
+import createDataChannelEmitter from 'core/dataChannelEmitter'
 
-export default function createSignaling (socket) {
+export default function createSignaling (socket, onChannel) {
   let _connection
   let _dataChannel
 
@@ -19,8 +20,9 @@ export default function createSignaling (socket) {
     }
 
     _connection.ondatachannel = event => {
-      _dataChannel = event.datachannel
-      console.log(_dataChannel)
+      _dataChannel = event.channel
+
+      onChannel(createDataChannelEmitter(_dataChannel))
     }
 
     await _connection.setRemoteDescription(description)

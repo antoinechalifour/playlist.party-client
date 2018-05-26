@@ -1,6 +1,7 @@
 import iceServers from 'core/iceServers'
+import createDataChannelEmitter from 'core/dataChannelEmitter'
 
-export default function createSignaling (socket) {
+export default function createSignaling (socket, onChannel) {
   const _guests = {}
 
   async function onJoin ({ remoteId }) {
@@ -8,8 +9,7 @@ export default function createSignaling (socket) {
     const connection = new RTCPeerConnection({ iceServers })
     const dataChannel = connection.createDataChannel(`channel/${remoteId}`)
 
-    // TODO: Prepare data channel
-    console.log(dataChannel)
+    onChannel(createDataChannelEmitter(dataChannel))
 
     connection.onicecandidate = event => {
       if (event.candidate) {
@@ -39,6 +39,11 @@ export default function createSignaling (socket) {
 
   function onLeave ({ remoteId }) {
     console.log('<-- leave', remoteId)
+
+    if (!_guests[remoteId]) {
+      return
+    }
+
     _guests[remoteId].connection.close()
 
     delete _guests[remoteId]

@@ -18,7 +18,7 @@ export default class Party extends Component {
   constructor (props) {
     super(props)
 
-    this.signaling = createSignaling(props.socket)
+    this.signaling = createSignaling(props.socket, this._onChannel)
 
     this.signaling.subscribe()
 
@@ -35,6 +35,15 @@ export default class Party extends Component {
     } else {
       // TODO: Commit state
     }
+  }
+
+  _onChannel = channel => {
+    channel.on('search', ({ q }, ack) => {
+      console.log(q)
+
+      ack({ response: 'ok' })
+    })
+    console.log(channel)
   }
 
   componentWillUnmount () {
