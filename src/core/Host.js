@@ -32,8 +32,15 @@ export default class Host extends Store {
   get actions () {
     return {
       addGuest: this.addGuest,
-      removeGuest: this.removeGuest
+      removeGuest: this.removeGuest,
+      setPlayer: this.setPlayer,
+      processVote: this.processVote
     }
+  }
+
+  setPlayer = player => {
+    this.player = player
+    this.notify(this.state)
   }
 
   _onGuestSearch = guestId => async ({ q }, ack) => {
@@ -105,6 +112,31 @@ export default class Host extends Store {
 
   removeGuest = connection => {
     this.guests = this.guests.filter(guest => guest.connection !== connection)
+
+    this.notify(this.state)
+  }
+
+  processVote = () => {
+    const battlingTracks = this.queue.filter(x => x.role === 'battle')
+    const nextTrack = battlingTracks.reduce((tmpWin, track) => {
+      if (!tmpWin) {
+        return track
+      }
+
+      return track.votes.length > tmpWin.votes.length ? track : tmpWin
+    }, null)
+
+    this.queue = this.queue.filter(x => x.role !== 'battle')
+
+    this.spotify.player.play(nextTrack.track.uri)
+
+    if (this.queue[0]) {
+      this.queue[0].role = 'battle'
+    }
+
+    if (this.queue[1]) {
+      this.queue[1].role = 'battle'
+    }
 
     this.notify(this.state)
   }

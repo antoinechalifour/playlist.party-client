@@ -5,6 +5,7 @@ import Party from './Party'
 export default withSocket(
   connectToHost(Party, (state, actions) => ({
     party: state.party,
+    player: state.player,
     addGuest: actions.addGuest
   }))
 )

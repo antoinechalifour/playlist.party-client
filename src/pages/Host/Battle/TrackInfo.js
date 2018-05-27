@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   padding: 16px;
+  width: 250px;
 `
 
 const TrackName = styled.div`

@@ -42,6 +42,7 @@ export default class Party extends Component {
       name: PropTypes.string.isRequired,
       code: PropTypes.string.isRequired
     }).isRequired,
+    player: PropTypes.object,
     addGuest: PropTypes.func.isRequired
   }
 
@@ -87,7 +88,7 @@ export default class Party extends Component {
           <Battle />
           <Queue />
         </Body>
-        <Player />
+        {this.props.player && <Player />}
       </Wrapper>
     )
   }
