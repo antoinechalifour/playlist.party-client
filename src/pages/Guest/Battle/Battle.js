@@ -16,6 +16,7 @@ const Track = styled.li`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   
   > div {
     position: relative;

@@ -151,5 +151,6 @@ export default class Host extends Store {
     }
 
     this.notify(this.state)
+    this.notifyGuests()
   }
 }
