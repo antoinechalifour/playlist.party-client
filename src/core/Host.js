@@ -106,6 +106,7 @@ export default class Host extends Store {
     })
 
     // TODO: Send the current battle to the new client
+    this.notifyGuest(guestId)
 
     this.notify(this.state)
   }
@@ -114,6 +115,17 @@ export default class Host extends Store {
     this.guests = this.guests.filter(guest => guest.connection !== connection)
 
     this.notify(this.state)
+  }
+
+  notifyGuests () {
+    this.guests.forEach(x => this.notifyGuest(x.id))
+  }
+
+  notifyGuest (guestId) {
+    const guest = this.guests.find(x => x.id === guestId)
+    const tracks = this.queue.filter(x => x.role === 'battle').map(x => x.track)
+
+    guest.socket.emit('battle/update', { tracks })
   }
 
   processVote = () => {

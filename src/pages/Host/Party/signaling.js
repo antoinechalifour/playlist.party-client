@@ -8,7 +8,7 @@ export default function createSignaling (socket, onGuest) {
     const connection = new RTCPeerConnection({ iceServers })
     const dataChannel = connection.createDataChannel(`channel/${remoteId}`)
 
-    onGuest(connection, dataChannel)
+    dataChannel.onopen = () => onGuest(connection, dataChannel)
 
     connection.onicecandidate = event => {
       if (event.candidate) {

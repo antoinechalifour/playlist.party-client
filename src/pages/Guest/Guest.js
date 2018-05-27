@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import createSignaling from './signaling'
 import { ChannelProvider } from 'components/ChannelContext'
 import SearchBar from './SearchBar'
+import Battle from './Battle'
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  > :last-child {
+    flex: 1;
+  }
+`
 
 export default class Guest extends Component {
   static propTypes = {
@@ -47,7 +59,10 @@ export default class Guest extends Component {
     }
     return (
       <ChannelProvider channel={this.state.channel}>
-        <SearchBar />
+        <Wrapper>
+          <SearchBar />
+          <Battle />
+        </Wrapper>
       </ChannelProvider>
     )
   }
