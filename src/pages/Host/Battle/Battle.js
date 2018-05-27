@@ -112,13 +112,17 @@ const TrackType = PropTypes.shape({
   track: PropTypes.shape({
     album: PropTypes.shape({
       name: PropTypes.string.isRequired,
-      images: PropTypes.arrayOf({
-        url: PropTypes.string.isRequired
-      }).isRequired
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          url: PropTypes.string.isRequired
+        }).isRequired
+      ).isRequired
     }).isRequired,
-    artists: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }).isRequired,
+    artists: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired
+      })
+    ).isRequired,
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired
   }).isRequired,
