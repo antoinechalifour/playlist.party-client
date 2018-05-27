@@ -2,10 +2,12 @@ import qs from 'querystring'
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import SpotifyApiFactory from 'core/spotifyApi'
+import Host from 'core/Host'
 import theme from './theme'
-import Home from './pages/Home'
-import Host from './pages/Host'
-import Guest from './pages/Guest'
+import HomePage from './pages/Home'
+import HostPage from './pages/Host'
+import GuestPage from './pages/Guest'
 import { HostProvider } from './components/HostContext'
 import { SocketProvider } from './components/SocketContext'
 import { GuestProvider } from './components/GuestContext'
@@ -19,18 +21,19 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <BrowserRouter className='App'>
             <Switch>
-              <Route path='/home' component={Home} />
+              <Route path='/home' component={HomePage} />
               <Route
                 path='/host'
                 render={({ location }) => {
                   const { party, accessToken, code } = getQueryParams(
                     location.search
                   )
-                  const props = { party, accessToken, code }
+                  const spotify = SpotifyApiFactory({ accessToken })
+                  const host = new Host({ party, code, accessToken, spotify })
 
                   return (
-                    <HostProvider {...props}>
-                      <Host />
+                    <HostProvider host={host}>
+                      <HostPage />
                     </HostProvider>
                   )
                 }}
@@ -43,7 +46,7 @@ class App extends Component {
 
                   return (
                     <GuestProvider {...props}>
-                      <Guest />
+                      <GuestPage />
                     </GuestProvider>
                   )
                 }}

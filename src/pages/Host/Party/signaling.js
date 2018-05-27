@@ -1,7 +1,6 @@
 import iceServers from 'core/iceServers'
-import createDataChannelEmitter from 'core/dataChannelEmitter'
 
-export default function createSignaling (socket, onChannel) {
+export default function createSignaling (socket, onGuest) {
   const _guests = {}
 
   async function onJoin ({ remoteId }) {
@@ -9,7 +8,7 @@ export default function createSignaling (socket, onChannel) {
     const connection = new RTCPeerConnection({ iceServers })
     const dataChannel = connection.createDataChannel(`channel/${remoteId}`)
 
-    onChannel(createDataChannelEmitter(dataChannel))
+    onGuest(connection, dataChannel)
 
     connection.onicecandidate = event => {
       if (event.candidate) {

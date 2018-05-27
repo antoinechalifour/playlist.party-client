@@ -1,4 +1,6 @@
-import { withHost } from 'components/HostContext'
+import { connectToHost } from 'components/HostContext'
 import Host from './Host'
 
-export default withHost(Host)
+export default connectToHost(Host, state => ({
+  accessToken: state.accessToken
+}))

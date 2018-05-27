@@ -1,5 +1,4 @@
 import React, { createContext } from 'react'
-import PropTypes from 'prop-types'
 
 const context = createContext()
 

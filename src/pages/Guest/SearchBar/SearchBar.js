@@ -13,10 +13,15 @@ export default class SearchBar extends Component {
   }
 
   _searchSuggestions = value => {
-    console.log(value)
-    this.props.channel.emit('search', { q: value }, suggestions =>
-      console.log(suggestions)
+    this.props.channel.emit(
+      'search',
+      { q: value },
+      ({ results: suggestions }) => this.setState({ suggestions })
     )
+  }
+
+  _submitTrack = trackId => {
+    this.props.channel.emit('queue/add', { trackId })
   }
 
   render () {
@@ -26,6 +31,14 @@ export default class SearchBar extends Component {
           type='text'
           onChange={e => this._searchSuggestions(e.target.value)}
         />
+
+        <ul>
+          {this.state.suggestions.map(x => (
+            <li onClick={() => this._submitTrack(x.id)}>
+              {x.name} by {x.artists.map(y => y.name).join(', ')}
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }

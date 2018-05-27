@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { PlayerProvider } from 'components/PlayerContext'
+// import { PlayerProvider } from 'components/PlayerContext'
 import Party from './Party'
 
 export default class Host extends Component {
   static propTypes = {
-    host: PropTypes.shape({
-      accessToken: PropTypes.string.isRequired,
-      party: PropTypes.string.isRequired,
-      code: PropTypes.string.isRequired
-    }).isRequired
+    accessToken: PropTypes.string.isRequired
   }
 
   constructor (props) {
@@ -18,39 +14,44 @@ export default class Host extends Component {
 
     window.onSpotifyWebPlaybackSDKReady = this._setup
 
-    this._injectSpotifySDK()
+    // this._injectSpotifySDK()
 
-    this.state = {
-      player: null
-    }
+    // this.state = {
+    //   player: null
+    // }
   }
 
-  _injectSpotifySDK () {
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = 'https://sdk.scdn.co/spotify-player.js'
-    document.body.appendChild(script)
-  }
+  // _injectSpotifySDK () {
+  //   const script = document.createElement('script')
+  //   script.type = 'text/javascript'
+  //   script.src = 'https://sdk.scdn.co/spotify-player.js'
+  //   document.body.appendChild(script)
+  // }
 
-  _setup = () => {
-    const player = new window.Spotify.Player({
-      name: 'PlaylistParty player',
-      getOAuthToken: cb => cb(this.props.host.accessToken)
-    })
+  // _setup = () => {
+  //   const player = new window.Spotify.Player({
+  //     name: 'PlaylistParty player',
+  //     getOAuthToken: cb => cb(this.props.host.accessToken)
+  //   })
 
-    player.addListener('ready', () => this.setState({ player }))
+  //   player.addListener('ready', () => this.setState({ player }))
 
-    player.connect()
-  }
+  //   player.connect()
+  // }
 
   render () {
-    return this.state.player
-      ? <PlayerProvider player={this.state.player}>
-        <Wrapper>
-          <Party />
-        </Wrapper>
-      </PlayerProvider>
-      : <div>Waiting for spotiry player...</div>
+    return (
+      <Wrapper>
+        <Party />
+      </Wrapper>
+    )
+    // return this.state.player
+    //   ? <PlayerProvider player={this.state.player}>
+    //     <Wrapper>
+    //       <Party />
+    //     </Wrapper>
+    //   </PlayerProvider>
+    //   : <div>Waiting for spotiry player...</div>
   }
 }
 

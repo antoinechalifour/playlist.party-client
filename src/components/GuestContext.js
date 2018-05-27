@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react'
+import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
 
 const context = createContext()

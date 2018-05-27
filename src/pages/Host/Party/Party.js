@@ -1,14 +1,48 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Battle from '../Battle'
+import Queue from '../Queue'
+import Guests from '../Guests'
+import Player from '../Player'
 import createSignaling from './signaling'
+
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const Header = styled.header`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.dark};
+  padding: 24px;
+  padding-bottom: 48px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .25);
+`
+
+const Body = styled.main`
+  flex: 1;
+  display: flex;
+
+  > :nth-child(2) {
+    flex: 1;
+  }
+
+  > :first-child,
+  > :last-child {
+    width: 300px;
+  }
+`
 
 export default class Party extends Component {
   static propTypes = {
     socket: PropTypes.object.isRequired,
-    host: PropTypes.shape({
-      party: PropTypes.string.isRequired,
+    party: PropTypes.shape({
+      name: PropTypes.string.isRequired,
       code: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    addGuest: PropTypes.func.isRequired
   }
 
   state = {
@@ -18,39 +52,43 @@ export default class Party extends Component {
   constructor (props) {
     super(props)
 
-    this.signaling = createSignaling(props.socket, this._onChannel)
+    this.signaling = createSignaling(props.socket, this.onGuest)
 
     this.signaling.subscribe()
 
     this.signaling.init(
-      props.host.party,
-      props.host.code,
+      props.party.name,
+      props.party.code,
       this._onSignalingReady
     )
   }
 
   _onSignalingReady = err => {
     if (err) {
-      // TODO: Display an error message
+      console.log('@Party: error during signaling:', err)
     } else {
-      // TODO: Commit state
+      console.log('@Party: Done creating party.')
     }
   }
 
-  _onChannel = channel => {
-    channel.on('search', ({ q }, ack) => {
-      console.log(q)
-
-      ack({ response: 'ok' })
-    })
-    console.log(channel)
-  }
+  onGuest = (connection, dataChannel) =>
+    this.props.addGuest(connection, dataChannel)
 
   componentWillUnmount () {
     this.signaling.unsubscribe()
   }
 
   render () {
-    return <div>ezifhzeifh</div>
+    return (
+      <Wrapper>
+        <Header>{this.props.party.name} / {this.props.party.code}</Header>
+        <Body>
+          <Guests />
+          <Battle />
+          <Queue />
+        </Body>
+        <Player />
+      </Wrapper>
+    )
   }
 }

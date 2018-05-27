@@ -37,6 +37,7 @@ export default class Guest extends Component {
   }
 
   _onChannel = channel => {
+    console.log(channel)
     this.setState({ channel })
   }
 
