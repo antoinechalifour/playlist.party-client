@@ -2,15 +2,15 @@ import qs from 'querystring'
 import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import SpotifyApiFactory from 'core/spotifyApi'
-import Host from 'core/Host'
-import theme from './theme'
-import HomePage from './pages/Home'
-import HostPage from './pages/Host'
-import GuestPage from './pages/Guest'
-import { HostProvider } from './components/HostContext'
-import { SocketProvider } from './components/SocketContext'
-import { GuestProvider } from './components/GuestContext'
+import SpotifyApiFactory from 'core/network/spotifyApi'
+import theme from 'core/theming/theme'
+import Home from 'core/components/pages/Home'
+import { SocketProvider } from 'core/components/providers/Socket'
+import HostApp from 'host/App'
+import Host from 'host/domain/Host'
+import { HostProvider } from 'host/components/providers/Host'
+import GuestApp from 'guest/App'
+import { GuestProvider } from 'guest/components/providers/Guest'
 
 const getQueryParams = search => qs.parse(search.substr(1))
 
@@ -21,7 +21,7 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <BrowserRouter className='App'>
             <Switch>
-              <Route path='/home' component={HomePage} />
+              <Route path='/home' component={Home} />
               <Route
                 path='/host'
                 render={({ location }) => {
@@ -33,7 +33,7 @@ class App extends Component {
 
                   return (
                     <HostProvider host={host}>
-                      <HostPage />
+                      <HostApp />
                     </HostProvider>
                   )
                 }}
@@ -46,7 +46,7 @@ class App extends Component {
 
                   return (
                     <GuestProvider {...props}>
-                      <GuestPage />
+                      <GuestApp />
                     </GuestProvider>
                   )
                 }}
