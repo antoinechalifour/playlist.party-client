@@ -3,11 +3,11 @@ import { v4 as uuid } from 'uuid'
 export default function createPeerSocket (dataChannel) {
   const _handlers = {}
   const _callbackQueue = {}
-  const emitter = {
+  const socket = {
     emit (eventName, payload, cb = null) {
       const message = {
         type: eventName,
-        ...payload
+        payload
       }
 
       if (cb) {
@@ -30,8 +30,7 @@ export default function createPeerSocket (dataChannel) {
 
   dataChannel.onmessage = event => {
     try {
-      console.log(event.data)
-      const { type, requestId, ...payload } = JSON.parse(event.data)
+      const { type, requestId, payload } = JSON.parse(event.data)
 
       if (_callbackQueue[requestId]) {
         const handler = _callbackQueue[requestId]
@@ -47,7 +46,7 @@ export default function createPeerSocket (dataChannel) {
 
       _handlers[type].forEach(handler =>
         handler(payload, response => {
-          emitter.emit('@@response', {
+          socket.emit('@@response', {
             ...response,
             requestId
           })
@@ -58,5 +57,5 @@ export default function createPeerSocket (dataChannel) {
     }
   }
 
-  return emitter
+  return socket
 }
