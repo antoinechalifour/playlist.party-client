@@ -1,18 +1,21 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Typography from 'core/components/Typography'
 
 const Wrapper = styled.div`
   padding: 16px;
-  width: 250px;
+  text-align: center;
 `
 
-const TrackName = styled.div`
-  font-size: 2rem;
-  margin-bottom: 8px;
+const TrackName = styled(Typography)`
+  margin: 12px 0;
 `
 
-const Artists = styled.div`
-  opacity: .65;
+const AlbumCover = styled.img`
+  display: block;
+  width: 150px;
+  margin: auto;
 `
 
 export default function TrackInfo ({ track }) {
@@ -24,8 +27,31 @@ export default function TrackInfo ({ track }) {
 
   return (
     <Wrapper>
-      <TrackName>{track.track.name}</TrackName>
-      <Artists>{artistsNames.join(', ')}</Artists>
+      <AlbumCover src={track.track.album.images[0].url} />
+      <TrackName reverse variant='display2'>{track.track.name}</TrackName>
+      <Typography reverse type='secondary'>
+        {artistsNames.join(', ')}
+      </Typography>
     </Wrapper>
   )
+}
+
+TrackInfo.propTypes = {
+  track: PropTypes.shape({
+    track: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      artists: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string.isRequired
+        })
+      ).isRequired,
+      album: PropTypes.shape({
+        images: PropTypes.arrayOf(
+          PropTypes.shape({
+            url: PropTypes.string.isRequired
+          })
+        ).isRequired
+      }).isRequired
+    }).isRequired
+  })
 }

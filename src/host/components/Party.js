@@ -13,28 +13,7 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-`
-
-const Header = styled.header`
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.dark};
-  padding: 24px;
-  padding-bottom: 48px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .25);
-`
-
-const Body = styled.main`
-  flex: 1;
-  display: flex;
-
-  > :nth-child(2) {
-    flex: 1;
-  }
-
-  > :first-child,
-  > :last-child {
-    width: 300px;
-  }
+  background: #151515;
 `
 
 class Party extends Component {
@@ -84,13 +63,8 @@ class Party extends Component {
   render () {
     return (
       <Wrapper>
-        <Header>{this.props.party.name} / {this.props.party.code}</Header>
-        <Body>
-          <Guests />
-          <Battle />
-          <Queue />
-        </Body>
         {this.props.player && <Player />}
+        <Battle />
       </Wrapper>
     )
   }

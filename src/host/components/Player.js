@@ -1,19 +1,31 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import Typography from 'core/components/Typography'
 import { connectToHost } from './providers/Host'
 
 const Wrapper = styled.div`
   padding: 24px;
-  padding-top: 48px;
+  color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  background: rgba(0, 0, 0, .1);
+  background: rgba(0, 0, 0, .8);
   text-align: center;
+  position: relative;
+  z-index: 1;
 
   > :last-child {
     font-size: 90%;
     opacity: .75;
   }
+`
+
+const Progress = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #1db954;
+  transition: width .1s ease-out;
 `
 
 class Player extends Component {
@@ -29,6 +41,7 @@ class Player extends Component {
       playerState: null
     }
 
+    // TODO: Move the player logic outside of this component
     props.player.addListener('player_state_changed', this._updatePlayerState)
     props.player.getCurrentState().then(this._updatePlayerState)
 
@@ -68,8 +81,6 @@ class Player extends Component {
     const { duration, position } = this.state.playerState
     const timeLeft = duration - position
 
-    console.log(timeLeft)
-
     if (timeLeft < 2000) {
       this.timeout = window.setTimeout(() => {
         this.props.processVote()
@@ -82,16 +93,21 @@ class Player extends Component {
       <Wrapper>
         {this.state.playerState
           ? <Fragment>
-            <div>
+            <Progress
+              style={{
+                width: `${this.state.playerState.position / this.state.playerState.duration * 100}%`
+              }}
+              />
+            <Typography reverse>
               {this.state.playerState.track_window.current_track.name}
-            </div>
-            <div>
+            </Typography>
+            <Typography reverse type='secondary'>
               {this.state.playerState.track_window.current_track.artists
                   .map(x => x.name)
                   .join(', ')}
-            </div>
+            </Typography>
           </Fragment>
-          : <div>Nothing playing</div>}
+          : <Typography reverse type='secondary'>Nothing playing</Typography>}
       </Wrapper>
     )
   }

@@ -1,42 +1,22 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { connectToHost } from './providers/Host'
+import BattleBackground from './BattleBackground'
 import TrackInfo from './TrackInfo'
 import TrackCover from './TrackCover'
 
-const Wrapper = styled.div`
-  background: #fff;
+const Inner = styled.div`
+  flex: 1;
   color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
   padding: 24px;
-  margin-top: -24px;
-  margin-bottom: -24px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
   > * {
-    position: relative;
-  }
-
-  > :nth-child(2) {
-    text-align: right;
-  }
-`
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #151515;
-
-  > div {
-    opacity: .1;
-    filter: blur(10px);
+    flex: 1;
   }
 `
 
@@ -49,7 +29,7 @@ const Covers = styled.div`
 
 const BattleWrapper = styled.div`
   flex: 1;
-  max-width: 50%;
+  max-width: 33%;
 `
 
 function Battle ({ battle }) {
@@ -65,46 +45,35 @@ function Battle ({ battle }) {
   }
 
   return (
-    <Wrapper>
-      <Background>
-        {track1 &&
-          <TrackCover
-            cover={track1.track.album.images[0].url}
-            votes={track1.votes.length}
-            totalVotes={totalVotes}
-            align='left'
-          />}
-        {track2 &&
-          <TrackCover
-            cover={track2.track.album.images[0].url}
-            votes={track2.votes.length}
-            totalVotes={totalVotes}
-            align='right'
-          />}
-      </Background>
-      <TrackInfo track={battle[0]} />
+    <Fragment>
+      <BattleBackground track1={track1} track2={track2} />
 
-      <BattleWrapper>
-        <Covers>
-          {track1 &&
-            <TrackCover
-              cover={track1.track.album.images[0].url}
-              votes={track1.votes.length}
-              totalVotes={totalVotes}
-              align='left'
-            />}
-          {track2 &&
-            <TrackCover
-              cover={track2.track.album.images[0].url}
-              votes={track2.votes.length}
-              totalVotes={totalVotes}
-              align='right'
-            />}
-        </Covers>
-      </BattleWrapper>
+      <Inner>
 
-      <TrackInfo track={battle[1]} />
-    </Wrapper>
+        <TrackInfo track={battle[0]} />
+
+        <BattleWrapper>
+          <Covers>
+            {track1 &&
+              <TrackCover
+                cover={track1.track.album.images[0].url}
+                votes={track1.votes.length}
+                totalVotes={totalVotes}
+                align='left'
+              />}
+            {track2 &&
+              <TrackCover
+                cover={track2.track.album.images[0].url}
+                votes={track2.votes.length}
+                totalVotes={totalVotes}
+                align='right'
+              />}
+          </Covers>
+        </BattleWrapper>
+
+        <TrackInfo track={battle[1]} />
+      </Inner>
+    </Fragment>
   )
 }
 

@@ -46,6 +46,8 @@ export default class Host extends Store {
   _onGuestSearch = guestId => async ({ q }, ack) => {
     const tracks = await this.spotify.search(q)
 
+    console.log(tracks)
+
     ack({ results: tracks })
   }
 
@@ -91,6 +93,9 @@ export default class Host extends Store {
   addGuest = (connection, dataChannel) => {
     const socket = createPeerSocket(dataChannel)
     const guestId = uuid()
+    dataChannel.onclose = () => {
+      this.removeGuest(connection)
+    }
 
     socket.on('search', this._onGuestSearch(guestId))
     socket.on('queue/add', this._onQueueAdd(guestId))
