@@ -11,8 +11,8 @@ export default function createPeerSocket (dataChannel) {
       }
 
       if (cb) {
-        message.requestId = uuid()
-        _callbackQueue[message.requestId] = cb
+        message.payload.requestId = uuid()
+        _callbackQueue[message.payload.requestId] = cb
       }
 
       dataChannel.send(JSON.stringify(message))
@@ -30,7 +30,8 @@ export default function createPeerSocket (dataChannel) {
 
   dataChannel.onmessage = event => {
     try {
-      const { type, requestId, payload } = JSON.parse(event.data)
+      const { type, payload } = JSON.parse(event.data)
+      const { requestId } = payload
 
       if (_callbackQueue[requestId]) {
         const handler = _callbackQueue[requestId]
