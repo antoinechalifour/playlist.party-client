@@ -7,8 +7,6 @@ import theme from 'core/theming/theme'
 import Home from 'core/components/pages/Home'
 import { SocketProvider } from 'core/components/providers/Socket'
 import HostApp from 'host/App'
-import Host from 'host/domain/Host'
-import { HostProvider } from 'host/components/providers/Host'
 import GuestApp from 'guest/App'
 import { GuestProvider } from 'guest/components/providers/Guest'
 
@@ -28,13 +26,14 @@ class App extends Component {
                   const { party, accessToken, code } = getQueryParams(
                     location.search
                   )
-                  const spotify = SpotifyApiFactory({ accessToken })
-                  const host = new Host({ party, code, accessToken, spotify })
 
                   return (
-                    <HostProvider host={host}>
-                      <HostApp />
-                    </HostProvider>
+                    <HostApp
+                      party={party}
+                      code={code}
+                      accessToken={accessToken}
+                      socket={this.props.socket}
+                    />
                   )
                 }}
               />

@@ -1,60 +1,61 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { connectToHost } from './components/providers/Host'
+import { Provider } from 'react-redux'
 import Party from './components/Party'
+import createStore from './createStore'
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  display: flex;
-
-  > * {
-    flex: 1;
-  }
-`
-
-class Host extends Component {
+export default class Host extends Component {
   static propTypes = {
+    party: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired,
     accessToken: PropTypes.string.isRequired,
-    setPlayer: PropTypes.func.isRequired
+    socket: PropTypes.object.isRequired
   }
 
   constructor (props) {
     super(props)
 
-    window.onSpotifyWebPlaybackSDKReady = this._setup
-
-    this._injectSpotifySDK()
-  }
-
-  _injectSpotifySDK () {
-    const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = 'https://sdk.scdn.co/spotify-player.js'
-    document.body.appendChild(script)
-  }
-
-  _setup = () => {
-    const player = new window.Spotify.Player({
-      name: 'PlaylistParty player',
-      getOAuthToken: cb => cb(this.props.accessToken)
+    this.store = createStore({
+      initialState: {
+        party: {
+          name: this.props.party,
+          code: this.props.code,
+          accessToken: this.props.accessToken
+        }
+      },
+      socket: this.props.socket
     })
 
-    player.addListener('ready', () => this.props.setPlayer(player))
+    // window.onSpotifyWebPlaybackSDKReady = this._setup
 
-    player.connect()
+    // TODO: Move plaer creation to a middleware
+    // this._injectSpotifySDK()
   }
+
+  // _injectSpotifySDK () {
+  //   const script = document.createElement('script')
+  //   script.type = 'text/javascript'
+  //   script.src = 'https://sdk.scdn.co/spotify-player.js'
+  //   document.body.appendChild(script)
+  // }
+
+  // _setup = () => {
+  //   const player = new window.Spotify.Player({
+  //     name: 'PlaylistParty player',
+  //     getOAuthToken: cb => cb(this.props.accessToken)
+  //   })
+
+  //   player.addListener('ready', () => this.props.setPlayer(player))
+
+  //   player.connect()
+  // }
 
   render () {
     return (
-      <Wrapper>
-        <Party />
-      </Wrapper>
+      <Provider store={this.store}>
+        {/* <Party /> */}
+        <div> hello</div>
+      </Provider>
     )
   }
 }
-
-export default connectToHost(Host, (state, actions) => ({
-  accessToken: state.accessToken,
-  setPlayer: actions.setPlayer
-}))

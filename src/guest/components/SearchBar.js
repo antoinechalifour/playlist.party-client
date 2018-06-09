@@ -73,7 +73,7 @@ class SearchBar extends Component {
 
   _submitTrack = trackId => {
     this.setState({ suggestions: [], search: '' })
-    this.props.channel.emit('queue/add', { trackId })
+    this.props.channel.emit('track/add', { trackId })
   }
 
   _onChange = e => {
