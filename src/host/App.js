@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import Party from './components/Party'
 import createStore from './createStore'
+import Party from './components/Party'
 
 export default class Host extends Component {
   static propTypes = {
@@ -25,36 +25,12 @@ export default class Host extends Component {
       },
       socket: this.props.socket
     })
-
-    // window.onSpotifyWebPlaybackSDKReady = this._setup
-
-    // TODO: Move plaer creation to a middleware
-    // this._injectSpotifySDK()
   }
-
-  // _injectSpotifySDK () {
-  //   const script = document.createElement('script')
-  //   script.type = 'text/javascript'
-  //   script.src = 'https://sdk.scdn.co/spotify-player.js'
-  //   document.body.appendChild(script)
-  // }
-
-  // _setup = () => {
-  //   const player = new window.Spotify.Player({
-  //     name: 'PlaylistParty player',
-  //     getOAuthToken: cb => cb(this.props.accessToken)
-  //   })
-
-  //   player.addListener('ready', () => this.props.setPlayer(player))
-
-  //   player.connect()
-  // }
 
   render () {
     return (
       <Provider store={this.store}>
-        {/* <Party /> */}
-        <div> hello</div>
+        <Party />
       </Provider>
     )
   }

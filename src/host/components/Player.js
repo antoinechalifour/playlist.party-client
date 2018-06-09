@@ -1,21 +1,27 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import {
+  getCurrentTrack,
+  getCurrentAlbum,
+  getCurrentArtists,
+  getProgress
+} from 'host/reducers'
 import Typography from 'core/components/Typography'
-import { connectToHost } from './providers/Host'
 
-const Wrapper = styled.div`
-  padding: 24px;
+const Outer = styled.div`
+  background: #151515;
   color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
-  background: rgba(0, 0, 0, .8);
-  text-align: center;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  z-index: 1;
 
-  > :last-child {
-    font-size: 90%;
-    opacity: .75;
+  img {
+    max-width: 75px;
+    margin-right: 12px;
   }
 `
 
@@ -25,96 +31,47 @@ const Progress = styled.div`
   left: 0;
   height: 2px;
   background: #1db954;
-  transition: width .1s ease-out;
+  width: 0;
+  transition: width .2s ease;
 `
 
-class Player extends Component {
-  static propTypes = {
-    player: PropTypes.object.isRequired,
-    spotify: PropTypes.object.isRequired,
-    processVote: PropTypes.func.isRequired
-  }
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      playerState: null
-    }
-
-    // TODO: Move the player logic outside of this component
-    props.player.addListener('player_state_changed', this._updatePlayerState)
-    props.player.getCurrentState().then(this._updatePlayerState)
-
-    this._fetchPlayerState()
-    props.spotify.player.transferPlayback(props.player._options.id)
-
-    this.interval = window.setInterval(() => this._fetchPlayerState(), 500)
-  }
-
-  _fetchPlayerState = () =>
-    this.props.player.getCurrentState().then(this._updatePlayerState)
-
-  _updatePlayerState = playerState => this.setState({ playerState })
-
-  componentWillUnmount () {
-    if (this.interval) {
-      window.clearInterval(this.interval)
-    }
-
-    if (this.timeout) {
-      window.clearTimeout(this.timeout)
-    }
-  }
-
-  componentDidUpdate (_, prevState) {
-    if (!this.state.playerState) {
-      return
-    } else {
-      if (this.state.playerState.position === 0) {
-        this.timeout = null
-      }
-      if (this.timeout) {
-        return
-      }
-    }
-
-    const { duration, position } = this.state.playerState
-    const timeLeft = duration - position
-
-    if (timeLeft < 2000) {
-      this.timeout = window.setTimeout(() => {
-        this.props.processVote()
-      }, 1500)
-    }
-  }
-
-  render () {
-    return (
-      <Wrapper>
-        {this.state.playerState
-          ? <Fragment>
-            <Progress
-              style={{
-                width: `${this.state.playerState.position / this.state.playerState.duration * 100}%`
-              }}
-              />
-            <Typography reverse>
-              {this.state.playerState.track_window.current_track.name}
-            </Typography>
-            <Typography reverse type='secondary'>
-              {this.state.playerState.track_window.current_track.artists
-                  .map(x => x.name)
-                  .join(', ')}
-            </Typography>
-          </Fragment>
-          : <Typography reverse type='secondary'>Nothing playing</Typography>}
-      </Wrapper>
-    )
-  }
+function Player ({ track, album, artists, progress }) {
+  return (
+    <Outer>
+      <img src={album.cover} />
+      <div>
+        <Typography reverse>{track.name}</Typography>
+        <Typography reverse type='secondary'>
+          {artists.map(x => x.name).join(', ')}
+        </Typography>
+      </div>
+      <Progress style={{ width: `${progress * 100}%` }} />
+    </Outer>
+  )
 }
 
-export default connectToHost(Player, (state, actions) => ({
-  player: state.player,
-  spotify: state.spotify,
-  processVote: actions.processVote
-}))
+Player.propTypes = {
+  track: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired,
+  album: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired
+  }).isRequired,
+  artists: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  progress: PropTypes.number.isRequired
+}
+
+export default connect(state => ({
+  track: getCurrentTrack(state),
+  album: getCurrentAlbum(state),
+  artists: getCurrentArtists(state),
+  progress: getProgress(state)
+}))(Player)
