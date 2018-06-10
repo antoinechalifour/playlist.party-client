@@ -19,6 +19,8 @@ export const getGuest = id => state => fromGuests.getGuest(state.guests, id)
 
 export const isBattleFull = state => fromTracks.isBattleFull(state.tracks)
 
+export const getContenders = state => fromTracks.getContenders(state.tracks)
+
 export const isPlayerAvailable = state =>
   fromPlayer.isPlayerAvailable(state.player)
 

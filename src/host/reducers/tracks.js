@@ -42,3 +42,5 @@ const tracksReducer = combineReducers({
 export default tracksReducer
 
 export const isBattleFull = state => state.next.length === 2
+
+export const getContenders = state => state.next

@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "debounce": "^1.1.0",
+    "node-vibrant": "^3.0.0",
+    "polished": "^1.9.2",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

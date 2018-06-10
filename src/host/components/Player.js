@@ -11,13 +11,15 @@ import {
 import Typography from 'core/components/Typography'
 
 const Outer = styled.div`
-  background: #151515;
+  background: #212121;
   color: #fff;
   padding: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
 
   img {
     max-width: 75px;
