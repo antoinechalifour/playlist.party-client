@@ -20,7 +20,8 @@ export default class Host extends Component {
         party: {
           name: this.props.party,
           code: this.props.code,
-          accessToken: this.props.accessToken
+          accessToken: this.props.accessToken,
+          isStarted: false
         }
       },
       socket: this.props.socket

@@ -10,6 +10,8 @@ export default function playerReducer (state = null, action) {
   }
 }
 
+export const getPlayer = state => state
+
 export const isPlayerAvailable = state => state !== null
 
 export const getPosition = state => state.position

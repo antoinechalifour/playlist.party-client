@@ -28,8 +28,12 @@ export function * createPlayer () {
   return player
 }
 
-export function * playTrackToSpotify (spotify, action) {
-  yield call([spotify.player, spotify.player.play], action.track.uri)
+export function * playTrackToSpotify (spotify, player, action) {
+  yield call(
+    [spotify.player, spotify.player.play],
+    action.track.uri,
+    player._options.id
+  )
 }
 
 export default function * root (spotify) {
@@ -45,5 +49,5 @@ export default function * root (spotify) {
   yield fork(watchPlayerState, player)
   yield fork(watchPlayerProgress)
 
-  yield takeEvery(PLAY_TRACK, playTrackToSpotify, spotify)
+  yield takeEvery(PLAY_TRACK, playTrackToSpotify, spotify, player)
 }

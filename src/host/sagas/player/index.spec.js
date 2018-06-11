@@ -11,11 +11,16 @@ describe('playTrackToSpotify()', () => {
     name: 'Never gonna give you up',
     uri: 'spotify:zepfihzeh'
   })
-  const gen = playTrackToSpotify(spotify, action)
+  const player = {
+    _options: {
+      id: 'toto'
+    }
+  }
+  const gen = playTrackToSpotify(spotify, player, action)
 
   it('Should call the api to play the track', () => {
     expect(gen.next().value).toEqual(
-      call([spotify.player, spotify.player.play], 'spotify:zepfihzeh')
+      call([spotify.player, spotify.player.play], 'spotify:zepfihzeh', 'toto')
     )
     expect(gen.next().done).toBe(true)
   })

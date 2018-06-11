@@ -42,9 +42,15 @@ export default function SpotifyApiFactory ({ accessToken }) {
           }
         )
       },
-      async play (trackUri) {
+      async play (trackUri, deviceId) {
+        const options = {}
+
+        if (deviceId) {
+          options.device_id = deviceId
+        }
+
         await axios.put(
-          makeUrl('/me/player/play'),
+          makeUrl(`/me/player/play?${qs.stringify(options)}`),
           {
             uris: [trackUri]
           },

@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { getContenders } from 'host/reducers'
+import { getContenders, getParty } from 'host/reducers'
+import StartPartyButton from './StartPartyButton'
 
 const CoversContainer = styled.div`
   position: relative;
@@ -29,7 +31,7 @@ const Link = styled.div`
   flex-basis: 100px;
 `
 
-function Battle ({ contenders }) {
+function Battle ({ contenders, party }) {
   const totalVotes = contenders.reduce((sum, x) => sum + x.votes.length, 0)
   const covers = contenders.map(x => {
     return {
@@ -40,7 +42,8 @@ function Battle ({ contenders }) {
 
   return (
     <Fragment>
-      <Link />
+      {contenders[0] && <Link />}
+
       <div>
         <CoversContainer>
           {covers.map((x, index) => {
@@ -55,11 +58,21 @@ function Battle ({ contenders }) {
           })}
         </CoversContainer>
       </div>
-      <Link />
+      {contenders[1] && <Link />}
+
+      {!party.isStarted && <StartPartyButton />}
     </Fragment>
   )
 }
 
+Battle.propTypes = {
+  contenders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  party: PropTypes.shape({
+    isStarted: PropTypes.bool.isRequired
+  }).isRequired
+}
+
 export default connect(state => ({
-  contenders: getContenders(state)
+  contenders: getContenders(state),
+  party: getParty(state)
 }))(Battle)

@@ -4,6 +4,7 @@ import { getAccessToken } from 'host/reducers'
 import signaling from './signaling'
 import guests from './guests'
 import player from './player'
+import party from './party'
 import tracks from './tracks'
 
 export default function * root (socket) {
@@ -14,4 +15,5 @@ export default function * root (socket) {
   yield fork(guests, spotify)
   yield fork(player, spotify)
   yield fork(tracks)
+  yield fork(party)
 }
