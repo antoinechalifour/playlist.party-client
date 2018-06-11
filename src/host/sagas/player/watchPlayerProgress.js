@@ -1,6 +1,7 @@
-import { select, take } from 'redux-saga/effects'
+import { put, select, take } from 'redux-saga/effects'
 import { UPDATE_PLAYER_STATE } from 'host/actions/player'
 import { isPlayerAvailable, getPosition, getDuration } from 'host/reducers'
+import { triggerVote } from 'host/actions/tracks'
 
 const delay = ms => new Promise(resolve => window.setTimeout(resolve, ms))
 
@@ -27,7 +28,7 @@ export default function * root () {
       if (duration - position <= 2000 && !readyForNextTrack) {
         readyForNextTrack = true
         yield delay(1500)
-        console.log('Will trigger vote process')
+        yield put(triggerVote())
       }
     }
   }

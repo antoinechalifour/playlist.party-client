@@ -10,11 +10,12 @@ export default function configureStore ({ initialState, socket }) {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   const store = createStore(
     reducer,
-    /* initialState */ mockState,
+    initialState,
+    // mockState,
     composeEnhancers(applyMiddleware(sagaMiddleware))
   )
 
-  // sagaMiddleware.run(sagas, socket)
+  sagaMiddleware.run(sagas, socket)
 
   return store
 }

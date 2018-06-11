@@ -2,17 +2,22 @@ import { combineReducers } from 'redux'
 import * as actions from '../actions/tracks'
 
 function previous (state = [], action) {
-  return state
-}
+  switch (action.type) {
+    case actions.ADD_TO_PREVIOUS:
+      return [...state, action.track]
 
-function current (state = null, action) {
-  return state
+    default:
+      return state
+  }
 }
 
 function next (state = [], action) {
   switch (action.type) {
     case actions.ADD_TO_BATTLE:
       return [...state, { ...action.track, votes: [] }]
+
+    case actions.ADD_TO_PREVIOUS:
+      return state.filter(x => x.id !== action.track.id)
 
     case '@guest/battle/vote':
       return [
@@ -52,7 +57,6 @@ function queue (state = [], action) {
 const tracksReducer = combineReducers({
   previous,
   next,
-  current,
   queue
 })
 
@@ -61,3 +65,6 @@ export default tracksReducer
 export const isBattleFull = state => state.next.length === 2
 
 export const getContenders = state => state.next
+
+export const getNextContenders = state =>
+  state.queue.slice(0, 2).filter(Boolean)

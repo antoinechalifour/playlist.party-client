@@ -25,6 +25,9 @@ export const isBattleFull = state => fromTracks.isBattleFull(state.tracks)
 
 export const getContenders = state => fromTracks.getContenders(state.tracks)
 
+export const getNextContenders = state =>
+  fromTracks.getNextContenders(state.tracks)
+
 export const isPlayerAvailable = state =>
   fromPlayer.isPlayerAvailable(state.player)
 

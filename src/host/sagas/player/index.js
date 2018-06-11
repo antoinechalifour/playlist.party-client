@@ -1,7 +1,8 @@
-import { call, fork, select } from 'redux-saga/effects'
+import { call, fork, select, takeEvery } from 'redux-saga/effects'
 import { getAccessToken } from 'host/reducers'
 import watchPlayerState from './watchPlayerState'
 import watchPlayerProgress from './watchPlayerProgress'
+import { PLAY_TRACK } from 'host/actions/player'
 
 export function * injectSpotifySdk () {
   console.log('Injecting SDK...')
@@ -27,7 +28,11 @@ export function * createPlayer () {
   return player
 }
 
-export default function * root () {
+export function * playTrackToSpotify (spotify, action) {
+  yield call([spotify.player, spotify.player.play], action.track.uri)
+}
+
+export default function * root (spotify) {
   const sdkReady = new Promise(resolve => {
     window.onSpotifyWebPlaybackSDKReady = resolve
   })
@@ -39,4 +44,6 @@ export default function * root () {
   console.log('Watching player state...')
   yield fork(watchPlayerState, player)
   yield fork(watchPlayerProgress)
+
+  yield takeEvery(PLAY_TRACK, playTrackToSpotify, spotify)
 }
