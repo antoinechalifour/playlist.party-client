@@ -38,13 +38,12 @@ export default class Background extends Component {
 
   async computeColors (sources) {
     const swatches = await Promise.all(
-      sources.map(x => Vibrant.from(x).getPalette().then(x => x.Muted))
+      sources.map(x => Vibrant.from(x).getPalette().then(x => x.Vibrant))
     )
 
-    const colors = swatches
-      .map(x => rgb(Math.floor(x.r), Math.floor(x.g), Math.floor(x.b)))
-      .map(darken(0.25))
-      .map(desaturate(0.25))
+    const colors = swatches.map(x =>
+      rgb(Math.floor(x.r), Math.floor(x.g), Math.floor(x.b))
+    )
 
     this.setState({ colors })
   }
