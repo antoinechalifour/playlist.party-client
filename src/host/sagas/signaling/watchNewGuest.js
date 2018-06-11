@@ -7,7 +7,7 @@ import {
 } from 'host/actions/signaling'
 import iceServers from 'core/network/iceServers'
 import { getGuest } from 'host/reducers'
-import { addGuest, removeGuest } from 'host/actions/guests'
+import { addGuest, removeGuest, guestReady } from 'host/actions/guests'
 
 const noop = () => {}
 
@@ -77,9 +77,11 @@ export function * onJoin (socket, action) {
   )
 
   yield new Promise(resolve => (dataChannel.onopen = resolve))
-  // TODO: Update guest status
+
+  yield put(guestReady(action.remoteId))
 
   yield new Promise(resolve => (dataChannel.onclose = resolve))
+
   yield put(removeGuest(action.remoteId))
 }
 

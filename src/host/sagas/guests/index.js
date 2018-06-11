@@ -1,7 +1,12 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects'
-import { ADD_GUEST } from 'host/actions/guests'
+import { ADD_GUEST, GUEST_READY } from 'host/actions/guests'
 import { addToQueue, addToBattle } from 'host/actions/tracks'
-import { getGuest, isBattleFull } from 'host/reducers'
+import {
+  getGuest,
+  isBattleFull,
+  getAllChannels,
+  getContenders
+} from 'host/reducers'
 import watchGuestEvents from './watchGuestEvents'
 
 /**
@@ -20,7 +25,25 @@ export function * search (spotify, action) {
     }
   }
 
-  guest.dataChannel.send(JSON.stringify(message))
+  yield call(
+    [guest.dataChannel, guest.dataChannel.send],
+    JSON.stringify(message)
+  )
+}
+
+export function * notifyGuests () {
+  const channels = yield select(getAllChannels)
+  const contenders = yield select(getContenders)
+
+  const message = {
+    type: 'battle/update',
+    payload: {
+      tracks: contenders
+    }
+  }
+  for (const channel of channels) {
+    yield call([channel, channel.send], JSON.stringify(message))
+  }
 }
 
 /**
@@ -41,10 +64,34 @@ export function * addTrack (spotify, action) {
   } else {
     yield put(addToBattle(track))
   }
+
+  yield call(notifyGuests)
+}
+
+/**
+ * Setups the new guest.
+ * @param {{ id: String }} action - The addGuest action.
+ */
+export function * setupGuest (action) {
+  const guest = yield select(getGuest(action.id))
+  const contenders = yield select(getContenders)
+
+  const message = {
+    type: 'battle/update',
+    payload: {
+      tracks: contenders
+    }
+  }
+
+  yield call(
+    [guest.dataChannel, guest.dataChannel.send],
+    JSON.stringify(message)
+  )
 }
 
 export default function * root (spotify) {
   yield takeEvery(ADD_GUEST, watchGuestEvents)
+  yield takeEvery(GUEST_READY, setupGuest)
   yield takeEvery('@guest/search', search, spotify)
   yield takeEvery('@guest/track/add', addTrack, spotify)
 }

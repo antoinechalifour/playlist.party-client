@@ -17,6 +17,10 @@ export const getParty = state => fromParty.getParty(state.party)
 
 export const getGuest = id => state => fromGuests.getGuest(state.guests, id)
 
+export const getGuests = state => fromGuests.getGuests(state.guests)
+
+export const getAllChannels = state => fromGuests.getAllChannels(state.guests)
+
 export const isBattleFull = state => fromTracks.isBattleFull(state.tracks)
 
 export const getContenders = state => fromTracks.getContenders(state.tracks)

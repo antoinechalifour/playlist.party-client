@@ -12,7 +12,24 @@ function current (state = null, action) {
 function next (state = [], action) {
   switch (action.type) {
     case actions.ADD_TO_BATTLE:
-      return [...state, action.track]
+      return [...state, { ...action.track, votes: [] }]
+
+    case '@guest/battle/vote':
+      return [
+        ...state.map(x => {
+          if (x.id === action.payload.trackId) {
+            return {
+              ...x,
+              votes: [...x.votes, action.guestId]
+            }
+          } else {
+            return {
+              ...x,
+              votes: x.votes.filter(x => x !== action.guestId)
+            }
+          }
+        })
+      ]
 
     default:
       return state

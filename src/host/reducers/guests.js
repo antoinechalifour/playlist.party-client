@@ -22,3 +22,7 @@ export default function guestsReducer (state = [], action) {
 }
 
 export const getGuest = (state, id) => state.find(x => x.id === id)
+
+export const getGuests = state => state
+
+export const getAllChannels = state => state.map(x => x.dataChannel)
