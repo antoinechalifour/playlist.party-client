@@ -34,7 +34,6 @@ export function * search (spotify, action) {
 export function * notifyGuests () {
   const channels = yield select(getAllChannels)
   const contenders = yield select(getContenders)
-
   const message = {
     type: 'battle/update',
     payload: {
@@ -56,16 +55,13 @@ export function * addTrack (spotify, action) {
     [spotify.tracks, spotify.tracks.findOne],
     action.payload.trackId
   )
-
   const shouldAddToQueue = yield select(isBattleFull)
-
   if (shouldAddToQueue) {
     yield put(addToQueue(track))
   } else {
     yield put(addToBattle(track))
+    yield call(notifyGuests)
   }
-
-  yield call(notifyGuests)
 }
 
 /**

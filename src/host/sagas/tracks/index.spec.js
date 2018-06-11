@@ -5,7 +5,7 @@ import { processVote } from '.'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
 
-describe('processVote', () => {
+describe('processVote saga', () => {
   const gen = cloneableGenerator(processVote)()
   expect(gen.next().value).toEqual(select(getContenders))
 
