@@ -28,6 +28,10 @@ export const getContenders = state => fromTracks.getContenders(state.tracks)
 export const isPlayerAvailable = state =>
   fromPlayer.isPlayerAvailable(state.player)
 
+export const getPosition = state => fromPlayer.getPosition(state.player)
+
+export const getDuration = state => fromPlayer.getDuration(state.player)
+
 export const getProgress = state => fromPlayer.getProgress(state.player)
 
 export const isPlaying = state => fromPlayer.isPlaying(state.player)

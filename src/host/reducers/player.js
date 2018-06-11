@@ -12,6 +12,10 @@ export default function playerReducer (state = null, action) {
 
 export const isPlayerAvailable = state => state !== null
 
+export const getPosition = state => state.position
+
+export const getDuration = state => state.duration
+
 export const getProgress = state => state.position / state.duration
 
 export const isPlaying = state => !state.paused

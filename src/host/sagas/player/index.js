@@ -1,6 +1,7 @@
 import { call, fork, select } from 'redux-saga/effects'
 import { getAccessToken } from 'host/reducers'
 import watchPlayerState from './watchPlayerState'
+import watchPlayerProgress from './watchPlayerProgress'
 
 export function * injectSpotifySdk () {
   console.log('Injecting SDK...')
@@ -37,4 +38,5 @@ export default function * root () {
 
   console.log('Watching player state...')
   yield fork(watchPlayerState, player)
+  yield fork(watchPlayerProgress)
 }

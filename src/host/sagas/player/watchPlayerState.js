@@ -6,7 +6,7 @@ export function * fetchPlayerState (player) {
   return eventChannel(emit => {
     const interval = window.setInterval(() => {
       player.getCurrentState().then(state => emit(updatePlayerState(state)))
-    }, 3000)
+    }, 500)
 
     return () => window.clearInterval(interval)
   })
