@@ -8,20 +8,21 @@ import watchGuestEvents from 'host/sagas/watchGuestEvents'
 import initializeGuest from 'host/sagas/initializeGuest'
 import handleGuestSearch from 'host/sagas/handleGuestSearch'
 import addTrack from 'host/sagas/addTrack'
-import initializeParty from 'host/sagas/initializeParty'
+import startParty from 'host/sagas/startParty'
 
 // TODO: Refactor those sagas
 import playerSaga from './player'
 import signalingSaga from './signaling'
+import { START_PARTY } from 'host/actions/party'
 
 export default function * root (socket) {
   const accessToken = yield select(getAccessToken)
   const spotify = SpotifyApiFactory({ accessToken })
 
-  yield fork(initializeParty)
   yield fork(playerSaga, spotify)
   yield fork(signalingSaga, socket)
 
+  yield takeEvery(START_PARTY, startParty)
   yield takeEvery(TRIGGER_VOTE, processVote)
   yield takeEvery(ADD_GUEST, watchGuestEvents)
   yield takeEvery(GUEST_READY, initializeGuest)
