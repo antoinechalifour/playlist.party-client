@@ -3,6 +3,9 @@ import { getContenders } from 'host/reducers'
 import { triggerVote } from 'host/actions/tracks'
 import { partyReady } from 'host/actions/party'
 
+/**
+ * Triggers the initial vote to start the party.
+ */
 export default function * startParty () {
   const contenders = yield select(getContenders)
 

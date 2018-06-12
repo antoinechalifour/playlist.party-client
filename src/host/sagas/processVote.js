@@ -3,6 +3,16 @@ import { getNextContenders, getContenders } from 'host/reducers'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
 
+/**
+ * Describes the vote process: decides which track is going to be played
+ * next based on the number of votes.
+ *
+ * When only 1 track is in the contenders list, it gets played without
+ * a vote.
+ * When 2 tracks are contending, the most voted one gets played. In case
+ * of equality, track 1 is played if the number of votes is event (track 2
+ * is played otherwise)
+ */
 export default function * processVote () {
   const contenders = yield select(getContenders)
 
