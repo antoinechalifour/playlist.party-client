@@ -1,11 +1,12 @@
-import { call } from 'redux-saga/effects'
+import { call, select } from 'redux-saga/effects'
+import { getParty } from 'host/reducers'
 
 /**
  * Creates a party on the server.
  * @param {SocketIOClient.Socket} socket The socket.
- * @param {{ name: String, code: String }} party The party to create.
  */
-export default function * root (socket, party) {
+export default function * initializeParty (socket) {
+  const party = yield select(getParty)
   yield call(
     [socket, socket.emit],
     'party/create',

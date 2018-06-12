@@ -122,11 +122,8 @@ export function * onCandidate (action) {
  * guest joins the party.
  * @param {SocketIOClient.Socket} socket - The server connection.
  */
-export default function * root (socket) {
-  console.log('WATCH NEW GUEST ICI')
-  yield all([
-    takeEvery(SIGNALING_IN_JOIN, onJoin, socket),
-    takeEvery(SIGNALING_IN_ANSWER, onAnswer),
-    takeEvery(SIGNALING_IN_CANDIDATE, onCandidate)
-  ])
+export default function * signaling (socket) {
+  yield takeEvery(SIGNALING_IN_JOIN, onJoin, socket)
+  yield takeEvery(SIGNALING_IN_ANSWER, onAnswer)
+  yield takeEvery(SIGNALING_IN_CANDIDATE, onCandidate)
 }
