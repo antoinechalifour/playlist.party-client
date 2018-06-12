@@ -11,7 +11,7 @@ import {
 import Typography from 'core/components/Typography'
 
 const Outer = styled.div`
-  background: #212121;
+  background: rgba(0, 0, 0, .65);
   color: #fff;
   padding: 12px;
   display: flex;
