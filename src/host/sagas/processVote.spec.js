@@ -1,7 +1,7 @@
 import { cloneableGenerator } from 'redux-saga/utils'
 import { select, put } from 'redux-saga/effects'
 import { getContenders, getNextContenders } from 'host/reducers'
-import { processVote } from '.'
+import processVote from './processVote'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
 

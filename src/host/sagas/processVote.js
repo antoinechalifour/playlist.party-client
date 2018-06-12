@@ -1,9 +1,9 @@
-import { put, select, takeEvery } from 'redux-saga/effects'
-import { TRIGGER_VOTE, addToPrevious, addToBattle } from 'host/actions/tracks'
-import { getContenders, getNextContenders } from 'host/reducers'
+import { put, select } from 'redux-saga/effects'
+import { getNextContenders, getContenders } from 'host/reducers'
 import { playTrack } from 'host/actions/player'
+import { addToPrevious, addToBattle } from 'host/actions/tracks'
 
-export function * processVote () {
+export default function * processVote () {
   const contenders = yield select(getContenders)
 
   if (contenders.length === 1) {
@@ -43,8 +43,4 @@ export function * processVote () {
       yield put(addToBattle(contender))
     }
   }
-}
-
-export default function * root () {
-  yield takeEvery(TRIGGER_VOTE, processVote)
 }

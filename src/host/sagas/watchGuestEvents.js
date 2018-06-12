@@ -40,7 +40,7 @@ export function * readFromGuest (guest) {
  * Watches new guests to watch their events.
  * @param {{ id: String }} action - The addGuest action.
  */
-export default function * root (action) {
+export default function * watchGuestEvents (action) {
   const guest = yield select(getGuest(action.id))
 
   yield fork(readFromGuest, guest)
