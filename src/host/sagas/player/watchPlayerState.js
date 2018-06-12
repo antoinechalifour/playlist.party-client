@@ -2,7 +2,7 @@ import { eventChannel } from 'redux-saga'
 import { call, put, take } from 'redux-saga/effects'
 import { updatePlayerState } from 'host/actions/player'
 
-export function * fetchPlayerState (player) {
+export function fetchPlayerState (player) {
   return eventChannel(emit => {
     const interval = window.setInterval(() => {
       player.getCurrentState().then(state => emit(updatePlayerState(state)))

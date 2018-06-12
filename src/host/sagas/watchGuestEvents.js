@@ -8,7 +8,7 @@ const noop = () => {}
  * Creates an event channel for the data channel.
  * @param {RTCDataChannel} dataChannel - The data channel.
  */
-export function * subscribeToDataChannelEvents (dataChannel) {
+export function subscribeToDataChannelEvents (dataChannel) {
   return eventChannel(emit => {
     dataChannel.onmessage = event => {
       const { type, payload } = JSON.parse(event.data)

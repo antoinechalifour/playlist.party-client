@@ -4,7 +4,7 @@ import watchPlayerState from './watchPlayerState'
 import watchPlayerProgress from './watchPlayerProgress'
 import { PLAY_TRACK } from 'host/actions/player'
 
-export function * injectSpotifySdk () {
+export function injectSpotifySdk () {
   console.log('Injecting SDK...')
   const script = document.createElement('script')
   script.type = 'text/javascript'

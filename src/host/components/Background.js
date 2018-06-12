@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import * as Vibrant from 'node-vibrant'
-import { rgb, darken, desaturate } from 'polished'
+import { rgb } from 'polished'
 
 const Outer = styled.div`
   position: absolute;

@@ -10,7 +10,7 @@ export default function * root () {
   let lastPosition = Number.MAX_VALUE
 
   while (true) {
-    const action = yield take(UPDATE_PLAYER_STATE)
+    yield take(UPDATE_PLAYER_STATE)
     const hasPlayer = yield select(isPlayerAvailable)
 
     if (hasPlayer) {

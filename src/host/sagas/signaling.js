@@ -1,5 +1,5 @@
 import { eventChannel, END } from 'redux-saga'
-import { all, call, put, select, takeEvery } from 'redux-saga/effects'
+import { call, put, select, takeEvery } from 'redux-saga/effects'
 import {
   SIGNALING_IN_JOIN,
   SIGNALING_IN_ANSWER,

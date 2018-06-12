@@ -40,7 +40,7 @@ const Progress = styled.div`
 function Player ({ track, album, artists, progress }) {
   return (
     <Outer>
-      <img src={album.cover} />
+      <img src={album.cover} alt={`Album cover for "${album.name}"`} />
       <div>
         <Typography reverse>{track.name}</Typography>
         <Typography reverse type='secondary'>

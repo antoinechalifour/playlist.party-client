@@ -11,7 +11,7 @@ import {
  * Creates an event channel for server-sent actions.
  * @param {SocketIOClient.Socket} socket The socket to listen to.
  */
-export function * subscribeToSocketEvents (socket) {
+export function subscribeToSocketEvents (socket) {
   return eventChannel(emit => {
     const onJoin = ({ remoteId }) => emit(signalingInJoin(remoteId))
     const onLeave = ({ remoteId }) => emit(signalingInLeave(remoteId))
