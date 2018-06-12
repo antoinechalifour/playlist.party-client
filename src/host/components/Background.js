@@ -11,6 +11,7 @@ const Outer = styled.div`
   bottom: 0;
   left: 0;
   background-color: #151515;
+  transition: background 1s ease;
 `
 
 export default class Background extends Component {
@@ -38,12 +39,14 @@ export default class Background extends Component {
 
   async computeColors (sources) {
     const swatches = await Promise.all(
-      sources.map(x => Vibrant.from(x).getPalette().then(x => x.Vibrant))
+      sources.map(x =>
+        Vibrant.from(x).getPalette().then(palette => palette.Vibrant)
+      )
     )
 
-    const colors = swatches.map(x =>
-      rgb(Math.floor(x.r), Math.floor(x.g), Math.floor(x.b))
-    )
+    const colors = swatches
+      .filter(Boolean)
+      .map(x => rgb(Math.floor(x.r), Math.floor(x.g), Math.floor(x.b)))
 
     this.setState({ colors })
   }
