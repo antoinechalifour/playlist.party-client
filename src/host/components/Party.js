@@ -35,9 +35,13 @@ function Party ({ isPlayerAvailable, contenders }) {
       {isPlayerAvailable && <Player />}
 
       <Main>
-        {contender1 && <Contender {...contender1} />}
+        {contender1
+          ? <Contender {...contender1} />
+          : <div style={{ width: '250px' }} />}
         <Battle />
-        {contender2 && <Contender {...contender2} />}
+        {contender2
+          ? <Contender {...contender2} />
+          : <div style={{ width: '250px' }} />}
       </Main>
     </Outer>
   )
