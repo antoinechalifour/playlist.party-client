@@ -28,9 +28,9 @@ export default class Background extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const shouldComputeColors = this.props.sources.some(
-      (source, i) => source !== prevProps.sources[i]
-    )
+    const shouldComputeColors =
+      prevProps.sources.length !== this.props.sources.length ||
+      this.props.sources.some((source, i) => source !== prevProps.sources[i])
 
     if (shouldComputeColors) {
       this.computeColors(this.props.sources)
@@ -38,15 +38,19 @@ export default class Background extends Component {
   }
 
   async computeColors (sources) {
-    const swatches = await Promise.all(
+    const swatches = (await Promise.all(
       sources.map(x =>
         Vibrant.from(x).getPalette().then(palette => palette.Vibrant)
       )
-    )
-
-    const colors = swatches
+    ))
       .filter(Boolean)
       .map(x => rgb(Math.floor(x.r), Math.floor(x.g), Math.floor(x.b)))
+
+    const colors = []
+
+    for (let i = 0; i < 2; i += 1) {
+      colors[i] = swatches[i] || 'transparent'
+    }
 
     this.setState({ colors })
   }
