@@ -11,11 +11,3 @@ const props = { socket }
 
 ReactDOM.render(<App {...props} />, document.getElementById('root'))
 registerServiceWorker()
-
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default
-
-    ReactDOM.render(<NextApp {...props} />, document.getElementById('root'))
-  })
-}

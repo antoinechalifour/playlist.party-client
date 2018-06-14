@@ -3,13 +3,26 @@ import React, { Component } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import theme from 'core/theming/theme'
-import Home from 'core/components/pages/Home'
+import Loadable from 'react-loadable'
 import { SocketProvider } from 'core/components/providers/Socket'
-import HostApp from 'host/App'
-import GuestApp from 'guest/App'
 import { GuestProvider } from 'guest/components/providers/Guest'
 
 const getQueryParams = search => qs.parse(search.substr(1))
+
+const HomeApp = Loadable({
+  loader: () => import('core/components/pages/Home'),
+  loading: () => null
+})
+
+const HostApp = Loadable({
+  loader: () => import('host/App'),
+  loading: () => null
+})
+
+const GuestApp = Loadable({
+  loader: () => import('guest/App'),
+  loading: () => null
+})
 
 class App extends Component {
   render () {
@@ -18,7 +31,7 @@ class App extends Component {
         <ThemeProvider theme={theme}>
           <BrowserRouter className='App'>
             <Switch>
-              <Route path='/home' component={Home} />
+              <Route path='/home' component={HomeApp} />
               <Route
                 path='/host'
                 render={({ location }) => {
