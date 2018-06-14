@@ -18,7 +18,7 @@ const Outer = styled.div`
 const Cover = styled.img`
   display: block;
   margin: auto;
-  width: 100%;
+  width: 80%;
   margin-bottom: 24px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, .35);
