@@ -1,9 +1,10 @@
 import { cloneableGenerator } from 'redux-saga/utils'
-import { select, put } from 'redux-saga/effects'
+import { select, put, call } from 'redux-saga/effects'
 import { getContenders, getNextContenders } from 'host/reducers'
 import processVote from './processVote'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
+import notifyBattleUpdate from 'host/sagas/notifyBattleUpdate'
 
 describe('processVote saga', () => {
   const gen = cloneableGenerator(processVote)()
@@ -98,6 +99,10 @@ describe('processVote saga', () => {
       )
       expect(clone.next().value).toEqual(put(addToBattle(nextContenders[1])))
     })
+
+    it('Should notify the guests that the battle changed', () => {
+      expect(clone.next().value).toEqual(call(notifyBattleUpdate))
+    })
   })
 
   describe('multiple contenders (equality / choose contender 1)', () => {
@@ -143,6 +148,10 @@ describe('processVote saga', () => {
       )
       expect(clone.next().value).toEqual(put(addToBattle(nextContenders[1])))
     })
+
+    it('Should notify the guests that the battle changed', () => {
+      expect(clone.next().value).toEqual(call(notifyBattleUpdate))
+    })
   })
 
   describe('multiple contenders (equality / choose contender 2)', () => {
@@ -187,6 +196,10 @@ describe('processVote saga', () => {
         put(addToBattle(nextContenders[0]))
       )
       expect(clone.next().value).toEqual(put(addToBattle(nextContenders[1])))
+    })
+
+    it('Should notify the guests that the battle changed', () => {
+      expect(clone.next().value).toEqual(call(notifyBattleUpdate))
     })
   })
 })

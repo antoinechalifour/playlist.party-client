@@ -1,7 +1,8 @@
-import { put, select } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { getNextContenders, getContenders } from 'host/reducers'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
+import notifyBattleUpdate from 'host/sagas/notifyBattleUpdate'
 
 /**
  * Describes the vote process: decides which track is going to be played
@@ -52,5 +53,7 @@ export default function * processVote () {
     for (const contender of nextContenders) {
       yield put(addToBattle(contender))
     }
+
+    yield call(notifyBattleUpdate)
   }
 }
