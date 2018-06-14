@@ -29,7 +29,7 @@ const Outer = styled.div`
 
 const Progress = styled.div`
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   height: 2px;
   background: #1db954;
@@ -40,6 +40,7 @@ const Progress = styled.div`
 function Player ({ track, album, artists, progress }) {
   return (
     <Outer>
+      <Progress style={{ width: `${progress * 100}%` }} />
       <img src={album.cover} alt={`Album cover for "${album.name}"`} />
       <div>
         <Typography reverse>{track.name}</Typography>
@@ -47,7 +48,6 @@ function Player ({ track, album, artists, progress }) {
           {artists.map(x => x.name).join(', ')}
         </Typography>
       </div>
-      <Progress style={{ width: `${progress * 100}%` }} />
     </Outer>
   )
 }
