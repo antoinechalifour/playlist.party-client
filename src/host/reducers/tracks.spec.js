@@ -1,4 +1,4 @@
-import reducer from './tracks'
+import reducer, * as selectors from './tracks'
 import * as actions from '../actions/tracks'
 
 it('Should return the initial state', () => {
@@ -76,5 +76,41 @@ it('Should handle "@guest/battle/vote"', () => {
     previous: [{ id: '12' }],
     next: [{ id: '34', votes: [] }, { id: '56', votes: ['user1'] }],
     queue: [{ id: '78' }]
+  })
+})
+
+describe('getVoteProgress', () => {
+  it('Should return 100% (no votes)', () => {
+    const state = {
+      next: [
+        {
+          id: '34',
+          votes: []
+        },
+        {
+          id: '56',
+          votes: []
+        }
+      ]
+    }
+
+    expect(selectors.getVoteProgress('34', state)).toEqual(1)
+  })
+
+  it('Should return 75%', () => {
+    const state = {
+      next: [
+        {
+          id: '34',
+          votes: ['a', 'b', 'c']
+        },
+        {
+          id: '56',
+          votes: ['d']
+        }
+      ]
+    }
+
+    expect(selectors.getVoteProgress('34', state)).toEqual(0.75)
   })
 })

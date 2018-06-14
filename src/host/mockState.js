@@ -1,28 +1,17 @@
 export default {
   guests: [
     {
-      id: '5z4TSbrzQOXQOgmyAAAC',
-      name: 'Anonymous-5z4TSbrzQOXQOgmyAAAC',
-      connection: {},
-      dataChannel: {}
-    },
-    {
-      id: 'yVRPNjfxnhtR83RRAAAD',
-      name: 'Anonymous-yVRPNjfxnhtR83RRAAAD',
-      connection: {},
-      dataChannel: {}
-    },
-    {
-      id: 'EeGi_qpzk83C8nP4AAAE',
-      name: 'Anonymous-EeGi_qpzk83C8nP4AAAE',
+      id: 'FR5c2qu6T_5eaj-wAABG',
+      name: 'Anonymous-FR5c2qu6T_5eaj-wAABG',
       connection: {},
       dataChannel: {}
     }
   ],
   party: {
-    name: 'bonjour',
-    code: 'test',
-    accessToken: 'BQDpSEH40jobhRYR--iLHuVb7HrHjsEjwUmylQtayx3vrdZc_Ar7oGpqbsZLv28dFQwpevSmybPfX3GuFinrc9o_VTHQRSYCpHdeyOSrhIpw5CF0x8o4JUIFKbU4K2MeC3EWxEhHHj08llqezEyv_it6R2u1wg0'
+    name: 'octo',
+    code: '1234',
+    accessToken: 'BQB-eEYEOMp1_XshEt89U1xiY7IPpkifzd4csBfz37EX9HD2H6ciA81eRzTbnDDT8nTNX9HSDJpuN9dv218VHxn9_e4liQXuOWGmnpZN9kHiFWVfyiZshcrfu4qoLmWsVWCXlZtPLIgnpqDVipgh8J8TWVwDMx0',
+    isStarted: false
   },
   player: null,
   tracks: {
@@ -30,17 +19,17 @@ export default {
     next: [
       {
         album: {
-          album_type: 'compilation',
+          album_type: 'album',
           artists: [
             {
               external_urls: {
-                spotify: 'https://open.spotify.com/artist/58lV9VcRSjABbAbfWS6skp'
+                spotify: 'https://open.spotify.com/artist/1caBfBEapzw8z2Qz9q0OaQ'
               },
-              href: 'https://api.spotify.com/v1/artists/58lV9VcRSjABbAbfWS6skp',
-              id: '58lV9VcRSjABbAbfWS6skp',
-              name: 'Bon Jovi',
+              href: 'https://api.spotify.com/v1/artists/1caBfBEapzw8z2Qz9q0OaQ',
+              id: '1caBfBEapzw8z2Qz9q0OaQ',
+              name: 'Asking Alexandria',
               type: 'artist',
-              uri: 'spotify:artist:58lV9VcRSjABbAbfWS6skp'
+              uri: 'spotify:artist:1caBfBEapzw8z2Qz9q0OaQ'
             }
           ],
           available_markets: [
@@ -111,43 +100,43 @@ export default {
             'ZA'
           ],
           external_urls: {
-            spotify: 'https://open.spotify.com/album/3Ad4QdO0EJr1c2livr9cmm'
+            spotify: 'https://open.spotify.com/album/0dYHTESEegNj0dkIFGWy2d'
           },
-          href: 'https://api.spotify.com/v1/albums/3Ad4QdO0EJr1c2livr9cmm',
-          id: '3Ad4QdO0EJr1c2livr9cmm',
+          href: 'https://api.spotify.com/v1/albums/0dYHTESEegNj0dkIFGWy2d',
+          id: '0dYHTESEegNj0dkIFGWy2d',
           images: [
             {
               height: 640,
-              url: 'https://i.scdn.co/image/d2c5cf45ae1e6680a61ac4d5135c8bc94313e4bf',
+              url: 'https://i.scdn.co/image/7ba2898aa98ef47ea70ade86a47ba014ec81811c',
               width: 640
             },
             {
               height: 300,
-              url: 'https://i.scdn.co/image/5ee69c1bc272a9708bac4955430ae3b7f2f86189',
+              url: 'https://i.scdn.co/image/c6309068dbb1f0fb21ea6539edca2d24a0d0104b',
               width: 300
             },
             {
               height: 64,
-              url: 'https://i.scdn.co/image/99c638b2079e126e13fbac46e8b2bcdc450f6400',
+              url: 'https://i.scdn.co/image/a8ca4ac65af042fd484069564412174a9e39a05f',
               width: 64
             }
           ],
-          name: 'Bon Jovi Greatest Hits',
-          release_date: '2010-01-01',
+          name: 'Asking Alexandria',
+          release_date: '2017-12-15',
           release_date_precision: 'day',
           type: 'album',
-          uri: 'spotify:album:3Ad4QdO0EJr1c2livr9cmm'
+          uri: 'spotify:album:0dYHTESEegNj0dkIFGWy2d'
         },
         artists: [
           {
             external_urls: {
-              spotify: 'https://open.spotify.com/artist/58lV9VcRSjABbAbfWS6skp'
+              spotify: 'https://open.spotify.com/artist/1caBfBEapzw8z2Qz9q0OaQ'
             },
-            href: 'https://api.spotify.com/v1/artists/58lV9VcRSjABbAbfWS6skp',
-            id: '58lV9VcRSjABbAbfWS6skp',
-            name: 'Bon Jovi',
+            href: 'https://api.spotify.com/v1/artists/1caBfBEapzw8z2Qz9q0OaQ',
+            id: '1caBfBEapzw8z2Qz9q0OaQ',
+            name: 'Asking Alexandria',
             type: 'artist',
-            uri: 'spotify:artist:58lV9VcRSjABbAbfWS6skp'
+            uri: 'spotify:artist:1caBfBEapzw8z2Qz9q0OaQ'
           }
         ],
         available_markets: [
@@ -218,23 +207,23 @@ export default {
           'ZA'
         ],
         disc_number: 1,
-        duration_ms: 250626,
-        explicit: false,
+        duration_ms: 237003,
+        explicit: true,
         external_ids: {
-          isrc: 'USPR38619998'
+          isrc: 'USYFZ1789101'
         },
         external_urls: {
-          spotify: 'https://open.spotify.com/track/3X7abqSXC4xrxuC1ykpWcY'
+          spotify: 'https://open.spotify.com/track/7zWPlO8Mcjc5mQGf7v8dlE'
         },
-        href: 'https://api.spotify.com/v1/tracks/3X7abqSXC4xrxuC1ykpWcY',
-        id: '3X7abqSXC4xrxuC1ykpWcY',
+        href: 'https://api.spotify.com/v1/tracks/7zWPlO8Mcjc5mQGf7v8dlE',
+        id: '7zWPlO8Mcjc5mQGf7v8dlE',
         is_local: false,
-        name: "Livin' On A Prayer",
-        popularity: 71,
-        preview_url: 'https://p.scdn.co/mp3-preview/de6ff16fa752599433700bcde5a2247d57a693d4?cid=4575b816fd8442629a54d119330a11c8',
-        track_number: 1,
+        name: 'Into The Fire',
+        popularity: 64,
+        preview_url: 'https://p.scdn.co/mp3-preview/c21355703ab360744f4ac13db67210aacaa36995?cid=4575b816fd8442629a54d119330a11c8',
+        track_number: 2,
         type: 'track',
-        uri: 'spotify:track:3X7abqSXC4xrxuC1ykpWcY',
+        uri: 'spotify:track:7zWPlO8Mcjc5mQGf7v8dlE',
         votes: []
       },
       {
@@ -243,13 +232,13 @@ export default {
           artists: [
             {
               external_urls: {
-                spotify: 'https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5'
+                spotify: 'https://open.spotify.com/artist/711MCceyCBcFnzjGY4Q7Un'
               },
-              href: 'https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5',
-              id: '0L8ExT028jH3ddEcZwqJJ5',
-              name: 'Red Hot Chili Peppers',
+              href: 'https://api.spotify.com/v1/artists/711MCceyCBcFnzjGY4Q7Un',
+              id: '711MCceyCBcFnzjGY4Q7Un',
+              name: 'AC/DC',
               type: 'artist',
-              uri: 'spotify:artist:0L8ExT028jH3ddEcZwqJJ5'
+              uri: 'spotify:artist:711MCceyCBcFnzjGY4Q7Un'
             }
           ],
           available_markets: [
@@ -320,43 +309,43 @@ export default {
             'ZA'
           ],
           external_urls: {
-            spotify: 'https://open.spotify.com/album/30Perjew8HyGkdSmqguYyg'
+            spotify: 'https://open.spotify.com/album/6mUdeDZCsExyJLMdAfDuwh'
           },
-          href: 'https://api.spotify.com/v1/albums/30Perjew8HyGkdSmqguYyg',
-          id: '30Perjew8HyGkdSmqguYyg',
+          href: 'https://api.spotify.com/v1/albums/6mUdeDZCsExyJLMdAfDuwh',
+          id: '6mUdeDZCsExyJLMdAfDuwh',
           images: [
             {
               height: 640,
-              url: 'https://i.scdn.co/image/5a6a1c6514398dc4004c6348a83d77694a3883d4',
+              url: 'https://i.scdn.co/image/52d83377fe9d7fc838deeb859499f3973adf903f',
               width: 640
             },
             {
               height: 300,
-              url: 'https://i.scdn.co/image/5ec4ff29311f065813234bdeee7c1364960f0c3e',
+              url: 'https://i.scdn.co/image/b7b31914e0c4951249fad37271248212c8ac3025',
               width: 300
             },
             {
               height: 64,
-              url: 'https://i.scdn.co/image/0fe6b80fd539eb74825b58c3fa62db459fa76b68',
+              url: 'https://i.scdn.co/image/184dd6719f7c5317a08505d4d67795583adfb392',
               width: 64
             }
           ],
-          name: 'Blood Sugar Sex Magik (Deluxe Version)',
-          release_date: '1991-09-24',
+          name: 'Back In Black',
+          release_date: '1980-07-25',
           release_date_precision: 'day',
           type: 'album',
-          uri: 'spotify:album:30Perjew8HyGkdSmqguYyg'
+          uri: 'spotify:album:6mUdeDZCsExyJLMdAfDuwh'
         },
         artists: [
           {
             external_urls: {
-              spotify: 'https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5'
+              spotify: 'https://open.spotify.com/artist/711MCceyCBcFnzjGY4Q7Un'
             },
-            href: 'https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5',
-            id: '0L8ExT028jH3ddEcZwqJJ5',
-            name: 'Red Hot Chili Peppers',
+            href: 'https://api.spotify.com/v1/artists/711MCceyCBcFnzjGY4Q7Un',
+            id: '711MCceyCBcFnzjGY4Q7Un',
+            name: 'AC/DC',
             type: 'artist',
-            uri: 'spotify:artist:0L8ExT028jH3ddEcZwqJJ5'
+            uri: 'spotify:artist:711MCceyCBcFnzjGY4Q7Un'
           }
         ],
         available_markets: [
@@ -427,448 +416,26 @@ export default {
           'ZA'
         ],
         disc_number: 1,
-        duration_ms: 264306,
+        duration_ms: 255493,
         explicit: false,
         external_ids: {
-          isrc: 'USWB19901576'
+          isrc: 'AUAP08000046'
         },
         external_urls: {
-          spotify: 'https://open.spotify.com/track/3d9DChrdc6BOeFsbrZ3Is0'
+          spotify: 'https://open.spotify.com/track/08mG3Y1vljYA6bvDt4Wqkj'
         },
-        href: 'https://api.spotify.com/v1/tracks/3d9DChrdc6BOeFsbrZ3Is0',
-        id: '3d9DChrdc6BOeFsbrZ3Is0',
+        href: 'https://api.spotify.com/v1/tracks/08mG3Y1vljYA6bvDt4Wqkj',
+        id: '08mG3Y1vljYA6bvDt4Wqkj',
         is_local: false,
-        name: 'Under The Bridge',
+        name: 'Back In Black',
         popularity: 82,
-        preview_url: 'https://p.scdn.co/mp3-preview/90e41778392f27b6f7dd82db4c90916b3727aa6a?cid=4575b816fd8442629a54d119330a11c8',
-        track_number: 11,
+        preview_url: 'https://p.scdn.co/mp3-preview/506bc9a0485990973449b0467791e06174371284?cid=4575b816fd8442629a54d119330a11c8',
+        track_number: 6,
         type: 'track',
-        uri: 'spotify:track:3d9DChrdc6BOeFsbrZ3Is0',
-        votes: [
-          '5z4TSbrzQOXQOgmyAAAC',
-          'yVRPNjfxnhtR83RRAAAD',
-          'EeGi_qpzk83C8nP4AAAE'
-        ]
+        uri: 'spotify:track:08mG3Y1vljYA6bvDt4Wqkj',
+        votes: []
       }
     ],
-    current: null,
-    queue: [
-      {
-        album: {
-          album_type: 'album',
-          artists: [
-            {
-              external_urls: {
-                spotify: 'https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5'
-              },
-              href: 'https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5',
-              id: '0L8ExT028jH3ddEcZwqJJ5',
-              name: 'Red Hot Chili Peppers',
-              type: 'artist',
-              uri: 'spotify:artist:0L8ExT028jH3ddEcZwqJJ5'
-            }
-          ],
-          available_markets: [
-            'AD',
-            'AR',
-            'AT',
-            'AU',
-            'BE',
-            'BG',
-            'BO',
-            'BR',
-            'CA',
-            'CH',
-            'CL',
-            'CO',
-            'CR',
-            'CY',
-            'CZ',
-            'DE',
-            'DK',
-            'DO',
-            'EC',
-            'EE',
-            'ES',
-            'FI',
-            'FR',
-            'GB',
-            'GR',
-            'GT',
-            'HK',
-            'HN',
-            'HU',
-            'ID',
-            'IE',
-            'IL',
-            'IS',
-            'IT',
-            'JP',
-            'LI',
-            'LT',
-            'LU',
-            'LV',
-            'MC',
-            'MT',
-            'MX',
-            'MY',
-            'NI',
-            'NL',
-            'NO',
-            'NZ',
-            'PA',
-            'PE',
-            'PH',
-            'PL',
-            'PT',
-            'PY',
-            'RO',
-            'SE',
-            'SG',
-            'SK',
-            'SV',
-            'TH',
-            'TR',
-            'TW',
-            'US',
-            'UY',
-            'VN',
-            'ZA'
-          ],
-          external_urls: {
-            spotify: 'https://open.spotify.com/album/6deiaArbeoqp1xPEGdEKp1'
-          },
-          href: 'https://api.spotify.com/v1/albums/6deiaArbeoqp1xPEGdEKp1',
-          id: '6deiaArbeoqp1xPEGdEKp1',
-          images: [
-            {
-              height: 640,
-              url: 'https://i.scdn.co/image/b14027718a46fb43d8c6d8c88092fba9f75d9d21',
-              width: 640
-            },
-            {
-              height: 300,
-              url: 'https://i.scdn.co/image/39577b5613c625bd98e53ba74963be0a98bdd857',
-              width: 300
-            },
-            {
-              height: 64,
-              url: 'https://i.scdn.co/image/0efaf4d918fa1de42dbe8cdca0a1763b418fcfdf',
-              width: 64
-            }
-          ],
-          name: 'By The Way (Deluxe Version)',
-          release_date: '2002-07-09',
-          release_date_precision: 'day',
-          type: 'album',
-          uri: 'spotify:album:6deiaArbeoqp1xPEGdEKp1'
-        },
-        artists: [
-          {
-            external_urls: {
-              spotify: 'https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5'
-            },
-            href: 'https://api.spotify.com/v1/artists/0L8ExT028jH3ddEcZwqJJ5',
-            id: '0L8ExT028jH3ddEcZwqJJ5',
-            name: 'Red Hot Chili Peppers',
-            type: 'artist',
-            uri: 'spotify:artist:0L8ExT028jH3ddEcZwqJJ5'
-          }
-        ],
-        available_markets: [
-          'AD',
-          'AR',
-          'AT',
-          'AU',
-          'BE',
-          'BG',
-          'BO',
-          'BR',
-          'CA',
-          'CH',
-          'CL',
-          'CO',
-          'CR',
-          'CY',
-          'CZ',
-          'DE',
-          'DK',
-          'DO',
-          'EC',
-          'EE',
-          'ES',
-          'FI',
-          'FR',
-          'GB',
-          'GR',
-          'GT',
-          'HK',
-          'HN',
-          'HU',
-          'ID',
-          'IE',
-          'IL',
-          'IS',
-          'IT',
-          'JP',
-          'LI',
-          'LT',
-          'LU',
-          'LV',
-          'MC',
-          'MT',
-          'MX',
-          'MY',
-          'NI',
-          'NL',
-          'NO',
-          'NZ',
-          'PA',
-          'PE',
-          'PH',
-          'PL',
-          'PT',
-          'PY',
-          'RO',
-          'SE',
-          'SG',
-          'SK',
-          'SV',
-          'TH',
-          'TR',
-          'TW',
-          'US',
-          'UY',
-          'VN',
-          'ZA'
-        ],
-        disc_number: 1,
-        duration_ms: 269000,
-        explicit: false,
-        external_ids: {
-          isrc: 'USWB10201694'
-        },
-        external_urls: {
-          spotify: 'https://open.spotify.com/track/3ZOEytgrvLwQaqXreDs2Jx'
-        },
-        href: 'https://api.spotify.com/v1/tracks/3ZOEytgrvLwQaqXreDs2Jx',
-        id: '3ZOEytgrvLwQaqXreDs2Jx',
-        is_local: false,
-        name: "Can't Stop",
-        popularity: 80,
-        preview_url: 'https://p.scdn.co/mp3-preview/ba7cb54850ccc71f42c627b36e2045cec23e2662?cid=4575b816fd8442629a54d119330a11c8',
-        track_number: 7,
-        type: 'track',
-        uri: 'spotify:track:3ZOEytgrvLwQaqXreDs2Jx'
-      },
-      {
-        album: {
-          album_type: 'album',
-          artists: [
-            {
-              external_urls: {
-                spotify: 'https://open.spotify.com/artist/6goK4KMSdP4A8lw8jk4ADk'
-              },
-              href: 'https://api.spotify.com/v1/artists/6goK4KMSdP4A8lw8jk4ADk',
-              id: '6goK4KMSdP4A8lw8jk4ADk',
-              name: 'Pokémon',
-              type: 'artist',
-              uri: 'spotify:artist:6goK4KMSdP4A8lw8jk4ADk'
-            }
-          ],
-          available_markets: [
-            'AD',
-            'AR',
-            'AT',
-            'AU',
-            'BE',
-            'BG',
-            'BO',
-            'BR',
-            'CA',
-            'CH',
-            'CL',
-            'CO',
-            'CR',
-            'CY',
-            'CZ',
-            'DE',
-            'DK',
-            'DO',
-            'EC',
-            'EE',
-            'ES',
-            'FI',
-            'FR',
-            'GB',
-            'GR',
-            'GT',
-            'HK',
-            'HN',
-            'HU',
-            'ID',
-            'IE',
-            'IL',
-            'IS',
-            'IT',
-            'JP',
-            'LI',
-            'LT',
-            'LU',
-            'LV',
-            'MC',
-            'MT',
-            'MX',
-            'MY',
-            'NI',
-            'NL',
-            'NO',
-            'NZ',
-            'PA',
-            'PE',
-            'PH',
-            'PL',
-            'PT',
-            'PY',
-            'RO',
-            'SE',
-            'SG',
-            'SK',
-            'SV',
-            'TH',
-            'TR',
-            'TW',
-            'US',
-            'UY',
-            'VN',
-            'ZA'
-          ],
-          external_urls: {
-            spotify: 'https://open.spotify.com/album/3qW0KwoP8BdFzqZSDh1ScI'
-          },
-          href: 'https://api.spotify.com/v1/albums/3qW0KwoP8BdFzqZSDh1ScI',
-          id: '3qW0KwoP8BdFzqZSDh1ScI',
-          images: [
-            {
-              height: 639,
-              url: 'https://i.scdn.co/image/e3136ef697510e3d3593168f64cdce4cc2f69b01',
-              width: 640
-            },
-            {
-              height: 300,
-              url: 'https://i.scdn.co/image/abe5a7975fc1c6e069e7230044f68d0cf20af728',
-              width: 300
-            },
-            {
-              height: 64,
-              url: 'https://i.scdn.co/image/bddf04eb7acda444a7f0db420311292c1b0af308',
-              width: 64
-            }
-          ],
-          name: 'Pokemon X - Ten Years Of Pokemon',
-          release_date: '2007-03-27',
-          release_date_precision: 'day',
-          type: 'album',
-          uri: 'spotify:album:3qW0KwoP8BdFzqZSDh1ScI'
-        },
-        artists: [
-          {
-            external_urls: {
-              spotify: 'https://open.spotify.com/artist/6goK4KMSdP4A8lw8jk4ADk'
-            },
-            href: 'https://api.spotify.com/v1/artists/6goK4KMSdP4A8lw8jk4ADk',
-            id: '6goK4KMSdP4A8lw8jk4ADk',
-            name: 'Pokémon',
-            type: 'artist',
-            uri: 'spotify:artist:6goK4KMSdP4A8lw8jk4ADk'
-          }
-        ],
-        available_markets: [
-          'AD',
-          'AR',
-          'AT',
-          'AU',
-          'BE',
-          'BG',
-          'BO',
-          'BR',
-          'CA',
-          'CH',
-          'CL',
-          'CO',
-          'CR',
-          'CY',
-          'CZ',
-          'DE',
-          'DK',
-          'DO',
-          'EC',
-          'EE',
-          'ES',
-          'FI',
-          'FR',
-          'GB',
-          'GR',
-          'GT',
-          'HK',
-          'HN',
-          'HU',
-          'ID',
-          'IE',
-          'IL',
-          'IS',
-          'IT',
-          'JP',
-          'LI',
-          'LT',
-          'LU',
-          'LV',
-          'MC',
-          'MT',
-          'MX',
-          'MY',
-          'NI',
-          'NL',
-          'NO',
-          'NZ',
-          'PA',
-          'PE',
-          'PH',
-          'PL',
-          'PT',
-          'PY',
-          'RO',
-          'SE',
-          'SG',
-          'SK',
-          'SV',
-          'TH',
-          'TR',
-          'TW',
-          'US',
-          'UY',
-          'VN',
-          'ZA'
-        ],
-        disc_number: 1,
-        duration_ms: 196826,
-        explicit: false,
-        external_ids: {
-          isrc: 'USAOG0400111'
-        },
-        external_urls: {
-          spotify: 'https://open.spotify.com/track/6xG2ZGudUgtV235xvDlSEt'
-        },
-        href: 'https://api.spotify.com/v1/tracks/6xG2ZGudUgtV235xvDlSEt',
-        id: '6xG2ZGudUgtV235xvDlSEt',
-        is_local: false,
-        name: 'Pokemon Theme',
-        popularity: 60,
-        preview_url: 'https://p.scdn.co/mp3-preview/53af3712921decd829bf606844d956538e3a0609?cid=4575b816fd8442629a54d119330a11c8',
-        track_number: 1,
-        type: 'track',
-        uri: 'spotify:track:6xG2ZGudUgtV235xvDlSEt'
-      }
-    ]
+    queue: []
   }
 }

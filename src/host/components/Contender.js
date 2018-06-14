@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import Typography from 'core/components/Typography'
+import { getVoteProgress } from 'host/reducers'
 
 const Outer = styled.div`
   text-align: center;
-  width: 250px;
+  padding: 16px;
   position: relative;
   
   p {
@@ -20,19 +22,25 @@ const Cover = styled.img`
   margin-bottom: 24px;
   border-radius: 8px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, .35);
+  transform: scale(1);
 `
 
 const Information = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
   text-align: center;
 `
 
-export default function Contender ({ name, album, artists }) {
+function Contender ({ name, album, artists, voteProgress }) {
+  const factor = 0.3 + voteProgress * 0.7
+  const transform = `scale(${factor})`
   return (
     <Outer>
-      <Cover src={album.images[0].url} />
+      <Cover
+        src={album.images[0].url}
+        style={{
+          transition: 'transform .2s ease',
+          transform
+        }}
+      />
       <Information>
         <Typography reverse variant='display2'>{name}</Typography>
         <Typography reverse type='secondary'>
@@ -57,5 +65,10 @@ Contender.propTypes = {
   }).isRequired,
   artists: PropTypes.arrayOf(
     PropTypes.shape({ name: PropTypes.string.isRequired })
-  ).isRequired
+  ).isRequired,
+  voteProgress: PropTypes.number.isRequired
 }
+
+export default connect((state, props) => ({
+  voteProgress: getVoteProgress(props.id, state)
+}))(Contender)

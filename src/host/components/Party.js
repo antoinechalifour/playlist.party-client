@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { isPlayerAvailable, getContenders } from 'host/reducers'
+import { isPlayerAvailable, getContenders, getParty } from 'host/reducers'
 import Header from './Header'
 import Player from 'host/components/Player'
 import Contender from './Contender'
 import Background from './Background'
-import Battle from './Battle'
+import StartPartyButton from 'host/components/StartPartyButton'
 
 const Outer = styled.div`
   height: 100vh;
@@ -21,10 +21,17 @@ const Main = styled.main`
   position: relative;
   flex: 1;
   color: #fff;
-
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 `
 
 function Party ({ isPlayerAvailable, contenders }) {
@@ -37,13 +44,13 @@ function Party ({ isPlayerAvailable, contenders }) {
       <Header />
 
       <Main>
-        {contender1
-          ? <Contender {...contender1} />
-          : <div style={{ width: '250px' }} />}
-        <Battle />
-        {contender2
-          ? <Contender {...contender2} />
-          : <div style={{ width: '250px' }} />}
+        <div>
+          {contender1 && <Contender {...contender1} />}
+          {contender2 && <Contender {...contender2} />}
+        </div>
+        <div>
+          <StartPartyButton />
+        </div>
       </Main>
 
       {isPlayerAvailable && <Player />}
@@ -53,6 +60,9 @@ function Party ({ isPlayerAvailable, contenders }) {
 
 Party.propTypes = {
   isPlayerAvailable: PropTypes.bool.isRequired,
+  party: PropTypes.shape({
+    isStarted: PropTypes.bool.isRequired
+  }).isRequired,
   contenders: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -77,5 +87,6 @@ Party.propTypes = {
 
 export default connect(state => ({
   isPlayerAvailable: isPlayerAvailable(state),
-  contenders: getContenders(state)
+  contenders: getContenders(state),
+  party: getParty(state)
 }))(Party)
