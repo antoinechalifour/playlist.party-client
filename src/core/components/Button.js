@@ -26,6 +26,7 @@ export const Button = styled.button`
   font-size: inherit;
   background: none;
   border-radius: 4px;
+  border: none;
 
   ${({ variant }) => typeThemes[variant]}
 `
