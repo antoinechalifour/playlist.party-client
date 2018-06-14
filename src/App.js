@@ -37,9 +37,9 @@ class App extends Component {
                 }}
               />
               <Route
-                path='/guest'
-                render={({ location }) => {
-                  const { party, code } = getQueryParams(location.search)
+                path='/:party/:code'
+                render={({ match, ...rest }) => {
+                  const { party, code } = match.params
                   const props = { party, code }
 
                   return (
