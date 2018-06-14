@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { isPlayerAvailable, getContenders } from 'host/reducers'
+import Header from './Header'
 import Player from 'host/components/Player'
 import Contender from './Contender'
 import Background from './Background'
@@ -32,7 +33,8 @@ function Party ({ isPlayerAvailable, contenders }) {
   return (
     <Outer>
       <Background sources={contenders.map(x => x.album.images[0].url)} />
-      {isPlayerAvailable && <Player />}
+
+      <Header />
 
       <Main>
         {contender1
@@ -43,6 +45,8 @@ function Party ({ isPlayerAvailable, contenders }) {
           ? <Contender {...contender2} />
           : <div style={{ width: '250px' }} />}
       </Main>
+
+      {isPlayerAvailable && <Player />}
     </Outer>
   )
 }
