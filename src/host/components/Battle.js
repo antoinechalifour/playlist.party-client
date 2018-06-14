@@ -13,6 +13,11 @@ const CoversContainer = styled.div`
   border: 6px solid rgba(0, 0, 0, .5);
   border-radius: 100%;
   overflow: hidden;
+  margin-bottom: 16px;
+`
+
+const BattleWrapper = styled.div`
+  text-align: center;
 `
 
 const Cover = styled.div`
@@ -44,7 +49,7 @@ function Battle ({ contenders, party }) {
     <Fragment>
       {contenders[0] && <Link />}
 
-      <div>
+      <BattleWrapper>
         <CoversContainer>
           {covers.map((x, index) => {
             const align = index === 1 ? 'right' : 'left'
@@ -57,10 +62,10 @@ function Battle ({ contenders, party }) {
             return <Cover style={style} />
           })}
         </CoversContainer>
-      </div>
+        {!party.isStarted && <StartPartyButton />}
+      </BattleWrapper>
       {contenders[1] && <Link />}
 
-      {!party.isStarted && <StartPartyButton />}
     </Fragment>
   )
 }
