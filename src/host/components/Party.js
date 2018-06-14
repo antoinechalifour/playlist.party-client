@@ -34,7 +34,7 @@ const Main = styled.main`
 
 `
 
-function Party ({ isPlayerAvailable, contenders }) {
+function Party ({ isPlayerAvailable, contenders, party }) {
   const [contender1, contender2] = contenders
 
   return (
@@ -48,9 +48,10 @@ function Party ({ isPlayerAvailable, contenders }) {
           {contender1 && <Contender {...contender1} />}
           {contender2 && <Contender {...contender2} />}
         </div>
-        <div>
-          <StartPartyButton />
-        </div>
+        {!party.isStarted &&
+          <div>
+            <StartPartyButton />
+          </div>}
       </Main>
 
       {isPlayerAvailable && <Player />}
