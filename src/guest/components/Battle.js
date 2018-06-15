@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { withChannel } from './providers/Channel'
 
 const Tracks = styled.ul`
@@ -18,6 +18,22 @@ const Track = styled.li`
   align-items: center;
   justify-content: center;
   text-align: center;
+  box-sizing: border-box;
+
+
+  ${({ active, theme }) => active && css`
+    ::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: solid 4px ${theme.colors.primary};
+      background: rgba(255, 255, 255, .2);
+    }
+  `}
   
   > div {
     position: relative;
@@ -51,6 +67,7 @@ class Battle extends Component {
   }
 
   state = {
+    currentVote: '',
     tracks: []
   }
 
@@ -66,7 +83,10 @@ class Battle extends Component {
 
   _renderTrack (track) {
     return (
-      <Track onClick={() => this._vote(track)}>
+      <Track
+        active={this.state.currentVote === track.id}
+        onClick={() => this._vote(track)}
+      >
         <div
           style={{
             backgroundImage: `url(${track.album.images[0].url})`
@@ -78,7 +98,10 @@ class Battle extends Component {
     )
   }
 
-  _vote = track => this.props.channel.emit('battle/vote', { trackId: track.id })
+  _vote = track => {
+    this.setState({ currentVote: track.id })
+    this.props.channel.emit('battle/vote', { trackId: track.id })
+  }
 
   render () {
     if (this.state.tracks.length === 0) {
