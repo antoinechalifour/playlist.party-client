@@ -69,6 +69,8 @@ export const getContenders = state => state.next
 export const getNextContenders = state =>
   state.queue.slice(0, 2).filter(Boolean)
 
+export const getQueue = state => state.queue
+
 export const getVoteProgress = (trackId, state) => {
   const contenders = getContenders(state)
   const totalVotes = contenders.reduce(

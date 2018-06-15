@@ -8,6 +8,7 @@ import Player from 'host/components/Player'
 import Contender from './Contender'
 import Background from './Background'
 import StartPartyButton from 'host/components/StartPartyButton'
+import Queue from 'host/components/Queue'
 
 const Outer = styled.div`
   height: 100vh;
@@ -31,7 +32,11 @@ const Main = styled.main`
     align-items: center;
     justify-content: center;
   }
+`
 
+const Body = styled.div`
+  flex: 1;
+  display: flex;
 `
 
 function Party ({ isPlayerAvailable, contenders, party }) {
@@ -43,16 +48,20 @@ function Party ({ isPlayerAvailable, contenders, party }) {
 
       <Header />
 
-      <Main>
-        <div>
-          {contender1 && <Contender {...contender1} />}
-          {contender2 && <Contender {...contender2} />}
-        </div>
-        {!party.isStarted &&
+      <Body>
+        <Queue />
+
+        <Main>
           <div>
-            <StartPartyButton />
-          </div>}
-      </Main>
+            {contender1 && <Contender {...contender1} />}
+            {contender2 && <Contender {...contender2} />}
+          </div>
+          {!party.isStarted &&
+            <div>
+              <StartPartyButton />
+            </div>}
+        </Main>
+      </Body>
 
       {isPlayerAvailable && <Player />}
     </Outer>

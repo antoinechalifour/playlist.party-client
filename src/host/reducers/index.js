@@ -28,6 +28,8 @@ export const getContenders = state => fromTracks.getContenders(state.tracks)
 export const getNextContenders = state =>
   fromTracks.getNextContenders(state.tracks)
 
+export const getQueue = state => fromTracks.getQueue(state.tracks)
+
 export const getVoteProgress = (trackId, state) =>
   fromTracks.getVoteProgress(trackId, state.tracks)
 
