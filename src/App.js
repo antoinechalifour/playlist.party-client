@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import theme from 'core/theming/theme'
 import Loadable from 'react-loadable'
-import { SocketProvider } from 'core/components/providers/Socket'
 import { GuestProvider } from 'guest/components/providers/Guest'
 
 const getQueryParams = search => qs.parse(search.substr(1))
@@ -32,46 +31,44 @@ const OauthApp = Loadable({
 class App extends Component {
   render () {
     return (
-      <SocketProvider socket={this.props.socket}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter className='App'>
-            <Switch>
-              <Route path='/home' component={HomeApp} />
-              <Route path='/oauth/callback' component={OauthApp} />
-              <Route
-                path='/host'
-                render={({ location }) => {
-                  const { party, accessToken, code } = getQueryParams(
-                    location.search
-                  )
+      <ThemeProvider theme={theme}>
+        <BrowserRouter className='App'>
+          <Switch>
+            <Route path='/home' component={HomeApp} />
+            <Route path='/oauth/callback' component={OauthApp} />
+            <Route
+              path='/host'
+              render={({ location }) => {
+                const { party, accessToken, code } = getQueryParams(
+                  location.search
+                )
 
-                  return (
-                    <HostApp
-                      party={party}
-                      code={code}
-                      accessToken={accessToken}
-                    />
-                  )
-                }}
-              />
-              <Route
-                path='/:party/:code'
-                render={({ match, ...rest }) => {
-                  const { party, code } = match.params
-                  const props = { party, code }
+                return (
+                  <HostApp
+                    party={party}
+                    code={code}
+                    accessToken={accessToken}
+                  />
+                )
+              }}
+            />
+            <Route
+              path='/:party/:code'
+              render={({ match, ...rest }) => {
+                const { party, code } = match.params
+                const props = { party, code }
 
-                  return (
-                    <GuestProvider {...props}>
-                      <GuestApp />
-                    </GuestProvider>
-                  )
-                }}
-              />
-              <Redirect from='/' to='/home' />
-            </Switch>
-          </BrowserRouter>
-        </ThemeProvider>
-      </SocketProvider>
+                return (
+                  <GuestProvider {...props}>
+                    <GuestApp />
+                  </GuestProvider>
+                )
+              }}
+            />
+            <Redirect from='/' to='/home' />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
     )
   }
 }

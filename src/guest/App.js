@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withSocket } from 'core/components/providers/Socket'
-import { ChannelProvider } from 'core/components/providers/Channel'
+import Socket from 'socket.io-client'
+import { ChannelProvider } from './components/providers/Channel'
 import { withGuest } from './components/providers/Guest'
 import createSignaling from './network/createSignaling'
 import SearchBar from './components/SearchBar'
@@ -20,7 +20,6 @@ const Wrapper = styled.div`
 
 class Guest extends Component {
   static propTypes = {
-    socket: PropTypes.object.isRequired,
     guest: PropTypes.shape({
       party: PropTypes.string.isRequired,
       code: PropTypes.string.isRequired
@@ -32,7 +31,8 @@ class Guest extends Component {
   constructor (props) {
     super(props)
 
-    this.signaling = createSignaling(props.socket, this._onChannel)
+    this.socket = Socket(process.env.REACT_APP_SIGNALING_URI)
+    this.signaling = createSignaling(this.socket, this._onChannel)
 
     this.signaling.subscribe()
     this.signaling.init(
@@ -70,4 +70,4 @@ class Guest extends Component {
   }
 }
 
-export default withSocket(withGuest(Guest))
+export default withGuest(Guest)

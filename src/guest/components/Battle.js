@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withChannel } from 'core/components/providers/Channel'
+import { withChannel } from './providers/Channel'
 
 const Tracks = styled.ul`
   display: flex;

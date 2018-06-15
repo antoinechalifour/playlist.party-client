@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import debounce from 'debounce'
 import styled from 'styled-components'
-import { withChannel } from 'core/components/providers/Channel'
+import { withChannel } from './providers/Channel'
 
 const Wrapper = styled.div`
   background: #151515;
