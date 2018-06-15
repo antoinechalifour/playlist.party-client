@@ -80,7 +80,7 @@ it('Should handle "@guest/battle/vote"', () => {
 })
 
 describe('getVoteProgress', () => {
-  it('Should return 100% (no votes)', () => {
+  it('Should return 50% (no votes)', () => {
     const state = {
       next: [
         {
@@ -94,7 +94,7 @@ describe('getVoteProgress', () => {
       ]
     }
 
-    expect(selectors.getVoteProgress('34', state)).toEqual(1)
+    expect(selectors.getVoteProgress('34', state)).toEqual(0.5)
   })
 
   it('Should return 75%', () => {

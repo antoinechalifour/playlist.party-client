@@ -77,7 +77,7 @@ export const getVoteProgress = (trackId, state) => {
   )
 
   if (totalVotes === 0) {
-    return 1
+    return 0.5
   }
 
   const track = contenders.find(x => x.id === trackId)
