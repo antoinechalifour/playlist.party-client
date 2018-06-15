@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom'
 const typeThemes = {
   primary: css`
     background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.typography};
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .45);
+    border: 1px solid rgba(0, 0, 0, .15);
+    color: #fff;
     text-decoration: none;
   `,
   secondary: css`
     color: ${({ theme }) => theme.colors.typography};
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+    border: 1px solid rgba(0, 0, 0, .15);
     text-decoration: none;
   `,
   tertiary: css`
@@ -21,12 +21,15 @@ const typeThemes = {
 }
 
 export const Button = styled.button`
-  padding: 12px 16px;
-  cursor: pointer;
+  display: inline-block;
   font-size: inherit;
+  border: none;
   background: none;
   border-radius: 4px;
-  border: none;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
 
   ${({ variant }) => typeThemes[variant]}
 `

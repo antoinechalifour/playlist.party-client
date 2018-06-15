@@ -10,7 +10,7 @@ import { GuestProvider } from 'guest/components/providers/Guest'
 const getQueryParams = search => qs.parse(search.substr(1))
 
 const HomeApp = Loadable({
-  loader: () => import('core/components/pages/Home'),
+  loader: () => import('home/App'),
   loading: () => null
 })
 
@@ -24,6 +24,11 @@ const GuestApp = Loadable({
   loading: () => null
 })
 
+const OauthApp = Loadable({
+  loader: () => import('oauth/App'),
+  loading: () => null
+})
+
 class App extends Component {
   render () {
     return (
@@ -32,6 +37,7 @@ class App extends Component {
           <BrowserRouter className='App'>
             <Switch>
               <Route path='/home' component={HomeApp} />
+              <Route path='/oauth/callback' component={OauthApp} />
               <Route
                 path='/host'
                 render={({ location }) => {

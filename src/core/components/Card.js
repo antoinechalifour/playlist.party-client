@@ -12,4 +12,13 @@ export const CardContent = styled.div`
   color: ${({ theme }) => theme.colors.typography};
 `
 
+export const CardActions = styled.div`
+  text-align: right;
+  padding: 24px 0;
+
+  > * + * {
+    margin-left: 8px;
+  }
+`
+
 export default Card

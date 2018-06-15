@@ -8,6 +8,9 @@
       "host/*": [
         "host/*"
       ],
+      "home/*": [
+        "home/*"
+      ],
       "core/*": [
         "core/*"
       ]

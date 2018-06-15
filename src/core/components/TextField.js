@@ -13,7 +13,7 @@ const Inner = styled.div`
   padding-top: 0.5rem;
   margin-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: ${({ isFocused }) => (isFocused ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.25)')};
   border-radius: 4px;
