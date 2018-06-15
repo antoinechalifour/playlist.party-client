@@ -8,8 +8,7 @@ export default class Host extends Component {
   static propTypes = {
     party: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
-    accessToken: PropTypes.string.isRequired,
-    socket: PropTypes.object.isRequired
+    accessToken: PropTypes.string.isRequired
   }
 
   constructor (props) {
@@ -23,8 +22,7 @@ export default class Host extends Component {
           accessToken: this.props.accessToken,
           isStarted: false
         }
-      },
-      socket: this.props.socket
+      }
     })
   }
 

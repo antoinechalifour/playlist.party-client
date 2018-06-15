@@ -50,7 +50,6 @@ class App extends Component {
                       party={party}
                       code={code}
                       accessToken={accessToken}
-                      socket={this.props.socket}
                     />
                   )
                 }}

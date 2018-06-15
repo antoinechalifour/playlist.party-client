@@ -1,4 +1,5 @@
 import { call, fork, select, takeEvery } from 'redux-saga/effects'
+import Socket from 'socket.io-client'
 import SpotifyApiFactory from 'core/network/spotifyApi'
 import { getAccessToken } from 'host/reducers'
 import { TRIGGER_VOTE } from 'host/actions/tracks'
@@ -17,7 +18,8 @@ import signaling from 'host/sagas/signaling'
 // TODO: Refactor those sagas
 import playerSaga from './player'
 
-export default function * root (socket) {
+export default function * root () {
+  const socket = Socket(process.env.REACT_APP_SIGNALING_URI)
   const accessToken = yield select(getAccessToken)
   const spotify = SpotifyApiFactory({ accessToken })
 
