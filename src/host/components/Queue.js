@@ -20,6 +20,7 @@ const Outer = styled.div`
   background: rgba(0, 0, 0, .9);
   padding: 12px;
   width: 250px;
+  overflow-y: auto;
 `
 
 const trackEnterAnimation = keyframes`
