@@ -27,10 +27,10 @@ describe('addToPrevious', () => {
   })
 })
 
-describe('triggerVote', () => {
+describe('processVote', () => {
   it('Should return the action', () => {
-    expect(actions.triggerVote()).toEqual({
-      type: 'TRIGGER_VOTE'
+    expect(actions.startProcessVote()).toEqual({
+      type: 'START_PROCESS_VOTE'
     })
   })
 })

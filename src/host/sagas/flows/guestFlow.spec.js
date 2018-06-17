@@ -1,24 +1,23 @@
 import { takeEvery } from 'redux-saga/effects'
-import handleGuestSearch from 'host/sagas/tasks/handleGuestSearch'
 import { ADD_GUEST, GUEST_READY } from 'host/actions/guests'
-import addTrack from 'host/sagas/tasks/addTrack'
-import watchGuestEvents from 'host/sagas/tasks/watchGuestEvents'
-import initializeGuest from 'host/sagas/tasks/initializeGuest'
+import { ADD_TO_BATTLE } from 'host/actions/tracks'
+import notifyBattleUpdate from 'host/sagas/tasks/notifyBattleUpdate'
+import searchTracks from 'host/sagas/tasks/guests/searchTracks'
+import addTrack from 'host/sagas/tasks/guests/addTrack'
 import guestFlow from './guestFlow'
 
 describe('guestFlow', () => {
-  const spotify = {}
-  const gen = guestFlow(spotify)
+  const gen = guestFlow()
 
   it('Should handle the guest flow', () => {
     // Should answer to guest searches
-    expect(gen.next().value).toEqual(
-      takeEvery('@guest/search', handleGuestSearch, spotify)
-    )
+    expect(gen.next().value).toEqual(takeEvery('@guest/search', searchTracks))
 
     // Should answer to guest adding tracks
+    expect(gen.next().value).toEqual(takeEvery('@guest/track/add', addTrack))
+
     expect(gen.next().value).toEqual(
-      takeEvery('@guest/track/add', addTrack, spotify)
+      takeEvery(ADD_TO_BATTLE, notifyBattleUpdate)
     )
   })
 })

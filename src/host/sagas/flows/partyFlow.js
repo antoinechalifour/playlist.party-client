@@ -8,13 +8,17 @@ import {
   PARTY_TOKEN_EXPIRED,
   partyStatusFinished
 } from 'host/actions/party'
-import { ADD_TO_BATTLE, TRIGGER_VOTE, triggerVote } from 'host/actions/tracks'
+import {
+  ADD_TO_BATTLE,
+  START_PROCESS_VOTE,
+  startProcessVote
+} from 'host/actions/tracks'
 import createCurrentParty from 'host/sagas/tasks/createCurrentParty'
 import signalingFlow from 'host/sagas/flows/signalingFlow'
 import guestFlow from 'host/sagas/flows/guestFlow'
 import processVote from 'host/sagas/tasks/processVote'
 
-export default function * partyFlow (socket, spotify) {
+export default function * partyFlow (socket) {
   try {
     yield call(createCurrentParty, socket)
 
@@ -24,7 +28,7 @@ export default function * partyFlow (socket, spotify) {
     // Once created, the party is in "waiting for track" status
     yield put(partyStatusWaitingForTracks())
 
-    const guestsTask = yield fork(guestFlow, spotify)
+    const guestsTask = yield fork(guestFlow)
 
     // Once 2 tracks have been added to the battle, the
     // party is in "waiting for user to start" status
@@ -35,8 +39,8 @@ export default function * partyFlow (socket, spotify) {
 
     // The party then starts
     yield take(START_PARTY)
-    yield takeEvery(TRIGGER_VOTE, processVote)
-    yield put(triggerVote())
+    yield takeEvery(START_PROCESS_VOTE, processVote)
+    yield put(startProcessVote())
     yield put(partyStatusStarted())
 
     // Whenever the Spotify token expires, the party is over

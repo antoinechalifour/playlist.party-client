@@ -1,11 +1,10 @@
 import { call, cancel, fork, put, take } from 'redux-saga/effects'
-import { CREATING_PARTY, PARTY_CREATED, partyReady } from 'host/actions/party'
 import {
   signalingConnected,
   signalingDisconnected
 } from 'host/actions/signaling'
 import dispatchSocketEvents from 'host/sagas/tasks/dispatchSocketEvents'
-import { END, eventChannel } from 'redux-saga'
+import { eventChannel } from 'redux-saga'
 
 const noop = () => {}
 

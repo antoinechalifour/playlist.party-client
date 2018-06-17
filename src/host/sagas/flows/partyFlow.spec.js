@@ -18,7 +18,12 @@ import {
   PARTY_TOKEN_EXPIRED,
   partyStatusFinished
 } from 'host/actions/party'
-import { ADD_TO_BATTLE, TRIGGER_VOTE, triggerVote } from 'host/actions/tracks'
+import {
+  ADD_TO_BATTLE,
+  triggerVote,
+  startProcessVote,
+  START_PROCESS_VOTE
+} from 'host/actions/tracks'
 import createCurrentParty from 'host/sagas/tasks/createCurrentParty'
 import partyFlow from './partyFlow'
 import signalingFlow from 'host/sagas/flows/signalingFlow'
@@ -27,8 +32,7 @@ import processVote from 'host/sagas/tasks/processVote'
 
 describe('partyFlow', () => {
   const socket = {}
-  const spotify = {}
-  const gen = cloneableGenerator(partyFlow)(socket, spotify)
+  const gen = cloneableGenerator(partyFlow)(socket)
 
   it('Should call the server to create the current party', () => {
     expect(gen.next().value).toEqual(call(createCurrentParty, socket))
@@ -51,15 +55,17 @@ describe('partyFlow', () => {
       put(partyStatusWaitingForTracks())
     )
 
-    expect(clone.next().value).toEqual(fork(guestFlow, spotify))
+    expect(clone.next().value).toEqual(fork(guestFlow))
 
     expect(clone.next(guestTask).value).toEqual(take(ADD_TO_BATTLE))
     expect(clone.next().value).toEqual(take(ADD_TO_BATTLE))
 
     expect(clone.next().value).toEqual(put(partyStatusWaitingToStart()))
     expect(clone.next().value).toEqual(take(START_PARTY))
-    expect(clone.next().value).toEqual(takeEvery(TRIGGER_VOTE, processVote))
-    expect(clone.next().value).toEqual(put(triggerVote()))
+    expect(clone.next().value).toEqual(
+      takeEvery(START_PROCESS_VOTE, processVote)
+    )
+    expect(clone.next().value).toEqual(put(startProcessVote()))
     expect(clone.next().value).toEqual(put(partyStatusStarted()))
 
     expect(clone.next().value).toEqual(take(PARTY_TOKEN_EXPIRED))

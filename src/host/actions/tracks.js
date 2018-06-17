@@ -1,7 +1,7 @@
 export const ADD_TO_BATTLE = 'ADD_TO_BATTLE'
 export const ADD_TO_QUEUE = 'ADD_TO_QUEUE'
 export const ADD_TO_PREVIOUS = 'ADD_TO_PREVIOUS'
-export const TRIGGER_VOTE = 'TRIGGER_VOTE'
+export const START_PROCESS_VOTE = 'START_PROCESS_VOTE'
 
 export const addToBattle = track => ({
   type: ADD_TO_BATTLE,
@@ -18,6 +18,6 @@ export const addToPrevious = track => ({
   track
 })
 
-export const triggerVote = () => ({
-  type: TRIGGER_VOTE
+export const startProcessVote = () => ({
+  type: START_PROCESS_VOTE
 })
