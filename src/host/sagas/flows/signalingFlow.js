@@ -3,7 +3,8 @@ import { call, put, select, takeEvery } from 'redux-saga/effects'
 import {
   SIGNALING_IN_JOIN,
   SIGNALING_IN_ANSWER,
-  SIGNALING_IN_CANDIDATE
+  SIGNALING_IN_CANDIDATE,
+  SIGNALING_IN_LEAVE
 } from 'host/actions/signaling'
 import { ADD_GUEST, GUEST_READY } from 'host/actions/guests'
 import iceServers from 'core/network/iceServers'
@@ -85,6 +86,7 @@ export function * onJoin (socket, action) {
 
   yield put(guestReady(action.remoteId))
 
+  // FIXME: DataChannel.onclose is never being called ???
   yield new Promise(resolve => (dataChannel.onclose = resolve))
 
   yield put(removeGuest(action.remoteId))
@@ -123,6 +125,14 @@ export function * onCandidate (action) {
 }
 
 /**
+ * Removes a guest when it leaves.
+ * @param {{ remoteId: String }} action
+ */
+export function * onLeave (action) {
+  yield put(removeGuest(action.remoteId))
+}
+
+/**
  * Starts sub-sagas for handling the signaling process when a new
  * guest joins the party.
  * @param {SocketIOClient.Socket} socket - The server connection.
@@ -131,6 +141,7 @@ export default function * signalingFlow (socket) {
   yield takeEvery(SIGNALING_IN_JOIN, onJoin, socket)
   yield takeEvery(SIGNALING_IN_ANSWER, onAnswer)
   yield takeEvery(SIGNALING_IN_CANDIDATE, onCandidate)
+  yield takeEvery(SIGNALING_IN_LEAVE, onLeave)
   yield takeEvery(ADD_GUEST, watchGuestEvents)
   yield takeEvery(GUEST_READY, initializeGuest)
 }
