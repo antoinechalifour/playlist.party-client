@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography Should render default typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world :D
+</p>
+`;
+
+exports[`Typography Should render normal default default typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal default display1 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  font-size: 2.5rem;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal default display2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  font-size: 2rem;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal default h2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal secondary default typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  opacity: .65;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal secondary display1 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  opacity: .65;
+  font-size: 2.5rem;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal secondary display2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  opacity: .65;
+  font-size: 2rem;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render normal secondary h2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  opacity: .65;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse default default typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse default display1 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse default display2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  font-size: 2rem;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse default h2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+<p
+  className="c0"
+  type="default"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse secondary default typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  opacity: .65;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse secondary display1 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  opacity: .65;
+  font-size: 2.5rem;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse secondary display2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  opacity: .65;
+  font-size: 2rem;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render reverse secondary h2 typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #fff;
+  opacity: .65;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world ;)
+</p>
+`;
+
+exports[`Typography Should render secondary typography 1`] = `
+.c0 {
+  line-height: 1.6;
+  color: #373d3f;
+  opacity: .65;
+}
+
+<p
+  className="c0"
+  type="secondary"
+>
+  Hello world :D
+</p>
+`;

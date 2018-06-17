@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextField Should render a filled Textfield 1`] = `
+.c0 {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.c1 {
+  position: relative;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.25);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.c2 {
+  position: absolute;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  left: 8px;
+  color: #bcbcbc;
+  top: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  background: #fff;
+  padding: 0 12px;
+}
+
+.c3 {
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  padding: 0 8px;
+}
+
+<div
+  className="test-textfield c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+      htmlFor="email"
+    >
+      Email address
+    </label>
+    <input
+      className="c3"
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="john.doe@company.com"
+      type="email"
+      value="jane.doe@company.com"
+    />
+  </div>
+</div>
+`;
+
+exports[`TextField Should render an empty Textfield 1`] = `
+.c0 {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.c1 {
+  position: relative;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.25);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.c2 {
+  position: absolute;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  left: 8px;
+  color: #bcbcbc;
+  top: 25%;
+  font-size: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+.c3 {
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  padding: 0 8px;
+}
+
+<div
+  className="test-textfield c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+      htmlFor="email"
+    >
+      Email address
+    </label>
+    <input
+      className="c3"
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="john.doe@company.com"
+      type="email"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`TextField Should render an empty text TextField by default 1`] = `
+.c0 {
+  display: block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.c1 {
+  position: relative;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0.25);
+  border-radius: 4px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.c2 {
+  position: absolute;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  left: 8px;
+  color: #bcbcbc;
+  top: 25%;
+  font-size: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+.c3 {
+  box-sizing: border-box;
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  padding: 0 8px;
+}
+
+<div
+  className="test-textfield c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+      htmlFor="test"
+    >
+      My label
+    </label>
+    <input
+      className="c3"
+      id="test"
+      name="test"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="write something"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,354 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should render a primary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  background: #1db954;
+  border: 1px solid rgba(0,0,0,.15);
+  color: #fff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<button
+  className="c0"
+>
+  Click me!
+</button>
+`;
+
+exports[`Button Should render a secondary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  border: 1px solid rgba(0,0,0,.15);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<button
+  className="c0"
+>
+  Click me!
+</button>
+`;
+
+exports[`Button Should render a tertiary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<button
+  className="c0"
+>
+  Click me!
+</button>
+`;
+
+exports[`Button Should render a tertiary button by default 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<button
+  className="c0"
+>
+  Click me!
+</button>
+`;
+
+exports[`ExternalLinkButton Should render a primary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  background: #1db954;
+  border: 1px solid rgba(0,0,0,.15);
+  color: #fff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
+  className="c0"
+  href="/test"
+>
+  Click me!
+</a>
+`;
+
+exports[`ExternalLinkButton Should render a secondary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  border: 1px solid rgba(0,0,0,.15);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
+  className="c0"
+  href="/test"
+>
+  Click me!
+</a>
+`;
+
+exports[`ExternalLinkButton Should render a tertiary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<a
+  className="c0"
+  href="/test"
+>
+  Click me!
+</a>
+`;
+
+exports[`ExternalLinkButton Should render a tertiary button by default 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<a
+  className="c0"
+  href="/test"
+>
+  Click me!
+</a>
+`;
+
+exports[`LinkButton Should render a primary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  background: #1db954;
+  border: 1px solid rgba(0,0,0,.15);
+  color: #fff;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
+  className="c0"
+  href="/"
+  onClick={[Function]}
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#6494aa",
+        "confirm": "#90a959",
+        "danger": "#a63d40",
+        "dark": "#151515",
+        "primary": "#1db954",
+        "typography": "#373d3f",
+        "typographyLight": "#bcbcbc",
+      },
+    }
+  }
+  variant="primary"
+>
+  Click me!
+</a>
+`;
+
+exports[`LinkButton Should render a secondary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  border: 1px solid rgba(0,0,0,.15);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+<a
+  className="c0"
+  href="/"
+  onClick={[Function]}
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#6494aa",
+        "confirm": "#90a959",
+        "danger": "#a63d40",
+        "dark": "#151515",
+        "primary": "#1db954",
+        "typography": "#373d3f",
+        "typographyLight": "#bcbcbc",
+      },
+    }
+  }
+  variant="secondary"
+>
+  Click me!
+</a>
+`;
+
+exports[`LinkButton Should render a tertiary button 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<a
+  className="c0"
+  href="/"
+  onClick={[Function]}
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#6494aa",
+        "confirm": "#90a959",
+        "danger": "#a63d40",
+        "dark": "#151515",
+        "primary": "#1db954",
+        "typography": "#373d3f",
+        "typographyLight": "#bcbcbc",
+      },
+    }
+  }
+  variant="tertiary"
+>
+  Click me!
+</a>
+`;
+
+exports[`LinkButton Should render a tertiary button by default 1`] = `
+.c0 {
+  display: inline-block;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 4px;
+  text-align: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 150px;
+  color: #373d3f;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+<a
+  className="c0"
+  href="/"
+  onClick={[Function]}
+  theme={
+    Object {
+      "colors": Object {
+        "accent": "#6494aa",
+        "confirm": "#90a959",
+        "danger": "#a63d40",
+        "dark": "#151515",
+        "primary": "#1db954",
+        "typography": "#373d3f",
+        "typographyLight": "#bcbcbc",
+      },
+    }
+  }
+  variant="tertiary"
+>
+  Click me!
+</a>
+`;

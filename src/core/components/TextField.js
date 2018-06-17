@@ -58,6 +58,7 @@ export default class TextField extends Component {
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired
   }
 

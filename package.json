@@ -29,6 +29,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@types/webrtc": "0.0.23"
+    "@types/webrtc": "0.0.23",
+    "jest-styled-components": "^5.0.1",
+    "react-test-renderer": "^16.4.1"
   }
 }

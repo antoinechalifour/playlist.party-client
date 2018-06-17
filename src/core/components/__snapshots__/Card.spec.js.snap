@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Should render a Card 1`] = `
+.c0 {
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0,0,0,.25);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.c1 {
+  padding: 16px;
+  color: #373d3f;
+}
+
+.c2 {
+  text-align: right;
+  padding: 24px 0;
+}
+
+.c2 > * + * {
+  margin-left: 8px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <p>
+      This is my test card content
+    </p>
+  </div>
+  <div
+    className="c2"
+  >
+    <button>
+      Click me!
+    </button>
+  </div>
+</div>
+`;

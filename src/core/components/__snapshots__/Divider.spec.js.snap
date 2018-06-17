@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider Should render a divider 1`] = `
+.c0 {
+  opacity: .25;
+  margin: 16px 0;
+}
+
+<hr
+  className="c0"
+/>
+`;
