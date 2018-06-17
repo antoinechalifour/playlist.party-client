@@ -79,6 +79,65 @@ it('Should handle "@guest/battle/vote"', () => {
   })
 })
 
+describe('isBattleFull', () => {
+  it('Should return true when the next contenders length is 2', () => {
+    const state = {
+      next: [{ id: '12' }, { id: '34' }]
+    }
+
+    expect(selectors.isBattleFull(state)).toBe(true)
+  })
+
+  it('Should return false when the next contenders length is not 2', () => {
+    const state = {
+      next: [{ id: '12' }]
+    }
+
+    expect(selectors.isBattleFull(state)).toBe(false)
+  })
+})
+
+describe('getContenders', () => {
+  it('Should return the next tracks', () => {
+    const state = {
+      next: [{ id: '12' }]
+    }
+
+    expect(selectors.getContenders(state)).toBe(state.next)
+  })
+})
+
+describe('getNextContenders', () => {
+  it('Should return the next contenders (1)', () => {
+    const state = {
+      queue: [{ id: '12' }]
+    }
+
+    expect(selectors.getNextContenders(state)).toEqual([state.queue[0]])
+  })
+
+  it('Should return the next contenders (3)', () => {
+    const state = {
+      queue: [{ id: '12' }, { id: '34' }, { id: '56' }]
+    }
+
+    expect(selectors.getNextContenders(state)).toEqual([
+      state.queue[0],
+      state.queue[1]
+    ])
+  })
+})
+
+describe('getQueue', () => {
+  it('Should return the queue', () => {
+    const state = {
+      queue: [{ id: '12' }, { id: '34' }, { id: '56' }]
+    }
+
+    expect(selectors.getQueue(state)).toEqual(state.queue)
+  })
+})
+
 describe('getVoteProgress', () => {
   it('Should return 50% (no votes)', () => {
     const state = {

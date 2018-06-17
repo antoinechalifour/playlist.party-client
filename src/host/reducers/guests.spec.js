@@ -1,4 +1,4 @@
-import reducer from './guests'
+import reducer, { getGuest, getGuests, getAllChannels } from './guests'
 import * as actions from '../actions/guests'
 
 it('Should return the initial state', () => {
@@ -65,4 +65,52 @@ it(`Should handle "${actions.REMOVE_GUEST}" actions`, () => {
       dataChannel: { fizz: 'buzz' }
     }
   ])
+})
+
+describe('getGuest', () => {
+  it('Should find the guest in the state', () => {
+    const state = [
+      {
+        id: '12'
+      },
+      {
+        id: '34'
+      }
+    ]
+
+    expect(getGuest(state, '34')).toBe(state[1])
+  })
+
+  it('Should return null when the guest is not found', () => {
+    const state = [
+      {
+        id: '12'
+      }
+    ]
+
+    expect(getGuest(state, '34')).toBe(null)
+  })
+})
+
+describe('getGuests', () => {
+  it('Should return the state', () => {
+    const state = [{ id: '12' }, { id: '34' }]
+    expect(getGuests(state)).toBe(state)
+  })
+})
+
+describe('getAllChannels', () => {
+  it('Should return all data channels', () => {
+    const state = [
+      { id: '12', dataChannel: {} },
+      { id: '34', dataChannel: {} },
+      { id: '56', dataChannel: {} }
+    ]
+
+    expect(getAllChannels(state)).toEqual([
+      state[0].dataChannel,
+      state[1].dataChannel,
+      state[2].dataChannel
+    ])
+  })
 })
