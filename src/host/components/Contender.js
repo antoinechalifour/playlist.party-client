@@ -1,14 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Typography from 'core/components/Typography'
 import { getVoteProgress } from 'host/reducers'
+
+const enterAnimation = keyframes`
+  from {
+    transform: perspective(500px) translateZ(40px);
+  }
+  to {
+    transform: perspective(500px) translateZ(0px);
+  }
+`
 
 const Outer = styled.div`
   text-align: center;
   padding: 16px;
   position: relative;
+  animation: ${enterAnimation} .5s cubic-bezier(.17,.67,.87,.31);
   
   p {
     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
@@ -32,6 +42,7 @@ const Information = styled.div`
 function Contender ({ name, album, artists, voteProgress }) {
   const factor = 0.3 + voteProgress * 0.7
   const transform = `scale(${factor})`
+
   return (
     <Outer>
       <Cover
