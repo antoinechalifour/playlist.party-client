@@ -1,10 +1,10 @@
 import { cloneableGenerator } from 'redux-saga/utils'
 import { select, put, call } from 'redux-saga/effects'
 import { getContenders, getNextContenders } from 'host/reducers'
-import processVote from './processVote'
 import { playTrack } from 'host/actions/player'
 import { addToPrevious, addToBattle } from 'host/actions/tracks'
-import notifyBattleUpdate from 'host/sagas/notifyBattleUpdate'
+import notifyBattleUpdate from 'host/sagas/tasks/notifyBattleUpdate'
+import processVote from './processVote'
 
 describe('processVote saga', () => {
   const gen = cloneableGenerator(processVote)()

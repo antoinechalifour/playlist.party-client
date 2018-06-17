@@ -5,11 +5,16 @@ import {
   SIGNALING_IN_ANSWER,
   SIGNALING_IN_CANDIDATE
 } from 'host/actions/signaling'
+import { ADD_GUEST, GUEST_READY } from 'host/actions/guests'
 import iceServers from 'core/network/iceServers'
 import { getGuest } from 'host/reducers'
 import { addGuest, removeGuest, guestReady } from 'host/actions/guests'
+import watchGuestEvents from 'host/sagas/tasks/watchGuestEvents'
+import initializeGuest from 'host/sagas/tasks/initializeGuest'
 
 const noop = () => {}
+
+// TODO: Extract some functions from this flow
 
 /**
  * Sends the local description to a guest.
@@ -122,8 +127,10 @@ export function * onCandidate (action) {
  * guest joins the party.
  * @param {SocketIOClient.Socket} socket - The server connection.
  */
-export default function * signaling (socket) {
+export default function * signalingFlow (socket) {
   yield takeEvery(SIGNALING_IN_JOIN, onJoin, socket)
   yield takeEvery(SIGNALING_IN_ANSWER, onAnswer)
   yield takeEvery(SIGNALING_IN_CANDIDATE, onCandidate)
+  yield takeEvery(ADD_GUEST, watchGuestEvents)
+  yield takeEvery(GUEST_READY, initializeGuest)
 }

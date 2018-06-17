@@ -7,10 +7,15 @@ jest.mock('host/reducers', () => {
   }
 })
 
-import { sendOffer, sendCandidate, onAnswer, onCandidate } from './signaling'
 import { call, select } from 'redux-saga/effects'
 import { getGuest } from 'host/reducers'
 import { cloneableGenerator } from 'redux-saga/utils'
+import {
+  sendOffer,
+  sendCandidate,
+  onAnswer,
+  onCandidate
+} from './signalingFlow'
 
 const socket = {
   emit: jest.fn()

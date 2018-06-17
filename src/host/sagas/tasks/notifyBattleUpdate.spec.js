@@ -1,6 +1,6 @@
 import { call, select } from 'redux-saga/effects'
-import notifyBattleUpdate from './notifyBattleUpdate'
 import { getAllChannels, getContenders } from 'host/reducers'
+import notifyBattleUpdate from './notifyBattleUpdate'
 
 describe('notifyBattleUpdate saga', () => {
   const gen = notifyBattleUpdate()

@@ -1,10 +1,10 @@
-import initializeParty from './initializeParty'
+import createCurrentParty from './createCurrentParty'
 import { call, select } from 'redux-saga/effects'
 import { getParty } from 'host/reducers'
 
-describe('initializeParty saga', () => {
+describe('createCurrentParty saga', () => {
   const socket = { emit: jest.fn() }
-  const gen = initializeParty(socket)
+  const gen = createCurrentParty(socket)
 
   it('Should get the current party', () => {
     expect(gen.next().value).toEqual(select(getParty))

@@ -1,6 +1,6 @@
 import { call, select } from 'redux-saga/effects'
-import initializeGuest from './initializeGuest'
 import { getContenders } from 'host/reducers'
+import initializeGuest from './initializeGuest'
 
 describe('initializeGuest saga', () => {
   const action = {

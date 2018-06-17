@@ -38,7 +38,7 @@ export function subscribeToSocketEvents (socket) {
  * Maps events from the socket channel to actions dispatched to the store.
  * @param {SocketIOClient.Socket} socket The socket.
  */
-export default function * readFromSocket (socket) {
+export default function * dispatchSocketEvents (socket) {
   const channel = yield call(subscribeToSocketEvents, socket)
 
   while (true) {

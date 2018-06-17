@@ -6,8 +6,11 @@ import sagas from './sagas'
 
 export default function configureStore ({ initialState, socket }) {
   const sagaMiddleware = createSagaMiddleware()
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      actionsBlacklist: ['UPDATE_PLAYER_STATE']
+    })
+    : compose
   const store = createStore(
     reducer,
     initialState,

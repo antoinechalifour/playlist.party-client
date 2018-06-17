@@ -1,8 +1,8 @@
 import { call, put, select } from 'redux-saga/effects'
 import { cloneableGenerator } from 'redux-saga/utils'
-import addTrack from './addTrack'
 import { isBattleFull } from 'host/reducers'
 import { addToQueue, addToBattle } from 'host/actions/tracks'
+import addTrack from './addTrack'
 import notifyBattleUpdate from './notifyBattleUpdate'
 
 describe('addTrack saga', () => {

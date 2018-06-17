@@ -1,5 +1,21 @@
 import * as actions from './signaling'
 
+describe('signalingConnected', () => {
+  it('Should return the action', () => {
+    expect(actions.signalingConnected()).toEqual({
+      type: 'SIGNALING_CONNECTED'
+    })
+  })
+})
+
+describe('signalingDisconnected', () => {
+  it('Should return the action', () => {
+    expect(actions.signalingDisconnected()).toEqual({
+      type: 'SIGNALING_DISCONNECTED'
+    })
+  })
+})
+
 describe('signalingInJoin', () => {
   it('Should return the action', () => {
     expect(actions.signalingInJoin('userId')).toEqual({
