@@ -6,7 +6,7 @@ import { getContenders, getGuest } from 'host/reducers'
  * @param {{ id: String }} action - The addGuest action.
  */
 export default function * initializeGuest (action) {
-  const guest = yield select(getGuest(action.id))
+  const guest = yield select(getGuest, action.id)
   const contenders = yield select(getContenders)
 
   const message = {

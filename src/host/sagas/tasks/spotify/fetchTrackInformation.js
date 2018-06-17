@@ -8,5 +8,5 @@ import getSpotifyClient from './getSpotifyClient'
 export default function * fetchTrackInformation (trackId) {
   const client = yield call(getSpotifyClient)
 
-  return call([client.tracks, client.tracks.findOne], trackId)
+  return yield call([client.tracks, client.tracks.findOne], trackId)
 }

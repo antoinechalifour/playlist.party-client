@@ -8,5 +8,5 @@ import getSpotifyClient from '../spotify/getSpotifyClient'
 export default function * searchTracks (query) {
   const client = yield call(getSpotifyClient)
 
-  return call([client, client.search], query)
+  return yield call([client, client.search], query)
 }

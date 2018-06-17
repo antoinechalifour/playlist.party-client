@@ -4,5 +4,5 @@ import { getAccessToken } from 'host/reducers'
 
 export default function * getSpotifyClient () {
   const accessToken = yield select(getAccessToken)
-  return call(SpotifyApiFactory, { accessToken })
+  return yield call(SpotifyApiFactory, { accessToken })
 }

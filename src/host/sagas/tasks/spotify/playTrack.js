@@ -8,5 +8,5 @@ import getSpotifyClient from './getSpotifyClient'
  */
 export default function * playTrack (trackId, playerId) {
   const client = yield call(getSpotifyClient)
-  return call([client.player, client.player.play], trackId, playerId)
+  return yield call([client.player, client.player.play], trackId, playerId)
 }

@@ -1,6 +1,6 @@
 import { call, select } from 'redux-saga/effects'
 import { getGuest } from 'host/reducers'
-import searchTracksFromSpotify from 'host/sagas/tasks/spotify/searchTracks'
+import searchTracksFromSpotify from '../spotify/searchTracks'
 
 /**
  * Provides results to the guest search.

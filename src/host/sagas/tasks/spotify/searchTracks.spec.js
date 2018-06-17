@@ -11,9 +11,6 @@ test('Returns the results from the Spotify API', () => {
   const gen = searchTracks(query)
 
   expect(gen.next().value).toEqual(call(getSpotifyClient))
-
-  const next = gen.next(client)
-
-  expect(next.value).toEqual(call([client, client.search], query))
-  expect(next.done).toBe(true)
+  expect(gen.next(client).value).toEqual(call([client, client.search], query))
+  expect(gen.next().done).toBe(true)
 })

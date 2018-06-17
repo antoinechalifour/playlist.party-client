@@ -41,7 +41,7 @@ export function * readFromGuest (guest) {
  * @param {{ id: String }} action - The addGuest action.
  */
 export default function * watchGuestEvents (action) {
-  const guest = yield select(getGuest(action.id))
+  const guest = yield select(getGuest, action.id)
 
   yield fork(readFromGuest, guest)
 }

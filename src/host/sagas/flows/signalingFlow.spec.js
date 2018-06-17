@@ -61,7 +61,7 @@ describe('signaling saga', () => {
 
     it('Should find the guest with the remoteId', () => {
       // TODO: Fix this failing test with anonymous function
-      expect(gen.next().value).toEqual(select(getGuest('my user id')))
+      expect(gen.next().value).toEqual(select(getGuest, 'my user id'))
     })
 
     it('Should do nothing when the guest is not found', () => {
@@ -95,7 +95,7 @@ describe('signaling saga', () => {
 
     it('Should find the guest with the remoteId', () => {
       // TODO: Fix this failing test with anonymous functions
-      expect(gen.next().value).toEqual(select(getGuest('my user id')))
+      expect(gen.next().value).toEqual(select(getGuest, 'my user id'))
     })
 
     it('Should do nothing when the guest is not found', () => {

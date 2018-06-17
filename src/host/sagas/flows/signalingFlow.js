@@ -98,7 +98,7 @@ export function * onJoin (socket, action) {
  */
 export function * onAnswer (action) {
   console.log('<-- ON ANSWER')
-  const guest = yield select(getGuest(action.remoteId))
+  const guest = yield select(getGuest, action.remoteId)
 
   if (guest) {
     yield call(
@@ -114,7 +114,7 @@ export function * onAnswer (action) {
  */
 export function * onCandidate (action) {
   console.log('<-- ON CANDIDATE')
-  const guest = yield select(getGuest(action.remoteId))
+  const guest = yield select(getGuest, action.remoteId)
 
   if (guest) {
     yield call(

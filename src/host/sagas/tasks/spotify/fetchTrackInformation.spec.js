@@ -12,11 +12,8 @@ test('Fetches the track information', () => {
   const gen = fetchTrackInformation('my-track-uri')
 
   expect(gen.next().value).toEqual(call(getSpotifyClient))
-
-  const next = gen.next(client)
-
-  expect(next.value).toEqual(
+  expect(gen.next(client).value).toEqual(
     call([client.tracks, client.tracks.findOne], 'my-track-uri')
   )
-  expect(next.done).toBe(true)
+  expect(gen.next().done).toBe(true)
 })
