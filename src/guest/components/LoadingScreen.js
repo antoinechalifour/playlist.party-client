@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Typography from 'core/components/Typography'
-import Loader from 'guest/components/Loader'
+import DelayedLoader from 'guest/components/DelayedLoader'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -23,8 +22,7 @@ const Wrapper = styled.div`
 export default function LoadingScreen () {
   return (
     <Wrapper>
-      <Loader />
-      <Typography reverse>Connecting to party...</Typography>
+      <DelayedLoader message='Connecting to party...' />
     </Wrapper>
   )
 }

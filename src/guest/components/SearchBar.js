@@ -5,6 +5,7 @@ import debounce from 'debounce'
 import MdAccountCirle from 'react-icons/lib/md/account-circle'
 import { withApi } from 'guest/components/providers/ApiProvider'
 import Suggestions from 'guest/components/Suggestions'
+import DelayedLoader from 'guest/components/DelayedLoader'
 
 const Outer = styled.div`
   position: relative;
@@ -42,6 +43,16 @@ const SearchInput = styled.input`
   border-bottom: 1px solid rgba(255, 255, 255, .65);
 `
 
+const LoaderContainer = styled.div`
+  position: relative;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  padding: 12px;
+  background: #313131;
+`
+
 class SearchBar extends Component {
   static propTypes = {
     onProfileClick: PropTypes.func.isRequired,
@@ -55,6 +66,7 @@ class SearchBar extends Component {
     super(props)
 
     this.state = {
+      isLoading: false,
       search: '',
       suggestions: []
     }
@@ -74,9 +86,10 @@ class SearchBar extends Component {
   }
 
   searchTracks = async query => {
+    this.setState({ isLoading: true })
     const results = await this.props.api.searchTracks(query)
 
-    this.setState({ suggestions: results })
+    this.setState({ suggestions: results, isLoading: false })
   }
 
   onTrackClick = track => {
@@ -95,6 +108,10 @@ class SearchBar extends Component {
             placeholder='Search tracks...'
           />
         </Nav>
+        {this.state.isLoading &&
+          <LoaderContainer>
+            <DelayedLoader message='Fetching suggestions from Spotify...' />
+          </LoaderContainer>}
         {this.state.suggestions.length > 0 &&
           <Suggestions
             tracks={this.state.suggestions}
