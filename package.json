@@ -1,5 +1,5 @@
 {
-  "name": "playslit-party",
+  "name": "playlist-party",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -32,5 +32,12 @@
     "@types/webrtc": "0.0.23",
     "jest-styled-components": "^5.0.1",
     "react-test-renderer": "^16.4.1"
+  },
+  "now": {
+    "name": "playlistparty",
+    "alias": "playlistparty",
+    "files": [
+      "build"
+    ]
   }
 }
