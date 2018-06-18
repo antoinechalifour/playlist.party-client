@@ -22,15 +22,17 @@ function next (state = [], action) {
     case '@guest/battle/vote':
       return [
         ...state.map(x => {
+          const filteredVotes = x.votes.filter(x => x !== action.guestId)
+
           if (x.id === action.payload.trackId) {
             return {
               ...x,
-              votes: [...x.votes, action.guestId]
+              votes: [...filteredVotes, action.guestId]
             }
           } else {
             return {
               ...x,
-              votes: x.votes.filter(x => x !== action.guestId)
+              votes: filteredVotes
             }
           }
         })

@@ -79,6 +79,28 @@ it('Should handle "@guest/battle/vote"', () => {
   })
 })
 
+it('Should not allow one user to votes multiple times for the same track', () => {
+  const action = {
+    type: '@guest/battle/vote',
+    payload: {
+      trackId: '56'
+    },
+    guestId: 'user1'
+  }
+
+  const state = {
+    previous: [{ id: '12' }],
+    next: [{ id: '34', votes: ['user1'] }, { id: '56', votes: ['user1'] }],
+    queue: [{ id: '78' }]
+  }
+
+  expect(reducer(state, action)).toEqual({
+    previous: [{ id: '12' }],
+    next: [{ id: '34', votes: [] }, { id: '56', votes: ['user1'] }],
+    queue: [{ id: '78' }]
+  })
+})
+
 describe('isBattleFull', () => {
   it('Should return true when the next contenders length is 2', () => {
     const state = {
