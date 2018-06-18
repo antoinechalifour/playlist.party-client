@@ -1,115 +1,108 @@
 import React, { Component } from 'react'
-import debounce from 'debounce'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { withChannel } from './providers/Channel'
+import debounce from 'debounce'
+import MdAccountCirle from 'react-icons/lib/md/account-circle'
+import { withApi } from 'guest/components/providers/ApiProvider'
+import Suggestions from 'guest/components/Suggestions'
 
-const Wrapper = styled.div`
-  background: #151515;
-  color: #fff;
+const Outer = styled.div`
   position: relative;
 `
 
-const Input = styled.input`
-  display: block;
-  box-sizing: border-box;
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+
+  background: #313131;
   color: #fff;
-  width: 100%;
-  color: inherit;
-  font-size: inherit;
-  font-family: inherit;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+`
+
+const ProfileIcon = styled(MdAccountCirle)`
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 12px;
+`
+
+const SearchInput = styled.input`
+  flex: 1;
+
+  box-sizing: border-box;
+  display: block;
   background: none;
   border: none;
-  padding: 12px;
-
-  ::placeholder {
-    color: #fff;
-    opacity: .5;
-  }
+  outline: none;
+  width: 100%;
+  padding: 4px 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border-bottom: 1px solid rgba(255, 255, 255, .65);
 `
 
-const Suggestions = styled.ul`
-  position: absolute;
-  z-index: 10;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  padding: 12px;
-  color: #373d3f;
-  max-height: 300px;
-  overflow-y: scroll;
-
-  > li {
-    padding: 6px;
-  }
-
-  > li + li {
-    border-top: 1px solid rgba(0, 0, 0, .1);
-  }
-`
-
-// TODO: Move channel stuff to the a guest model.
 class SearchBar extends Component {
-  state = {
-    search: '',
-    suggestions: []
+  static propTypes = {
+    onProfileClick: PropTypes.func.isRequired,
+    api: PropTypes.shape({
+      searchTracks: PropTypes.func.isRequired,
+      submitTrack: PropTypes.func.isRequired
+    }).isRequired
   }
 
   constructor (props) {
     super(props)
 
-    this._searchSuggestions = debounce(this._searchSuggestions, 200)
-  }
-
-  _searchSuggestions = value => {
-    this.props.channel.emit(
-      'search',
-      { q: value },
-      ({ results: suggestions }) => this.setState({ suggestions })
-    )
-  }
-
-  _submitTrack = trackId => {
-    this.setState({ suggestions: [], search: '' })
-    this.props.channel.emit('track/add', { trackId })
-  }
-
-  _onChange = e => {
-    const value = e.target.value
-
-    this.setState({ search: e.target.value })
-
-    if (value === '') {
-      this.setState({ suggestions: [] })
-    } else {
-      this._searchSuggestions(value)
+    this.state = {
+      search: '',
+      suggestions: []
     }
+
+    this.searchTracks = debounce(this.searchTracks, 1000)
+  }
+
+  onSearchChange = e => {
+    const search = e.target.value
+    this.setState({ search })
+
+    if (search.length > 2) {
+      this.searchTracks(search)
+    } else {
+      this.setState({ suggestions: [] })
+    }
+  }
+
+  searchTracks = async query => {
+    const results = await this.props.api.searchTracks(query)
+
+    this.setState({ suggestions: results })
+  }
+
+  onTrackClick = track => {
+    this.setState({ search: '', suggestions: [] })
+    this.props.api.submitTrack(track.id)
   }
 
   render () {
     return (
-      <Wrapper>
-        <Input
-          type='text'
-          value={this.state.search}
-          placeholder='Add your favorite track!'
-          onChange={this._onChange}
-        />
-
+      <Outer>
+        <Nav>
+          <ProfileIcon onClick={this.props.onProfileClick} />
+          <SearchInput
+            value={this.state.search}
+            onChange={this.onSearchChange}
+            placeholder='Search tracks...'
+          />
+        </Nav>
         {this.state.suggestions.length > 0 &&
-          <Suggestions>
-            {this.state.suggestions.map(x => (
-              <li key={x.id} onClick={() => this._submitTrack(x.id)}>
-                <div>{x.name}</div>
-                <div>{x.artists.map(y => y.name).join(', ')}</div>
-              </li>
-            ))}
-          </Suggestions>}
-      </Wrapper>
+          <Suggestions
+            tracks={this.state.suggestions}
+            onTrackClick={this.onTrackClick}
+          />}
+      </Outer>
     )
   }
 }
 
-export default withChannel(SearchBar)
+export default withApi(SearchBar)

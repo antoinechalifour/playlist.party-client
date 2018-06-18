@@ -1,3 +1,4 @@
+import { getAlbumCover } from 'core/helpers/tracks'
 import * as actions from '../actions/player'
 
 export default function playerReducer (state = null, action) {
@@ -31,7 +32,7 @@ export const getCurrentTrack = state => ({
 export const getCurrentAlbum = state => ({
   id: state.track_window.current_track.album.uri,
   name: state.track_window.current_track.album.name,
-  cover: state.track_window.current_track.album.images[0].url
+  cover: getAlbumCover(state.track_window.current_track)
 })
 
 export const getCurrentArtists = state =>

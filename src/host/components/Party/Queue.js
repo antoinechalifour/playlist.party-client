@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import Typography from 'core/components/Typography'
+import { SpotifyTrack } from 'core/propTypes'
+import { getAlbumCover, getArtistsAsHumanFormat } from 'core/helpers/tracks'
 import { getQueue } from 'host/reducers'
 
 const Title = styled(Typography).attrs({
@@ -71,11 +73,11 @@ function Queue ({ tracks }) {
       <ul>
         {tracks.map(track => (
           <Track key={track.id}>
-            <Cover src={track.album.images[0].url} />
+            <Cover src={getAlbumCover(track)} />
             <div>
               <Typography reverse>{track.name}</Typography>
               <Typography reverse type='secondary'>
-                {track.artists.map(x => x.name).join(', ')}
+                {getArtistsAsHumanFormat(track)}
               </Typography>
             </div>
           </Track>
@@ -86,25 +88,7 @@ function Queue ({ tracks }) {
 }
 
 Queue.propTypes = {
-  tracks: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      album: PropTypes.shape({
-        images: PropTypes.arrayOf(
-          PropTypes.shape({
-            url: PropTypes.string.isRequired
-          })
-        ).isRequired
-      }).isRequired,
-      artists: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired
-        })
-      )
-    })
-  ).isRequired
+  tracks: PropTypes.arrayOf(SpotifyTrack).isRequired
 }
 
 export default connect(state => ({

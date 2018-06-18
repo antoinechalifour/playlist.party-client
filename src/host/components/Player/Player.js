@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { getArtistsAsHumanFormat } from 'core/helpers/tracks'
+import Typography from 'core/components/Typography'
 import {
   getCurrentTrack,
   getCurrentAlbum,
   getCurrentArtists,
   getProgress
 } from 'host/reducers'
-import Typography from 'core/components/Typography'
 import { Container } from './components'
 
 const Outer = styled(Container)`
@@ -45,7 +46,7 @@ function Player ({ track, album, artists, progress }) {
       <div>
         <Typography reverse>{track.name}</Typography>
         <Typography reverse type='secondary'>
-          {artists.map(x => x.name).join(', ')}
+          {getArtistsAsHumanFormat({ artists })}
         </Typography>
       </div>
     </Outer>

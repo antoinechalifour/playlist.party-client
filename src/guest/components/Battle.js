@@ -1,119 +1,93 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled, { css } from 'styled-components'
-import { withChannel } from './providers/Channel'
+import styled, { keyframes } from 'styled-components'
+import MdFavorite from 'react-icons/lib/md/favorite'
+import Typography from 'core/components/Typography'
+import { withApi } from 'guest/components/providers/ApiProvider'
+import Contender from 'guest/components/Contender'
 
-const Tracks = styled.ul`
+const Outer = styled.div`
+  flex: 1;
+
   display: flex;
   flex-direction: column;
-  background: #151515;
-  color: #fff;
 `
 
-const Track = styled.li`
-  position: relative;
+const Hint = styled.div`
   flex: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  box-sizing: border-box;
-
-
-  ${({ active, theme }) => active && css`
-    ::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      border: solid 4px ${theme.colors.primary};
-      background: rgba(255, 255, 255, .2);
-    }
-  `}
-  
-  > div {
-    position: relative;
-  }
-  
-  > :first-child {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: .2;
-  }
-
-  > :nth-child(2) {
-    font-size: 2rem;
-  }
-
-  > :last-child {
-    opacity: .75;
-    font-size: 90%;
-  }
 `
 
-// TODO: Move channel stuff to a guest model.
+// From: https://codepen.io/tvweinstock/pen/MOBXyO?page=1&
+const heartAnimation = keyframes`
+  0% { transform: scale3d( .75, .75, .75 ); }
+  10% { transform: scale3d( .75, .75, .75 ); }
+  20% { transform: scale3d( 1, 1, 1 ); }
+  30% { transform: scale3d( .75, .75, .75 ); }
+  40% { transform: scale3d( 1, 1, 1 ); }
+  50% { transform: scale3d( .75, .75, .75 ); }
+  60% { transform: scale3d( .75, .75, .75 ); }
+  80% { transform: scale3d( .75, .75, .75 ); }
+  100% { transform: scale3d( .75, .75, .75 ); }
+`
+
+const FavIcon = styled(MdFavorite)`
+  font-size: 48px;
+  margin-bottom: 24px;
+  color: #fff;
+
+  opacity: .25;
+  animation: ${heartAnimation} 1.5s ease infinite;
+`
+
 class Battle extends Component {
   static propTypes = {
-    channel: PropTypes.object.isRequired
+    api: PropTypes.shape({
+      battle: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired
+        })
+      ).isRequired
+    }).isRequired
   }
 
-  state = {
-    currentVote: '',
-    tracks: []
-  }
+  state = { currentVote: '' }
 
-  constructor (props) {
-    super(props)
+  onContenderClick = trackId => {
+    this.setState({ currentVote: trackId })
 
-    props.channel.on('battle/update', this._onBattleUpdate)
-  }
-
-  _onBattleUpdate = ({ tracks }) => {
-    this.setState({ tracks })
-  }
-
-  _renderTrack (track) {
-    return (
-      <Track
-        active={this.state.currentVote === track.id}
-        onClick={() => this._vote(track)}
-      >
-        <div
-          style={{
-            backgroundImage: `url(${track.album.images[0].url})`
-          }}
-        />
-        <div>{track.name}</div>
-        <div>{track.artists.map(x => x.name).join(', ')}</div>
-      </Track>
-    )
-  }
-
-  _vote = track => {
-    this.setState({ currentVote: track.id })
-    this.props.channel.emit('battle/vote', { trackId: track.id })
+    this.props.api.vote(trackId)
   }
 
   render () {
-    if (this.state.tracks.length === 0) {
-      return <div>Empty queue</div>
-    }
+    const tracks = this.props.api.battle
+    const displayHint = tracks.length < 2
 
     return (
-      <Tracks>
-        {this.state.tracks.map(x => this._renderTrack(x))}
-      </Tracks>
+      <Outer>
+        {tracks.map(x => (
+          <Contender
+            key={x.id}
+            track={x}
+            isVoted={this.state.currentVote === x.id}
+            onClick={this.onContenderClick}
+          />
+        ))}
+        {displayHint &&
+          <Hint>
+            <FavIcon />
+            <Typography reverse type='secondary'>
+              Add your favorite track!
+            </Typography>
+          </Hint>}
+      </Outer>
     )
   }
 }
 
-export default withChannel(Battle)
+export default withApi(Battle)

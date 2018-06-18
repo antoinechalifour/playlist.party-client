@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import * as Vibrant from 'node-vibrant'
 import { rgb } from 'polished'
+import { getAlbumCover } from 'core/helpers/tracks'
 import { getContenders } from 'host/reducers'
 
 const Outer = styled.div`
@@ -69,5 +70,5 @@ class Background extends Component {
 }
 
 export default connect(state => ({
-  sources: getContenders(state).map(x => x.album.images[0]).map(x => x.url)
+  sources: getContenders(state).map(getAlbumCover)
 }))(Background)

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled, { keyframes } from 'styled-components'
 import Typography from 'core/components/Typography'
+import { SpotifyTrack } from 'core/propTypes'
+import { getAlbumCover, getArtistsAsHumanFormat } from 'core/helpers/tracks'
 import { getVoteProgress } from 'host/reducers'
-import { ContenderPropType } from 'host/components/propTypes'
 
 const enterAnimation = keyframes`
   from {
@@ -103,7 +104,7 @@ function Contender ({ contender, getVoteProgress }) {
   return (
     <Wrapper>
       <Cover
-        src={contender ? contender.album.images[0].url : null}
+        src={contender ? getAlbumCover(contender) : null}
         style={{ transform }}
       />
       <div>
@@ -111,9 +112,7 @@ function Contender ({ contender, getVoteProgress }) {
           {contender ? contender.name : 'Lorem Ipsum Dolores'}
         </TrackName>
         <Artists reverse type='secondary'>
-          {contender
-            ? contender.artists.map(x => x.name).join(', ')
-            : 'Lorem Ipsum'}
+          {contender ? getArtistsAsHumanFormat(contender) : 'Lorem Ipsum'}
         </Artists>
       </div>
     </Wrapper>
@@ -121,7 +120,7 @@ function Contender ({ contender, getVoteProgress }) {
 }
 
 Contender.propTypes = {
-  contender: ContenderPropType,
+  contender: SpotifyTrack,
   getVoteProgress: PropTypes.func.isRequired
 }
 

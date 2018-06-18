@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-export const ContenderPropType = PropTypes.shape({
+export const SpotifyTrack = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   album: PropTypes.shape({
@@ -13,6 +13,9 @@ export const ContenderPropType = PropTypes.shape({
     ).isRequired
   }).isRequired,
   artists: PropTypes.arrayOf(
-    PropTypes.shape({ name: PropTypes.string.isRequired })
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
   ).isRequired
 })

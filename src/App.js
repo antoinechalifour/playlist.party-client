@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import theme from 'core/theming/theme'
 import Loadable from 'react-loadable'
-import { GuestProvider } from 'guest/components/providers/Guest'
 
 const getQueryParams = search => qs.parse(search.substr(1))
 
@@ -58,11 +57,7 @@ class App extends Component {
                 const { party, code } = match.params
                 const props = { party, code }
 
-                return (
-                  <GuestProvider {...props}>
-                    <GuestApp />
-                  </GuestProvider>
-                )
+                return <GuestApp {...props} />
               }}
             />
             <Redirect from='/' to='/home' />

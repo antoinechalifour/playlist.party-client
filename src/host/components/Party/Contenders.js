@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { getContenders } from 'host/reducers'
-import { ContenderPropType } from '../propTypes'
 import Contender from './Contender'
+import { SpotifyTrack } from 'core/propTypes'
 
 const Wrapper = styled.div`
   flex: 1;
@@ -32,7 +32,7 @@ function Contenders ({ contenders }) {
 }
 
 Contenders.propTypes = {
-  contenders: PropTypes.arrayOf(ContenderPropType).isRequired
+  contenders: PropTypes.arrayOf(SpotifyTrack).isRequired
 }
 
 export default connect(state => ({

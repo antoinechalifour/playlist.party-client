@@ -18,7 +18,7 @@ const Outer = styled.header`
 function Header ({ party }) {
   return (
     <Outer>
-      playlist.party/{party.name}/{party.code}
+      {window.location.hostname}/{party.name}/{party.code}
     </Outer>
   )
 }
