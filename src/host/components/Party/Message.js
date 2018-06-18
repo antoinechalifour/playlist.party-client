@@ -56,6 +56,10 @@ function MessageDelegate ({ status }) {
   )
 }
 
+MessageDelegate.propTypes = {
+  status: PropTypes.string.isRequired
+}
+
 export default connect(state => ({
   status: getPartyStatus(state)
 }))(MessageDelegate)
