@@ -19,8 +19,11 @@ const BaseWrapper = styled.div`
   flex: 1;
 
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  text-align: center;
   padding: 16px;
 `
 
@@ -35,7 +38,8 @@ const BaseArtists = styled(Typography).attrs({
 })``
 
 const BaseCover = styled.div`
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 24px;
   width: 80%;
   border-radius: 8px;
