@@ -54,3 +54,6 @@ export const getPartyStatus = state => state.status
 
 export const isPartyReady = state =>
   getPartyStatus(state) === STATUS_WAITING_TO_START
+
+export const isPartyLocked = state =>
+  getPartyStatus(state) === STATUS_CREATION_ERROR

@@ -2,7 +2,8 @@ import reducer, {
   getAccessToken,
   getParty,
   getPartyStatus,
-  isPartyReady
+  isPartyReady,
+  isPartyLocked
 } from './party'
 import {
   partyStatusCreationError,
@@ -113,6 +114,30 @@ describe('isPartyReady', () => {
   it('Should return false otherwise', () => {
     expect(
       isPartyReady({
+        name: 'Playlist party!',
+        code: '1234',
+        accessToken: 'my access token',
+        status: 'PARTY_STATUS_FINISHED'
+      })
+    ).toEqual(false)
+  })
+})
+
+describe('isPartyLocked', () => {
+  it('Should return true when the status is "STATUS_CREATION_ERROR"', () => {
+    expect(
+      isPartyLocked({
+        name: 'Playlist party!',
+        code: '1234',
+        accessToken: 'my access token',
+        status: 'STATUS_CREATION_ERROR'
+      })
+    ).toEqual(true)
+  })
+
+  it('Should return false otherwise', () => {
+    expect(
+      isPartyLocked({
         name: 'Playlist party!',
         code: '1234',
         accessToken: 'my access token',

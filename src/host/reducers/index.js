@@ -17,6 +17,8 @@ export const getParty = state => fromParty.getParty(state.party)
 
 export const isPartyReady = state => fromParty.isPartyReady(state.party)
 
+export const isPartyLocked = state => fromParty.isPartyLocked(state.party)
+
 export const getPartyStatus = state => fromParty.getPartyStatus(state.party)
 
 export const getGuest = (state, id) => fromGuests.getGuest(state.guests, id)
