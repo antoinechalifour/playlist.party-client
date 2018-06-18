@@ -23,7 +23,7 @@ export default function createSignaling (socket, onPeerConnected) {
     _connection.ondatachannel = event => {
       _dataChannel = event.channel
 
-      onPeerConnected(createPeerSocket(_dataChannel))
+      onPeerConnected(createPeerSocket(_dataChannel, _connection))
     }
 
     await _connection.setRemoteDescription(description)

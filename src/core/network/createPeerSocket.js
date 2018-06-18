@@ -1,9 +1,12 @@
 import { v4 as uuid } from 'uuid'
 
-export default function createPeerSocket (dataChannel) {
+export default function createPeerSocket (dataChannel, connection) {
   const _handlers = {}
   const _callbackQueue = {}
   const socket = {
+    get status () {
+      return connection.iceConnectionState
+    },
     emit (eventName, payload, cb = null) {
       const message = {
         type: eventName,

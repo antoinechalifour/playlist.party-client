@@ -14,9 +14,6 @@ export class ApiProvider extends Component {
   constructor (props) {
     super(props)
 
-    this.socket = Socket(process.env.REACT_APP_SIGNALING_URI)
-    this.signaling = createSignaling(this.socket, this.onConnection)
-    this.listeners = {}
     this.state = {
       isConnectedToSignaling: false,
       isConnected: false,
@@ -28,17 +25,29 @@ export class ApiProvider extends Component {
       vote: this.vote,
       rename: this.rename
     }
+    this.emitQueue = []
 
+    this.startSignaling()
+  }
+
+  componentWillUnmount () {
+    this.signaling.unsubscribe()
+    this.socket.disconnect()
+  }
+
+  startSignaling = () => {
+    if (this.socket) {
+      this.socket.disconnect()
+    }
+
+    this.socket = Socket(process.env.REACT_APP_SIGNALING_URI)
+    this.signaling = createSignaling(this.socket, this.onConnection)
     this.signaling.subscribe()
     this.signaling.init(
       this.props.party,
       this.props.code,
       this.onSignalingResult
     )
-  }
-
-  componentWillUnmount () {
-    this.signaling.unsubscribe()
   }
 
   onSignalingResult = err => {
@@ -54,22 +63,34 @@ export class ApiProvider extends Component {
     this._connection.on('battle/update', this._onBattleUpdate)
 
     this.setState({ isConnected: true })
+
+    let args
+    while ((args = this.emitQueue.shift())) {
+      this._connection.emit(...args)
+    }
   }
 
   _onBattleUpdate = ({ tracks: battle }) => this.setState({ battle })
 
   searchTracks = query =>
     new Promise(resolve => {
-      this._connection.emit('search', { q: query }, ({ results }) =>
-        resolve(results)
-      )
+      this.safeEmit('search', { q: query }, ({ results }) => resolve(results))
     })
 
-  submitTrack = trackId => this._connection.emit('track/add', { trackId })
+  submitTrack = trackId => this.safeEmit('track/add', { trackId })
 
-  vote = trackId => this._connection.emit('battle/vote', { trackId })
+  vote = trackId => this.safeEmit('battle/vote', { trackId })
 
-  rename = username => this._connection.emit('guest/rename', { username })
+  rename = username => this.safeEmit('guest/rename', { username })
+
+  safeEmit = (...args) => {
+    if (this._connection.status === 'closed') {
+      this.emitQueue.push(args)
+      this.startSignaling()
+    } else {
+      this._connection.emit(...args)
+    }
+  }
 
   render () {
     return (
