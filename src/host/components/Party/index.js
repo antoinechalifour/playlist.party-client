@@ -1,5 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { isPartyLocked } from 'host/reducers'
+import PartyLocked from './PartyLocked'
 import Background from './Background'
 import Contenders from './Contenders'
 import Message from './Message'
@@ -22,7 +26,7 @@ const Main = styled.main`
   position: relative;
 `
 
-export default function Party () {
+function Party () {
   return (
     <Wrapper>
       <Background />
@@ -34,3 +38,19 @@ export default function Party () {
     </Wrapper>
   )
 }
+
+function PartyDelegate ({ isLocked }) {
+  if (isLocked) {
+    return <PartyLocked />
+  } else {
+    return <Party />
+  }
+}
+
+PartyDelegate.propTypes = {
+  isLocked: PropTypes.bool.isRequired
+}
+
+export default connect(state => ({
+  isLocked: isPartyLocked(state)
+}))(PartyDelegate)
