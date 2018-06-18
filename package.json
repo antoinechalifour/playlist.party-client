@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare-deploy": "rm build/static/js/*.map build/static/css/*.map"
   },
   "devDependencies": {
     "@types/webrtc": "0.0.23",

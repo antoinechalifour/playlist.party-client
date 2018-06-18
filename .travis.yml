@@ -7,6 +7,7 @@ cache:
 before_script:
 - npm test
 script: npm run build
+after_script: npm run prepare-deploy # Remove map files (now has a file size limit of 1mb...)
 before_deploy: npm install now --no-save
 deploy:
   - provider: script
