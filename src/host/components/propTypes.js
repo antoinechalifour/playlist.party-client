@@ -14,6 +14,5 @@ export const ContenderPropType = PropTypes.shape({
   }).isRequired,
   artists: PropTypes.arrayOf(
     PropTypes.shape({ name: PropTypes.string.isRequired })
-  ).isRequired,
-  voteProgress: PropTypes.number.isRequired
+  ).isRequired
 })
