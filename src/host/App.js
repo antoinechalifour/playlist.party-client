@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
-import createStore from './createStore'
-import Party from './components/Party'
+import styled from 'styled-components'
+import createStore from 'host/createStore'
+import Header from 'host/components/Header'
+import Party from 'host/components/Party'
+import Player from 'host/components/Player'
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`
 
 export default class Host extends Component {
   static propTypes = {
@@ -29,7 +38,11 @@ export default class Host extends Component {
   render () {
     return (
       <Provider store={this.store}>
-        <Party />
+        <Wrapper>
+          <Header />
+          <Party />
+          <Player />
+        </Wrapper>
       </Provider>
     )
   }

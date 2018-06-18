@@ -9,22 +9,22 @@ import {
   getProgress
 } from 'host/reducers'
 import Typography from 'core/components/Typography'
+import { Container } from './components'
 
-const Outer = styled.div`
-  background: rgba(0, 0, 0, .65);
-  color: #fff;
-  padding: 12px;
+const Outer = styled(Container)`
+  position: relative;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  z-index: 100;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .35);
 
-  img {
-    max-width: 75px;
-    margin-right: 12px;
-  }
+  padding: 12px;
+  width: 100%;
+`
+
+const Cover = styled.img`
+  max-width: 75px;
+  margin-right: 12px;
 `
 
 const Progress = styled.div`
@@ -32,7 +32,7 @@ const Progress = styled.div`
   top: 0;
   left: 0;
   height: 2px;
-  background: #1db954;
+  background: ${({ theme }) => theme.colors.primary};
   width: 0;
   transition: width .2s ease;
 `
@@ -41,7 +41,7 @@ function Player ({ track, album, artists, progress }) {
   return (
     <Outer>
       <Progress style={{ width: `${progress * 100}%` }} />
-      <img src={album.cover} alt={`Album cover for "${album.name}"`} />
+      <Cover src={album.cover} alt={`Album cover for "${album.name}"`} />
       <div>
         <Typography reverse>{track.name}</Typography>
         <Typography reverse type='secondary'>

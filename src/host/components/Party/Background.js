@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import * as Vibrant from 'node-vibrant'
 import { rgb } from 'polished'
+import { getContenders } from 'host/reducers'
 
 const Outer = styled.div`
   position: absolute;
@@ -10,11 +12,11 @@ const Outer = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #151515;
+  background-color: #0b0b0b;
   transition: background 1s ease;
 `
 
-export default class Background extends Component {
+class Background extends Component {
   static propTypes = {
     sources: PropTypes.arrayOf(PropTypes.string).isRequired
   }
@@ -65,3 +67,7 @@ export default class Background extends Component {
     return <Outer style={{ backgroundImage: background }} />
   }
 }
+
+export default connect(state => ({
+  sources: getContenders(state).map(x => x.album.images[0]).map(x => x.url)
+}))(Background)

@@ -6,11 +6,13 @@ import { getParty } from 'host/reducers'
 
 const Outer = styled.header`
   position: relative;
-  color: #fff;
-  background: #050505;
-  padding: 12px;
+  z-index: 1;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+
+  background: #151515;
+  color: #fff;
+  padding: 12px;
+  box-shadow: 0 1px 12px rgba(0, 0, 0, .25);
 `
 
 function Header ({ party }) {
