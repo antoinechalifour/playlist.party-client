@@ -14,7 +14,7 @@ const Outer = styled.ul`
 
   background: #313131;
   padding: 12px;
-  max-height: 33vh;
+  max-height: 350px;
   overflow-y: auto;
 
   border-bottom-left-radius: 4px;
