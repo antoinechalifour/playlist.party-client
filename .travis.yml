@@ -10,13 +10,13 @@ script: npm run build && npm run prepare-deploy # Remove map files (now has a fi
 before_deploy: npm install now --no-save
 deploy:
   - provider: script
-    script: cd ./build && now --token $NOW_TOKEN --public
+    script: now ./build --token $NOW_TOKEN --public
     skip_cleanup: true
     on:
       all_branches: true
       master: false
   - provider: script
-    script: cd ./build && now --token $NOW_TOKEN --public && now alias --token $NOW_TOKEN
+    script: now ./build --token $NOW_TOKEN --public && now alias --token $NOW_TOKEN
     skip_cleanup: true
     on:
       master: true
