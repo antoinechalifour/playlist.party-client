@@ -28,6 +28,7 @@ const Outer = styled.div`
   justify-content: center;
 
   p {
+    text-align: center;
     position: relative;
     user-select: none;
     text-shadow: 0 1px 3px rgba(0, 0, 0, .5);

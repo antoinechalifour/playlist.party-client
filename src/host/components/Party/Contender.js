@@ -87,6 +87,7 @@ const contenderComponents = {
   Cover: BaseCover.withComponent('img').extend`
     display: block;
     transform: scale(1);
+    max-width: 450px;
   `,
   TrackName: BaseTrackName,
   Artists: BaseArtists

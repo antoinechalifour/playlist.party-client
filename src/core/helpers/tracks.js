@@ -1,8 +1,13 @@
+import defaultAlbumCover from 'core/images/default-album-cover.png'
+
 /**
  * Gets the album cover for a track.
  * @param {{ album: { images: [{ url: String }]}}} track
  */
-export const getAlbumCover = track => track.album.images[0].url
+export const getAlbumCover = track =>
+  (track.album.images.length > 0
+    ? track.album.images[0].url
+    : defaultAlbumCover)
 
 /**
  * Returns a human readable string for artists.
@@ -28,3 +33,9 @@ export const getArtistsAsHumanFormat = track => {
     return `${firsts.map(x => x.name).join(', ')} and ${last.name}`
   }
 }
+
+/**
+ * Returns the alt attribute for the given track
+ * @param {{ name: string }} track - The track name.
+ */
+export const getCoverAlt = track => `Album cover for track "${track.name}"`

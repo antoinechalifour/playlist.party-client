@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { isPartyLocked } from 'host/reducers'
+import { isPartyLocked, isPartyOver } from 'host/reducers'
 import PartyLocked from './PartyLocked'
+import PartyOver from './PartyOver'
 import Background from './Background'
 import Contenders from './Contenders'
 import Message from './Message'
@@ -39,18 +40,22 @@ function Party () {
   )
 }
 
-function PartyDelegate ({ isLocked }) {
+function PartyDelegate ({ isLocked, isOver }) {
   if (isLocked) {
     return <PartyLocked />
+  } else if (isOver) {
+    return <PartyOver />
   } else {
     return <Party />
   }
 }
 
 PartyDelegate.propTypes = {
-  isLocked: PropTypes.bool.isRequired
+  isLocked: PropTypes.bool.isRequired,
+  isOver: PropTypes.bool.isRequired
 }
 
 export default connect(state => ({
-  isLocked: isPartyLocked(state)
+  isLocked: isPartyLocked(state),
+  isOver: isPartyOver(state)
 }))(PartyDelegate)

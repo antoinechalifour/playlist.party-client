@@ -5,6 +5,12 @@ import createSignaling from 'guest/network/createSignaling'
 
 const { Provider, Consumer } = createContext()
 
+export const STATUS_CONNECTING_TO_SERVER = 'CONNECTING_TO_SERVER'
+export const STATUS_CONNECTING_TO_HOST = 'CONNECTING_TO_HOST'
+export const STATUS_READY = 'READY'
+export const STATUS_PARTY_OVER = 'PARTY_OVER'
+export const STATUS_ERROR = 'ERROR'
+
 export class ApiProvider extends Component {
   static propTypes = {
     party: PropTypes.string.isRequired,
@@ -15,8 +21,7 @@ export class ApiProvider extends Component {
     super(props)
 
     this.state = {
-      isConnectedToSignaling: false,
-      isConnected: false,
+      status: STATUS_CONNECTING_TO_SERVER,
       signalingError: null,
       party: this.props.party,
       code: this.props.code,
@@ -42,7 +47,11 @@ export class ApiProvider extends Component {
     }
 
     this.socket = Socket(process.env.REACT_APP_SIGNALING_URI)
-    this.signaling = createSignaling(this.socket, this.onConnection)
+    this.signaling = createSignaling(
+      this.socket,
+      this.onConnection,
+      this.onPartyOver
+    )
     this.signaling.subscribe()
     this.signaling.init(
       this.props.party,
@@ -53,9 +62,12 @@ export class ApiProvider extends Component {
 
   onSignalingResult = err => {
     if (err) {
-      this.setState({ signalingError: err })
+      this.setState({
+        status: STATUS_ERROR,
+        signalingError: err
+      })
     } else {
-      this.setState({ isConnectedToSignaling: true })
+      this.setState({ status: STATUS_CONNECTING_TO_HOST })
     }
   }
 
@@ -64,13 +76,15 @@ export class ApiProvider extends Component {
 
     this._connection.on('battle/update', this._onBattleUpdate)
 
-    this.setState({ isConnected: true })
+    this.setState({ status: STATUS_READY })
 
     let args
     while ((args = this.emitQueue.shift())) {
       this._connection.emit(...args)
     }
   }
+
+  onPartyOver = () => this.setState({ status: STATUS_PARTY_OVER })
 
   _onBattleUpdate = ({ tracks: battle }) => this.setState({ battle })
 

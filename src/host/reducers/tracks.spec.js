@@ -44,14 +44,17 @@ it(`Should handle ${actions.ADD_TO_BATTLE}`, () => {
 
 it(`Should handle ${actions.ADD_TO_PREVIOUS}`, () => {
   const state = {
-    previous: [{ id: '12' }],
-    next: [{ id: '34' }],
+    previous: [[{ id: '12', role: 'winner' }]],
+    next: [{ id: '34' }, { id: '98' }],
     queue: [{ id: '56' }, { id: '78' }]
   }
-  const action = actions.addToPrevious({ id: '34' })
+  const action = actions.addToPrevious([{ id: '34' }, { id: '98' }], '34')
 
   expect(reducer(state, action)).toEqual({
-    previous: [{ id: '12' }, { id: '34' }],
+    previous: [
+      [{ id: '12', role: 'winner' }],
+      [{ id: '34', role: 'winner' }, { id: '98', role: 'loser' }]
+    ],
     next: [],
     queue: [{ id: '56' }, { id: '78' }]
   })
@@ -193,5 +196,14 @@ describe('getVoteProgress', () => {
     }
 
     expect(selectors.getVoteProgress('34', state)).toEqual(0.75)
+  })
+})
+
+describe('getTracksSummary', () => {
+  const state = require('./mocks/partyFinished').default
+  const expected = require('./mocks/expectedTracksSummary').default
+
+  it('Returns the track summary', () => {
+    expect(selectors.getTracksSummary(state.tracks)).toEqual(expected)
   })
 })

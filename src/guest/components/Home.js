@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withApi } from 'guest/components/providers/ApiProvider'
-import LoadingScreen from 'guest/components/LoadingScreen'
 import styled from 'styled-components'
+import {
+  withApi,
+  STATUS_ERROR,
+  STATUS_READY,
+  STATUS_PARTY_OVER
+} from 'guest/components/providers/ApiProvider'
+import LoadingScreen from 'guest/components/LoadingScreen'
 import SearchBar from 'guest/components/SearchBar'
 import Battle from 'guest/components/Battle'
 import UserModal from 'guest/components/UserModal'
 import InvalidPasscodeScreen from 'guest/components/InvalidPasscodeScreen'
+import PartyOverScreen from 'guest/components/PartyOverScreen'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -19,7 +25,7 @@ const Wrapper = styled.div`
 class Home extends Component {
   static propTypes = {
     api: PropTypes.shape({
-      isConnected: PropTypes.bool.isRequired,
+      status: PropTypes.string.isRequired,
       rename: PropTypes.func.isRequired
     }).isRequired
   }
@@ -38,9 +44,11 @@ class Home extends Component {
   }
 
   render () {
-    if (this.props.api.signalingError) {
+    if (this.props.api.status === STATUS_ERROR) {
       return <InvalidPasscodeScreen />
-    } else if (!this.props.api.isConnected) {
+    } else if (this.props.api.status === STATUS_PARTY_OVER) {
+      return <PartyOverScreen />
+    } else if (this.props.api.status !== STATUS_READY) {
       return <LoadingScreen />
     }
 

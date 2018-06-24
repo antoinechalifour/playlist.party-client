@@ -19,6 +19,8 @@ export const isPartyReady = state => fromParty.isPartyReady(state.party)
 
 export const isPartyLocked = state => fromParty.isPartyLocked(state.party)
 
+export const isPartyOver = state => fromParty.isPartyOver(state.party)
+
 export const getPartyStatus = state => fromParty.getPartyStatus(state.party)
 
 export const getGuest = (state, id) => fromGuests.getGuest(state.guests, id)
@@ -39,6 +41,9 @@ export const getQueue = state => fromTracks.getQueue(state.tracks)
 export const getVoteProgress = (trackId, state) =>
   fromTracks.getVoteProgress(trackId, state.tracks)
 
+export const getTracksSummary = state =>
+  fromTracks.getTracksSummary(state.tracks)
+
 export const getPlayer = state => fromPlayer.getPlayer(state.player)
 
 export const isPlayerAvailable = state =>
@@ -58,3 +63,25 @@ export const getCurrentAlbum = state => fromPlayer.getCurrentAlbum(state.player)
 
 export const getCurrentArtists = state =>
   fromPlayer.getCurrentArtists(state.player)
+
+export const getBestDJs = state => {
+  const scores = getGuests(state).map(guest => {
+    let score = 0
+
+    state.tracks.previous.forEach(battle => {
+      battle.forEach(track => {
+        if (track.role === 'winner' && track.submittedBy === guest.id) {
+          score += 1
+        }
+      })
+    })
+
+    return {
+      id: guest.id,
+      name: guest.name,
+      score
+    }
+  })
+
+  return scores.sort((a, b) => b.score - a.score)
+}

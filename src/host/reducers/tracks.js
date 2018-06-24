@@ -4,7 +4,7 @@ import * as actions from '../actions/tracks'
 function previous (state = [], action) {
   switch (action.type) {
     case actions.ADD_TO_PREVIOUS:
-      return [...state, action.track]
+      return [...state, action.tracks]
 
     default:
       return state
@@ -17,7 +17,11 @@ function next (state = [], action) {
       return [...state, { ...action.track, votes: [] }]
 
     case actions.ADD_TO_PREVIOUS:
-      return state.filter(x => x.id !== action.track.id)
+      return state.filter(x => {
+        const isInPrevious = action.tracks.find(y => y.id === x.id)
+
+        return !isInPrevious
+      })
 
     case '@guest/battle/vote':
       return [
@@ -87,4 +91,29 @@ export const getVoteProgress = (trackId, state) => {
   const track = contenders.find(x => x.id === trackId)
 
   return track.votes.length / totalVotes
+}
+
+export const getTracksSummary = state => {
+  const battles = state.previous
+
+  return battles.map(tracks => {
+    const totalVotes = tracks.reduce(
+      (sum, track) => sum + track.votes.length,
+      0
+    )
+
+    return tracks.map(track => {
+      const approvalRate = totalVotes === 0
+        ? 0.5
+        : track.votes.length / totalVotes
+      return {
+        id: track.id,
+        name: track.name,
+        album: track.album,
+        artists: track.artists,
+        approvalRate,
+        isWinner: track.role === 'winner'
+      }
+    })
+  })
 }

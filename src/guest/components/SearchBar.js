@@ -68,7 +68,7 @@ class SearchBar extends Component {
     this.state = {
       isLoading: false,
       search: '',
-      suggestions: []
+      suggestions: null
     }
 
     this.searchTracks = debounce(this.searchTracks, 1000)
@@ -81,7 +81,7 @@ class SearchBar extends Component {
     if (search.length > 2) {
       this.searchTracks(search)
     } else {
-      this.setState({ suggestions: [] })
+      this.setState({ suggestions: null })
     }
   }
 
@@ -93,7 +93,7 @@ class SearchBar extends Component {
   }
 
   onTrackClick = track => {
-    this.setState({ search: '', suggestions: [] })
+    this.setState({ search: '', suggestions: null })
     this.props.api.submitTrack(track.id)
   }
 
@@ -112,7 +112,7 @@ class SearchBar extends Component {
           <LoaderContainer>
             <DelayedLoader message='Fetching suggestions from Spotify...' />
           </LoaderContainer>}
-        {this.state.suggestions.length > 0 &&
+        {this.state.suggestions &&
           <Suggestions
             tracks={this.state.suggestions}
             onTrackClick={this.onTrackClick}

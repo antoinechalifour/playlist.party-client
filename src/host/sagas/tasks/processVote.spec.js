@@ -44,7 +44,7 @@ describe('processVote saga', () => {
     })
 
     it('Should put the contender in the previous list', () => {
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[0])))
+      expect(clone.next().value).toEqual(put(addToPrevious(contenders, '134')))
     })
 
     it('Should add the next 2 tracks in the queue as contenders', () => {
@@ -88,8 +88,7 @@ describe('processVote saga', () => {
     })
 
     it('Should put the contenders in the previous list', () => {
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[0])))
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[1])))
+      expect(clone.next().value).toEqual(put(addToPrevious(contenders, '456')))
     })
 
     it('Should add the next 2 tracks in the queue as contenders', () => {
@@ -137,8 +136,7 @@ describe('processVote saga', () => {
     })
 
     it('Should put the contenders in the previous list', () => {
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[0])))
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[1])))
+      expect(clone.next().value).toEqual(put(addToPrevious(contenders, '134')))
     })
 
     it('Should add the next 2 tracks in the queue as contenders', () => {
@@ -186,8 +184,7 @@ describe('processVote saga', () => {
     })
 
     it('Should put the contenders in the previous list', () => {
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[0])))
-      expect(clone.next().value).toEqual(put(addToPrevious(contenders[1])))
+      expect(clone.next().value).toEqual(put(addToPrevious(contenders, '456')))
     })
 
     it('Should add the next 2 tracks in the queue as contenders', () => {

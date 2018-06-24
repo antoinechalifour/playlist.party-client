@@ -1,4 +1,4 @@
-import { getAlbumCover, getArtistsAsHumanFormat } from './tracks'
+import { getAlbumCover, getArtistsAsHumanFormat, getCoverAlt } from './tracks'
 
 test('getAlbumCover - returns the cover', () => {
   const track = {
@@ -15,6 +15,16 @@ test('getAlbumCover - returns the cover', () => {
   }
 
   expect(getAlbumCover(track)).toEqual('http://spotify.com/cover')
+})
+
+test('getAlbumCover - returns a placeholder if no cover is provided', () => {
+  const track = {
+    album: {
+      images: []
+    }
+  }
+
+  expect(getAlbumCover(track)).toEqual('default-album-cover.png')
 })
 
 test('getArtistsAsHumanFormat - 1 artist', () => {
@@ -73,4 +83,10 @@ test('getArtistsAsHumanFormat - 2+ artists', () => {
       name: 'Justin Bieber'
     }
   ])
+})
+
+test('getCoverAlt - Return the alt attribute for a track cover', () => {
+  expect(getCoverAlt({ name: 'In the end' })).toBe(
+    'Album cover for track "In the end"'
+  )
 })

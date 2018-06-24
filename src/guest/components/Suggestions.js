@@ -59,9 +59,17 @@ const Artists = styled(Typography).attrs({
   overflow: hidden;
 `
 
+const Empty = styled.li`
+  text-align: center;
+  opacity: .65;
+  font-style: italic;
+  color: #fff;
+`
+
 export default function Suggestions ({ tracks, onTrackClick }) {
   return (
     <Outer>
+      {tracks.length === 0 && <Empty>No results found</Empty>}
       {tracks.map(track => (
         <Track key={track.id} onClick={() => onTrackClick(track)}>
           <img

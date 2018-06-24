@@ -20,9 +20,28 @@ describe('addToQueue', () => {
 
 describe('addToPrevious', () => {
   it('Should return the action', () => {
-    expect(actions.addToPrevious({ foo: 'bar' })).toEqual({
+    expect(actions.addToPrevious([{ id: 12 }, { id: 34 }], 34)).toEqual({
       type: 'ADD_TO_PREVIOUS',
-      track: { foo: 'bar' }
+      tracks: [
+        {
+          id: 12,
+          role: 'loser'
+        },
+        {
+          id: 34,
+          role: 'winner'
+        }
+      ]
+    })
+
+    expect(actions.addToPrevious([{ id: 12 }], 12)).toEqual({
+      type: 'ADD_TO_PREVIOUS',
+      tracks: [
+        {
+          id: 12,
+          role: 'winner'
+        }
+      ]
     })
   })
 })

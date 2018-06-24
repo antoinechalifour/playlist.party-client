@@ -20,7 +20,7 @@ export default function * processVote () {
   if (contenders.length === 1) {
     const winner = contenders[0]
     yield put(playTrack(winner))
-    yield put(addToPrevious(winner))
+    yield put(addToPrevious(contenders, winner.id))
 
     const nextContenders = yield select(getNextContenders)
 
@@ -44,9 +44,7 @@ export default function * processVote () {
 
     yield put(playTrack(winner))
 
-    for (const contender of contenders) {
-      yield put(addToPrevious(contender))
-    }
+    yield put(addToPrevious(contenders, winner.id))
 
     const nextContenders = yield select(getNextContenders)
 

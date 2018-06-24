@@ -13,9 +13,14 @@ export const addToQueue = track => ({
   track
 })
 
-export const addToPrevious = track => ({
+export const addToPrevious = (tracks, winnerId) => ({
   type: ADD_TO_PREVIOUS,
-  track
+  tracks: tracks.map(x => {
+    const track = { ...x }
+    track.role = x.id === winnerId ? 'winner' : 'loser'
+
+    return track
+  })
 })
 
 export const startProcessVote = () => ({

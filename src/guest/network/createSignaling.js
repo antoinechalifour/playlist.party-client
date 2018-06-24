@@ -1,7 +1,7 @@
 import iceServers from 'core/network/iceServers'
 import createPeerSocket from 'core/network/createPeerSocket'
 
-export default function createSignaling (socket, onPeerConnected) {
+export default function createSignaling (socket, onPeerConnected, onPartyOver) {
   let _connection
   let _dataChannel
 
@@ -41,6 +41,10 @@ export default function createSignaling (socket, onPeerConnected) {
   function onCandidate ({ candidate }) {
     console.log('<-- candidate')
     _connection.addIceCandidate(candidate)
+  }
+
+  function onLeave () {
+    onPartyOver()
   }
 
   function joinWithAccessToken (party, code) {
@@ -95,10 +99,12 @@ export default function createSignaling (socket, onPeerConnected) {
     subscribe () {
       socket.on('signaling/offer', onOffer)
       socket.on('signaling/candidate', onCandidate)
+      socket.on('signaling/leave', onLeave)
     },
     unsubscribe () {
       socket.off('signaling/offer', onOffer)
       socket.off('signaling/candidate', onCandidate)
+      socket.off('signaling/leave', onLeave)
     }
   }
 }

@@ -6,7 +6,8 @@ import addTrack, { addTrackToBattle, addTrackToQueue } from './addTrack'
 
 test('addTrack - Adds the track to the battle if a spot is available', () => {
   const action = {
-    payload: { trackId: 'track-id' }
+    payload: { trackId: 'track-id' },
+    guestId: 'user-id'
   }
   const track = {
     id: 'track-id'
@@ -17,12 +18,16 @@ test('addTrack - Adds the track to the battle if a spot is available', () => {
   expect(gen.next().value).toEqual(call(fetchTrackInformation, 'track-id'))
 
   expect(gen.next(track).value).toEqual(select(isBattleFull))
+
+  expect(track.submittedBy).toBe('user-id')
+
   expect(gen.next(false).value).toEqual(call(addTrackToBattle, track))
 })
 
 test('addTrack - Adds the track to the queue if no spot if available', () => {
   const action = {
-    payload: { trackId: 'track-id' }
+    payload: { trackId: 'track-id' },
+    guestId: 'user-id'
   }
   const track = {
     id: 'track-id'
@@ -33,6 +38,9 @@ test('addTrack - Adds the track to the queue if no spot if available', () => {
   expect(gen.next().value).toEqual(call(fetchTrackInformation, 'track-id'))
 
   expect(gen.next(track).value).toEqual(select(isBattleFull))
+
+  expect(track.submittedBy).toBe('user-id')
+
   expect(gen.next(true).value).toEqual(call(addTrackToQueue, track))
 })
 

@@ -21,10 +21,13 @@ export function * addTrackToQueue (track) {
 
 /**
  * Adds a track to the appropriate queue.
- * @param {{ payload: { trackId: String } }} action
+ * @param {{ payload: { trackId: String }, guestId: string }} action
  */
 export default function * addTrack (action) {
   const track = yield call(fetchTrackInformation, action.payload.trackId)
+
+  track.submittedBy = action.guestId
+
   const addToQueue = yield select(isBattleFull)
 
   if (addToQueue) {

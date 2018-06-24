@@ -1,4 +1,4 @@
-import { fork, take, all, cancel } from 'redux-saga/effects'
+import { call, fork, take, all, cancel } from 'redux-saga/effects'
 import Socket from 'socket.io-client'
 import playerFlow from './flows/playerFlow'
 import partyFlow from './flows/partyFlow'
@@ -14,4 +14,5 @@ export default function * root () {
 
   yield take(PARTY_STATUS_FINISHED)
   yield all([cancel(playerTask), cancel(socketTask), cancel(partyTask)])
+  yield call([socket, socket.disconnect])
 }

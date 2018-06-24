@@ -57,3 +57,5 @@ export const isPartyReady = state =>
 
 export const isPartyLocked = state =>
   getPartyStatus(state) === STATUS_CREATION_ERROR
+
+export const isPartyOver = state => getPartyStatus(state) === STATUS_FINISHED
