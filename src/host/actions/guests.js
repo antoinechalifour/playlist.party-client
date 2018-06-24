@@ -1,6 +1,6 @@
 export const ADD_GUEST = 'ADD_GUEST'
 export const GUEST_READY = 'GUEST_READY'
-export const REMOVE_GUEST = 'REMOVE_GUEST'
+export const GUEST_DISCONNECTED = 'GUEST_DISCONNECTED'
 
 export const addGuest = (id, name, connection, dataChannel) => ({
   type: ADD_GUEST,
@@ -15,7 +15,7 @@ export const guestReady = id => ({
   id
 })
 
-export const removeGuest = id => ({
-  type: REMOVE_GUEST,
+export const guestDisconnected = id => ({
+  type: GUEST_DISCONNECTED,
   id
 })

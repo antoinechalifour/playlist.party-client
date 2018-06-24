@@ -1,7 +1,6 @@
 import iceServers from 'core/network/iceServers'
 import createPeerSocket from 'core/network/createPeerSocket'
 
-// TODO: Rename onPeerConnected and move the createPeerSocket to a model.
 export default function createSignaling (socket, onPeerConnected) {
   let _connection
   let _dataChannel
@@ -44,9 +43,54 @@ export default function createSignaling (socket, onPeerConnected) {
     _connection.addIceCandidate(candidate)
   }
 
+  function joinWithAccessToken (party, code) {
+    const key = window.btoa(`${party}:${code}`)
+    const oldAccessToken = window.localStorage.getItem(key) || null
+
+    return new Promise((resolve, reject) => {
+      socket.emit(
+        'party/join',
+        { party, code, accessToken: oldAccessToken },
+        (err, data) => {
+          if (err) {
+            window.localStorage.removeItem(key)
+            return reject(err)
+          }
+
+          window.localStorage.setItem(key, data.accessToken)
+          resolve()
+        }
+      )
+    })
+  }
+
+  function joinWithoutAccessToken (party, code) {
+    const key = window.btoa(`${party}:${code}`)
+    return new Promise((resolve, reject) => {
+      socket.emit('party/join', { party, code }, (err, data) => {
+        if (err) {
+          return reject(err)
+        }
+
+        window.localStorage.setItem(key, data.accessToken)
+        resolve()
+      })
+    })
+  }
+
   return {
-    init (party, code, cb) {
-      socket.emit('party/join', { party, code }, cb)
+    async init (party, code, cb) {
+      try {
+        await joinWithAccessToken(party, code)
+        cb()
+      } catch (ignored) {
+        try {
+          await joinWithoutAccessToken(party, code)
+          cb()
+        } catch (err) {
+          cb(err)
+        }
+      }
     },
     subscribe () {
       socket.on('signaling/offer', onOffer)

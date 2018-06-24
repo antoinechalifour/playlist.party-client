@@ -14,7 +14,8 @@ it(`Should handle "${actions.ADD_GUEST}" actions`, () => {
       id: 'user-1',
       name: 'John Doe',
       connection: { state: 'open' },
-      dataChannel: { foo: 'bar' }
+      dataChannel: { foo: 'bar' },
+      isConnected: true
     }
   ]
   const action = actions.addGuest(
@@ -29,40 +30,160 @@ it(`Should handle "${actions.ADD_GUEST}" actions`, () => {
       id: 'user-1',
       name: 'John Doe',
       connection: { state: 'open' },
-      dataChannel: { foo: 'bar' }
+      dataChannel: { foo: 'bar' },
+      isConnected: true
     },
     {
       id: 'user-2',
       name: 'Jane doe',
       connection: { state: 'open' },
-      dataChannel: { fizz: 'buzz' }
+      dataChannel: { fizz: 'buzz' },
+      isConnected: false
     }
   ])
 })
 
-it(`Should handle "${actions.REMOVE_GUEST}" actions`, () => {
+it(`Should handle "${actions.ADD_GUEST}" actions when the user already has an account`, () => {
+  const state = [
+    {
+      id: 'user-1',
+      name: 'John Doe',
+      connection: { state: 'closed' },
+      dataChannel: { foo: 'bar' },
+      isConnected: false
+    }
+  ]
+  const action = actions.addGuest(
+    'user-1',
+    'Jane Doe',
+    { state: 'open' },
+    { fizz: 'buzz' }
+  )
+
+  expect(reducer(state, action)).toEqual([
+    {
+      id: 'user-1',
+      name: 'Jane Doe',
+      connection: { state: 'open' },
+      dataChannel: { fizz: 'buzz' },
+      isConnected: false
+    }
+  ])
+})
+
+it(`Should handle "${actions.GUEST_READY}"`, () => {
   const state = [
     {
       id: 'user-1',
       name: 'John Doe',
       connection: { state: 'open' },
-      dataChannel: { foo: 'bar' }
+      dataChannel: { foo: 'bar' },
+      isConnected: false
     },
     {
       id: 'user-2',
       name: 'Jane doe',
       connection: { state: 'open' },
-      dataChannel: { fizz: 'buzz' }
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
     }
   ]
-  const action = actions.removeGuest('user-1')
+  const action = actions.guestReady('user-1')
 
   expect(reducer(state, action)).toEqual([
+    {
+      id: 'user-1',
+      name: 'John Doe',
+      connection: { state: 'open' },
+      dataChannel: { foo: 'bar' },
+      isConnected: true
+    },
     {
       id: 'user-2',
       name: 'Jane doe',
       connection: { state: 'open' },
-      dataChannel: { fizz: 'buzz' }
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
+    }
+  ])
+})
+
+it(`Should handle "${actions.GUEST_DISCONNECTED}" actions`, () => {
+  const state = [
+    {
+      id: 'user-1',
+      name: 'John Doe',
+      connection: { state: 'open' },
+      dataChannel: { foo: 'bar' },
+      isConnected: true
+    },
+    {
+      id: 'user-2',
+      name: 'Jane doe',
+      connection: { state: 'open' },
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
+    }
+  ]
+  const action = actions.guestDisconnected('user-1')
+
+  expect(reducer(state, action)).toEqual([
+    {
+      id: 'user-1',
+      name: 'John Doe',
+      connection: { state: 'open' },
+      dataChannel: { foo: 'bar' },
+      isConnected: false
+    },
+    {
+      id: 'user-2',
+      name: 'Jane doe',
+      connection: { state: 'open' },
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
+    }
+  ])
+})
+
+it('Should handler "@guest/guest/rename" actions', () => {
+  const state = [
+    {
+      id: 'user-1',
+      name: 'John Doe',
+      connection: { state: 'open' },
+      dataChannel: { foo: 'bar' },
+      isConnected: true
+    },
+    {
+      id: 'user-2',
+      name: 'Jane doe',
+      connection: { state: 'open' },
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
+    }
+  ]
+  const action = {
+    type: '@guest/guest/rename',
+    guestId: 'user-1',
+    payload: {
+      username: 'Modified username'
+    }
+  }
+
+  expect(reducer(state, action)).toEqual([
+    {
+      id: 'user-1',
+      name: 'Modified username',
+      connection: { state: 'open' },
+      dataChannel: { foo: 'bar' },
+      isConnected: true
+    },
+    {
+      id: 'user-2',
+      name: 'Jane doe',
+      connection: { state: 'open' },
+      dataChannel: { fizz: 'buzz' },
+      isConnected: true
     }
   ])
 })
@@ -102,14 +223,13 @@ describe('getGuests', () => {
 describe('getAllChannels', () => {
   it('Should return all data channels', () => {
     const state = [
-      { id: '12', dataChannel: {} },
-      { id: '34', dataChannel: {} },
-      { id: '56', dataChannel: {} }
+      { id: '12', dataChannel: {}, isConnected: true },
+      { id: '34', dataChannel: {}, isConnected: false },
+      { id: '56', dataChannel: {}, isConnected: true }
     ]
 
     expect(getAllChannels(state)).toEqual([
       state[0].dataChannel,
-      state[1].dataChannel,
       state[2].dataChannel
     ])
   })

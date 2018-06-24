@@ -23,10 +23,10 @@ describe('guestReady', () => {
   })
 })
 
-describe('removeGuest', () => {
+describe('guestDisconnected', () => {
   it('Should return the action', () => {
-    expect(actions.removeGuest('user')).toEqual({
-      type: 'REMOVE_GUEST',
+    expect(actions.guestDisconnected('user')).toEqual({
+      type: 'GUEST_DISCONNECTED',
       id: 'user'
     })
   })

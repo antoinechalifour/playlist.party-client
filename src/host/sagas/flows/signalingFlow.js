@@ -9,7 +9,7 @@ import {
 import { ADD_GUEST, GUEST_READY } from 'host/actions/guests'
 import iceServers from 'core/network/iceServers'
 import { getGuest } from 'host/reducers'
-import { addGuest, removeGuest, guestReady } from 'host/actions/guests'
+import { addGuest, guestDisconnected, guestReady } from 'host/actions/guests'
 import watchGuestEvents from 'host/sagas/tasks/watchGuestEvents'
 import initializeGuest from 'host/sagas/tasks/initializeGuest'
 
@@ -46,12 +46,13 @@ export function * sendCandidate (socket, remoteId, candidate) {
 /**
  * Initiates the peer connection process.
  * @param {SocketIOClient.Socket} socket - The socket to emit to.
- * @param {{ type: String, remoteId: String }} action - The join action.
+ * @param {{ type: String, remoteId: String, userId: String }} action - The join action.
  */
 export function * onJoin (socket, action) {
-  console.log('<-- ON JOIN')
+  console.log('<-- ON JOIN', action)
   const connection = new RTCPeerConnection({ iceServers })
   const dataChannel = connection.createDataChannel(`channel/${action.remoteId}`)
+  console.log(dataChannel)
   const localDescription = yield call([connection, connection.createOffer])
   const localCandidatesChannel = eventChannel(emit => {
     connection.onicecandidate = e => {
@@ -73,6 +74,8 @@ export function * onJoin (socket, action) {
   )
   yield call([connection, connection.setLocalDescription], localDescription)
   yield call(sendOffer, socket, action.remoteId, localDescription)
+
+  // TODO: Remove previous guests with the same user id and close their data channels
   yield put(
     addGuest(
       action.remoteId,
@@ -89,7 +92,7 @@ export function * onJoin (socket, action) {
   // FIXME: DataChannel.onclose is never being called ???
   yield new Promise(resolve => (dataChannel.onclose = resolve))
 
-  yield put(removeGuest(action.remoteId))
+  yield put(guestDisconnected(action.remoteId))
 }
 
 /**
@@ -129,7 +132,7 @@ export function * onCandidate (action) {
  * @param {{ remoteId: String }} action
  */
 export function * onLeave (action) {
-  yield put(removeGuest(action.remoteId))
+  yield put(guestDisconnected(action.remoteId))
 }
 
 /**

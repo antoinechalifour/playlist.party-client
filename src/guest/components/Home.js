@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import SearchBar from 'guest/components/SearchBar'
 import Battle from 'guest/components/Battle'
 import UserModal from 'guest/components/UserModal'
+import InvalidPasscodeScreen from 'guest/components/InvalidPasscodeScreen'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -37,7 +38,9 @@ class Home extends Component {
   }
 
   render () {
-    if (!this.props.api.isConnected) {
+    if (this.props.api.signalingError) {
+      return <InvalidPasscodeScreen />
+    } else if (!this.props.api.isConnected) {
       return <LoadingScreen />
     }
 

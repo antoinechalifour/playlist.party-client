@@ -17,6 +17,7 @@ export class ApiProvider extends Component {
     this.state = {
       isConnectedToSignaling: false,
       isConnected: false,
+      signalingError: null,
       party: this.props.party,
       code: this.props.code,
       battle: [],
@@ -52,6 +53,7 @@ export class ApiProvider extends Component {
 
   onSignalingResult = err => {
     if (err) {
+      this.setState({ signalingError: err })
     } else {
       this.setState({ isConnectedToSignaling: true })
     }
