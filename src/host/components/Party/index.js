@@ -9,6 +9,7 @@ import Background from './Background'
 import Contenders from './Contenders'
 import Message from './Message'
 import Queue from './Queue'
+import VoteReactions from './VoteReactions'
 
 const Wrapper = styled.div`
   flex: 1;
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
 
 const Main = styled.main`
   flex: 1;
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -34,6 +36,7 @@ function Party () {
       <Main>
         <Contenders />
         <Message />
+        <VoteReactions />
       </Main>
       <Queue />
     </Wrapper>
