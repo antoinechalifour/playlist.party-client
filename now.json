@@ -1,4 +1,7 @@
 {
   "name": "playlistparty",
-  "alias": "playlistparty"
+  "alias": "playlistparty",
+  "env": {
+    "NODE_PATH": "src/"
+  }
 }

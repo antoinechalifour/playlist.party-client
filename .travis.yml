@@ -6,17 +6,17 @@ cache:
   - node_modules
 before_script:
 - npm test
-script: npm run build && npm run prepare-deploy # Remove map files (now has a file size limit of 1mb...)
+script: npm run build
 before_deploy: npm install now --no-save
 deploy:
   - provider: script
-    script: now ./build --token $NOW_TOKEN --public
+    script: now --token $NOW_TOKEN --public
     skip_cleanup: true
     on:
       all_branches: true
       master: false
   - provider: script
-    script: now ./build --token $NOW_TOKEN --public && now alias --token $NOW_TOKEN
+    script: now --token $NOW_TOKEN --public && now alias --token $NOW_TOKEN
     skip_cleanup: true
     on:
       master: true

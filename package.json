@@ -18,17 +18,17 @@
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
     "reset.css": "^2.0.2",
+    "serve": "^9.1.0",
     "socket.io-client": "^2.1.1",
     "styled-components": "^3.2.6",
     "uuid": "^3.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp now.json build/",
+    "now-start": "serve --single ./build/",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "prepare-deploy": "rm build/static/js/*.map build/static/css/*.map",
-    "now-build": "echo 'Built on Travis CI'"
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "@types/webrtc": "0.0.23",
