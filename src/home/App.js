@@ -6,6 +6,7 @@ import Typography from 'core/components/Typography'
 import TextField from 'core/components/TextField'
 import { ExternalLinkButton, LinkButton } from 'core/components/Button'
 import Divider from 'core/components/Divider'
+import { formatPartyName } from 'home/helpers/party'
 
 const Outer = styled.div`
   min-height: 100vh;
@@ -54,6 +55,9 @@ export default class App extends Component {
     return `https://accounts.spotify.com/authorize?${qs.stringify(query)}`
   }
 
+  onPartyNameChange = partyName =>
+    this.setState({ partyName: formatPartyName(partyName) })
+
   render () {
     return (
       <Outer>
@@ -69,7 +73,7 @@ export default class App extends Component {
               label='Party name'
               name='guestname'
               value={this.state.partyName}
-              onChange={partyName => this.setState({ partyName })}
+              onChange={this.onPartyNameChange}
             />
             <TextField
               label='Pass code'
