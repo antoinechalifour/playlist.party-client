@@ -1,7 +1,7 @@
 {
   "name": "playlistparty",
   "alias": "playlistparty",
-  "env": {
-    "NODE_PATH": "src/"
-  }
+  "files": [
+    "build"
+  ]
 }
