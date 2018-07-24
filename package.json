@@ -24,6 +24,7 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
+    "now-install": "echo 'Installed on travis!'",
     "start": "react-scripts start",
     "now-start": "serve --single ./build/",
     "build": "react-scripts build",
