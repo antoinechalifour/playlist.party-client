@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "now-start": "serve --single ./build/",
     "build": "react-scripts build",
+    "now-build": "echo 'Built on travis!'",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
