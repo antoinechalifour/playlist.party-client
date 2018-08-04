@@ -4,6 +4,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+I use [Figma](https://www.figma.com/file/TgDRFpznOVcL5mpdQ47dKCXT/Mixyu) to work on the design part.
+
 ![screenshot](./art/screenshot.png)
 
 > Playlist Party is a collaborative playlist builder. You **need** a premium Spotify account to use it.
